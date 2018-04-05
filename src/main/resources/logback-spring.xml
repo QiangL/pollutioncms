@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <property name="log_dir" value="/home/log/${project.artifactId}/" />
+    <!-- 日志最大的历史 30天 -->
+    <property name="maxHistory" value="30" />
+
+    <!-- ConsoleAppender 控制台输出日志 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                <!-- 设置日志输出格式 -->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- ERROR级别日志 -->
+    <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 RollingFileAppender -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>error.log</file>
+        <!-- 基于文件大小和时间的双重滚动策略 -->
+         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">  
+        <level>ERROR</level>  
+    </filter>  
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>
+                <!-- 每日 指定大小(单文件100M)分割 -->
+                ${log_dir}/error.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>
+                <!-- 每日 指定大小(单文件100M)分割 -->
+                ${log_dir}/info.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="com.pollutioncms" level="${log.level}" additivty="true">
+        <appender-ref ref="INFO"/>
+    </logger>
+
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+    </root>
+</configuration>
