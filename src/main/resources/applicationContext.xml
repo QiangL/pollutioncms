@@ -21,10 +21,14 @@
 	<context:component-scan base-package="com.pollutioncms.service"/>
     <context:component-scan base-package="com.pollutioncms.module"/>
 
+    <!-- 数据库配置 -->
+    <import resource="classpath:spring-database.xml"/>
+    <!-- mybatis相关配置 -->
+    <import resource="classpath:spring-mybatis.xml"/>
+
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
-    <!-- mybatis相关配置 -->
-    <import resource="classpath:spring-mybatis.xml"/>
+
 
 </beans>
