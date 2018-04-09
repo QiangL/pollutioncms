@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="db.properties"/>
+    <properties resource="pollutioncms/db.properties"/>
     <context id="Mysql" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
