@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="org.easybooks"/>
+    <bean id="dataSource1"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName"
+                  value="com.mysql.jdbc.Driver">
+        </property>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/monitoredcontrol?useUnicode=true&amp;characterEncoding=UTF-8">
+        </property>
+        <property name="username" value="root"/>
+        <property name="password" value="111"/>
+    </bean>
+    <bean id="sessionFactory1"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource1"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>org/easybooks/bookstore/vo/User.hbm.xml</value>
+                <value>
+                    org/easybooks/bookstore/vo/Alarmregular.hbm.xml
+                </value>
+                <value>
+                    org/easybooks/bookstore/vo/Enterprise.hbm.xml
+                </value>
+                <value>org/easybooks/bookstore/vo/Manage.hbm.xml</value>
+                <value>
+                    org/easybooks/bookstore/vo/Environment.hbm.xml
+                </value>
+                <value>org/easybooks/bookstore/vo/Scy.hbm.xml</value>
+                <value>
+                    org/easybooks/bookstore/vo/Alarmlogging.hbm.xml
+                </value>
+                <value>
+                    org/easybooks/bookstore/vo/Datamanage.hbm.xml
+                </value>
+                <value>org/easybooks/bookstore/vo/Inlet.hbm.xml</value>
+                <value>
+                    org/easybooks/bookstore/vo/Outfall.hbm.xml
+                </value>
+                <value>org/easybooks/bookstore/vo/Mail.hbm.xml</value>
+                <value>org/easybooks/bookstore/vo/Sign.hbm.xml</value>
+                <value>
+                    org/easybooks/bookstore/vo/Contacts.hbm.xml
+                </value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="login" class="org.easybooks.bookstore.action.LoginAction"/>
+    <bean id="alarmRegularAction" class="org.easybooks.bookstore.action.AlarmRegularAction"/>
+    <!-- 邮件 -->
+    <bean id="contactsService" class="org.easybooks.bookstore.service.impl.ContactsService"/>
+    <bean id="contactsAction" class="org.easybooks.bookstore.action.ContactsAction">
+        <property name="contactsService" ref="contactsService"/>
+    </bean>
+    <bean id="mailService" class="org.easybooks.bookstore.service.impl.MailService">
+        <property name="mailDAO" ref="mailDAO"/>
+        <property name="signDAO" ref="signDAO"/>
+    </bean>
+    <bean id="mailAction" class="org.easybooks.bookstore.action.MailAction">
+        <property name="mailService" ref="mailService"/>
+        <property name="contactsService" ref="contactsService"/>
+    </bean>
+    <!-- 邮件end -->
+
+    <!-- get Environments by Ent_no-->
+    <bean id="envByNoAction" class="org.easybooks.bookstore.action.EnvByNoAction">
+        <property name="envByNoService" ref="envByNoService"/>
+    </bean>
+    <bean id="inletAction" class="org.easybooks.bookstore.action.InletAction">
+        <property name="inletService" ref="inletService"/>
+    </bean>
+    <bean id="SCY_viewAction" class="org.easybooks.bookstore.action.SCY_viewAction">
+        <property name="scy_viewService" ref="SCY_viewService"/>
+    </bean>
+
+    <bean id="Outfall_viewAction" class="org.easybooks.bookstore.action.Outfall_viewAction">
+        <property name="outfall_viewService" ref="outfall_viewService"/>
+    </bean>
+    <bean id="enterpriseAction" class="org.easybooks.bookstore.action.EnterpriseAction">
+        <property name="enterpriseService" ref="enterpriseService"/>
+    </bean>
+    <!-- Ent_view -->
+    <bean id="ent_viewAction" class="org.easybooks.bookstore.action.Ent_viewAction">
+        <property name="ent_viewService" ref="ent_viewService"/>
+    </bean>
+    <bean id="alarmloggingAction" class="org.easybooks.bookstore.action.AlarmloggingAction">
+        <property name="alarmloggingService" ref="alarmloggingService"/>
+    </bean>
+    <!-- 排水口form表单 -->
+    <bean id="Outfall_formAction" class="org.easybooks.bookstore.action.form.Outfall_formAction">
+    </bean>
+    <!-- 邮件 -->
+    <bean id="ContactsDAO"
+          class="org.easybooks.bookstore.vo.ContactsDAO">
+        <property name="sessionFactory" ref="sessionFactory1"/>
+    </bean>
+    <bean id="UserDAO" class="org.easybooks.bookstore.vo.UserDAO">
+        <property name="sessionFactory" ref="sessionFactory1"/>
+    </bean>
+    <bean id="MailDAO" class="org.easybooks.bookstore.vo.MailDAO">
+        <property name="sessionFactory" ref="sessionFactory1"/>
+    </bean>
+    <bean id="SignDAO" class="org.easybooks.bookstore.vo.SignDAO">
+        <property name="sessionFactory" ref="sessionFactory1"/>
+    </bean>
+    <!-- 邮件end -->
+</beans>
+		

@@ -9,10 +9,10 @@
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
             <property name="caseSensitive" value="true"/>
-        </plugin>
+        </plugin>-->
 
         <commentGenerator>
             <!-- 如果生成日期，会造成即使修改一个字段，整个实体类所有属性都会发生变化，不利于版本控制，所以设置为true -->

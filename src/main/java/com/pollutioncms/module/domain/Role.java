@@ -1,65 +1,36 @@
 package com.pollutioncms.module.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-@Table(name = "hiwater..role")
 public class Role implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private Integer id;
 
-    /**
-     * 展示名称
-     */
     private String name;
 
     private String descript;
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * 获取展示名称
-     *
-     * @return name - 展示名称
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * 设置展示名称
-     *
-     * @param name 展示名称
-     */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 
-    /**
-     * @return descript
-     */
     public String getDescript() {
         return descript;
     }
 
-    /**
-     * @param descript
-     */
     public void setDescript(String descript) {
         this.descript = descript == null ? null : descript.trim();
     }

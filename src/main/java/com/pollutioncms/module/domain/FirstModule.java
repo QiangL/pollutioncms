@@ -1,12 +1,8 @@
 package com.pollutioncms.module.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-@Table(name = "hiwater..first_module")
 public class FirstModule implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "select uuid()")
     private String uuid;
 
     private String name;
@@ -15,44 +11,26 @@ public class FirstModule implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @return uuid
-     */
     public String getUuid() {
         return uuid;
     }
 
-    /**
-     * @param uuid
-     */
     public void setUuid(String uuid) {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 
-    /**
-     * @return descript
-     */
     public String getDescript() {
         return descript;
     }
 
-    /**
-     * @param descript
-     */
     public void setDescript(String descript) {
         this.descript = descript == null ? null : descript.trim();
     }

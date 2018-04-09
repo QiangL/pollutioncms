@@ -1,0 +1,105 @@
+<!DOCTYPE struts PUBLIC
+      "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+      "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.i18n.encoding" value="utf-8"/>
+   <package name="struts" extends="struts-default">
+   
+       <action name="login" class="login">
+            <result name="error">/error.jsp</result>
+            <result name="success">/index.jsp</result>
+       </action>
+       
+       <action name="browseAlarmRegular" class="alarmRegularAction" method="browseAlarmRegular">
+            <result name="success">/navigation_html/First/2-Alarm/AlarmRegular.jsp</result>
+       </action>
+       
+       <!-- 邮件 -->
+        <action name="browseContacts" class="org.easybooks.bookstore.action.ContactsAction" method="browseContacts">
+            <result name="success">/navigation_html/First/6-ShortMessage/contacts.jsp</result>
+       </action>
+       <action name="addContacts" class="org.easybooks.bookstore.action.ContactsAction" method="addContacts"> 
+              <result name="success" type="redirect">browseContacts</result>
+       </action> 
+ 
+       <action name="deleteContact" class="org.easybooks.bookstore.action.ContactsAction" method="deleteContact"> 
+              <result name="success" type="redirect">browseContacts</result>  
+       </action> 
+       
+       <action name="updateContacts" class="org.easybooks.bookstore.action.ContactsAction" method="updateContacts"> 
+              <result name="success" type="redirect">browseContacts</result>  
+       </action>
+       
+       <action name="browseMail" class="org.easybooks.bookstore.action.MailAction" method="browseMail">
+            <result name="success">/navigation_html/First/6-ShortMessage/mail.jsp</result>
+       </action>
+        <action name="deleteMail" class="org.easybooks.bookstore.action.MailAction" method="deleteMail"> 
+               <result name="success" type="redirect">browseMail</result>
+       </action> 
+       <action name="browseWriteMail" class="org.easybooks.bookstore.action.MailAction" method="browseWriteMail">
+            <result name="success">/navigation_html/First/6-ShortMessage/writeMail.jsp</result>
+       </action>
+       <action name="sendMail" class="org.easybooks.bookstore.action.MailAction" method="sendMail">
+            <result name="success">\navigation_html\First\6-ShortMessage\sendMailSuccess.jsp</result>
+       </action>
+       
+       <action name="setMail" class="org.easybooks.bookstore.action.MailAction" method="setMail"> 
+              <result name="success">/navigation_html/First/6-ShortMessage/setMail.jsp</result> 
+       </action>   
+       <action name="updateSign" class="org.easybooks.bookstore.action.MailAction" method="updateSign"> 
+              <result name="success" type="redirect">setMail</result> 
+       </action>
+       <action name="deleteSign" class="org.easybooks.bookstore.action.MailAction" method="deleteSign"> 
+              <result name="success" type="redirect">setMail</result> 
+       </action> 
+       <action name="addSign" class="org.easybooks.bookstore.action.MailAction" method="addSign"> 
+              <result name="success" type="redirect">setMail</result> 
+       </action> 
+       <!--  邮件end -->
+       
+       
+       <action name="browseEnvironment" class="environmentAction" method="browseEnvironment">
+            <result name="success">/navigation_html/Second/Environment.jsp</result>
+       </action>
+       
+        <action name="browseInlet" class="inletAction" method="browseInlet">
+            <result name="success">/navigation_html/Second/Inlet.jsp</result>
+       </action>
+       
+        <action name="browseSCY_view" class="SCY_viewAction" method="browseSCY_view">
+            <result name="success">/navigation_html/Second/scy.jsp</result>
+       </action>
+       
+       <action name="browseOutfall_view" class="Outfall_viewAction" method="browseOutfall_view">
+            <result name="success">/navigation_html/Second/Outfall.jsp</result>
+       </action>
+       
+       <!--  
+        <action name="browseEnterprise" class="enterpriseAction" method="browseEnterprise">
+            <result name="success">/navigation_html/Second/enterprise.jsp</result>
+       </action>
+       -->
+       <!-- Ent_view -->
+        <action name="browseEnt_view" class="ent_viewAction" method="browseEnt_view">
+            <result name="success">/navigation_html/Second/enterprise.jsp</result>
+       </action>
+       
+       
+       <action name="browseAlarmlogging" class="alarmloggingAction" method="browseAlarmlogging">
+            <result name="success">/navigation_html/First/2-Alarm/Alarmlogging.jsp</result>
+       </action>
+       
+       <!-- get Environments by Ent_no-->
+       <action name="browseEnvByNo" class="envByNoAction" method="browseEnvByNo">
+            <result name="success">/navigation_html/Second/Environment.jsp</result>
+       </action>
+       
+       <!-- 排水口form表单 -->
+       <action name="Outfall_form" class="Outfall_formAction">
+            <result name="success">/navigation_html/Second/form/form_success.jsp</result>
+       </action>
+       
+   </package>
+
+
+</struts>

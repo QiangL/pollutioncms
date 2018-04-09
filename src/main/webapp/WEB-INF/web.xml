@@ -29,10 +29,28 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>struts2</filter-name><!--这里的名字要和下面一致 -->
+        <filter-class>
+            org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
+        </filter-class>
+        <init-param>
+            <param-name>filterConfig</param-name>
+            <param-value>classpath:monitoredcontrol/struts.xml</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:pollutioncms/applicationContext.xml</param-value>
+        <param-value>
+            classpath:pollutioncms/applicationContext.xml,
+            classpath:monitoredcontrol/applicationContext.xml
+        </param-value>
     </context-param>
 
     <listener>
@@ -44,17 +62,19 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:pollutioncms/spring-mvc.xml,classpath:pollutioncms/spring-shiro.xml</param-value>
+            <param-value>
+                classpath:pollutioncms/spring-mvc.xml,
+            </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.mvc</url-pattern>
     </servlet-mapping>
 
     <!-- shiro配置 开始 -->
-    <filter>
+    <!--<filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <async-supported>true</async-supported>
@@ -66,6 +86,6 @@
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
     <!-- shiro配置 结束 -->
 </web-app>

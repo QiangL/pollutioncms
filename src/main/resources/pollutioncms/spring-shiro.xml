@@ -15,7 +15,7 @@
     <!-- 配置权限管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- ref对应我们写的realm  MyShiro -->
-        <property name="realm" ref="testRealm"/>
+        <!--<property name="realm" ref="testRealm"/>-->
         <!-- 使用下面配置的缓存管理器 -->
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
