@@ -1,9 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.easybooks.bookstore.service.IContactsService;
 import org.easybooks.bookstore.vo.Contacts;
 
@@ -24,16 +23,11 @@ public class ContactsAction extends ActionSupport {
 		
 		int s = contacts.size();
 				
-		Contacts a0 = (Contacts) contacts.get(0);
-	
-		JSONArray Contacts_JSONarray = JSONArray.fromObject(a0);
-		
-		for(int i=1;i<s;i++){
-			Contacts a = (Contacts) contacts.get(i);
-			
-			JSONObject json = JSONObject.fromObject(a);
+		JSONArray Contacts_JSONarray = new JSONArray();
 
-			Contacts_JSONarray.add(json);
+		for(int i=0;i<s;i++){
+			Contacts a = (Contacts) contacts.get(i);
+			Contacts_JSONarray.add(a);
 		}
 	
 		String Contacts_strJSONArray=Contacts_JSONarray.toString();

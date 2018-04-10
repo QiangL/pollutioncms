@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*,org.easybooks.bookstore.dao.impl.*,net.sf.json.JSONArray,net.sf.json.JSONObject" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,org.easybooks.bookstore.dao.impl.*,com.alibaba.fastjson.JSONArray" pageEncoding="utf-8"%>
+<%@ page import="com.alibaba.fastjson.JSONObject" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -42,16 +43,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         stu1.setAge("22");
         stu1.setAddress("湖南邵阳");
 
-        //1、使用JSONObject
-        JSONObject json = JSONObject.fromObject(stu);
-        JSONObject json1 = JSONObject.fromObject(stu1);
-        //2、使用JSONArray
-        JSONArray array=JSONArray.fromObject(stu);
-        array.add(json1);
-        
-        
-        String strJson=json.toString();
-       
+         JSONArray array = new JSONArray();
+         array.add(stu);
+         array.add(stu1);
+
+         String strJson = JSONObject.toJSONString(stu);
+
         String strArray=array.toString();
         
         System.out.println("strArray:"+strArray);

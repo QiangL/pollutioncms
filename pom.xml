@@ -45,7 +45,7 @@
             <artifactId>commons-dbcp2</artifactId>
             <version>2.1.1</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>${common-beanutils.version}</version>
@@ -76,7 +76,7 @@
                     <groupId>commons-io</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -177,6 +177,12 @@
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
             <version>${struts2.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
@@ -188,13 +194,24 @@
             <artifactId>struts2-json-plugin</artifactId>
             <version>${struts2.version}</version>
         </dependency>
+        <!--<dependency>
+            <groupId>ognl</groupId>
+            <artifactId>ognl</artifactId>
+            <version>3.1.12</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.22.0-GA</version>
+        </dependency>-->
+
         <!-- struts end -->
 
         <!-- hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.2.Final</version>
+            <version>5.2.9.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -280,18 +297,9 @@
         </dependency>
         <!-- for test end -->
         <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/json-lib-2.4-jdk15.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-email-1.0.jar</systemPath>
+            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis.generator</groupId>
@@ -359,11 +367,10 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <filtering>true</filtering>
+                            <filtering>false</filtering>
                             <directory>src/main/webapp</directory>
                             <includes>
-                                <include>**/*.css</include>
-                                <include>**/*.js</include>
+                                <include>**/*.*</include>
                             </includes>
                         </resource>
                     </webResources>

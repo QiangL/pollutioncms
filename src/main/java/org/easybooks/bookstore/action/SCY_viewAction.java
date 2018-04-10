@@ -1,9 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.easybooks.bookstore.service.ISCY_viewService;
 import org.easybooks.bookstore.vo.SCY_view;
 
@@ -21,15 +20,13 @@ public class SCY_viewAction extends ActionSupport{
 		int s = scy_views.size();
 		//System.out.println("scy_viewAction size="+s);
 		
-		SCY_view sv0 = (SCY_view) scy_views.get(0);
-		JSONArray JSONarray = JSONArray.fromObject(sv0);
+		JSONArray JSONarray =  new JSONArray();
 		
 
 		for(int i=1;i<s;i++){
 			SCY_view sv = (SCY_view) scy_views.get(i);
-			JSONObject json = JSONObject.fromObject(sv);
 			//System.out.println(json.toString());
-			JSONarray.add(json);
+			JSONarray.add(sv);
 		}
 		String strJSONArray=JSONarray.toString();
 		//System.out.println(strJSONArray);

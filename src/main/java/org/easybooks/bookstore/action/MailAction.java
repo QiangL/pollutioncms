@@ -1,9 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.easybooks.bookstore.service.IContactsService;
 import org.easybooks.bookstore.service.IMailService;
 import org.easybooks.bookstore.vo.Mail;
@@ -23,12 +22,10 @@ public class MailAction extends ActionSupport {
     public String browseMail() throws Exception{		
 		List mail = mailService.getAllMail();//直接调用业务层方法		
 		int s = mail.size();
-		Mail a0 = (Mail) mail.get(0);
-		JSONArray Mail_JSONarray = JSONArray.fromObject(a0);
-		for(int i=1;i<s;i++){
+		JSONArray Mail_JSONarray = new JSONArray();
+		for(int i=0;i<s;i++){
 			Mail a = (Mail) mail.get(i);
-			JSONObject json = JSONObject.fromObject(a);
-			Mail_JSONarray.add(json);
+			Mail_JSONarray.add(a);
 		}	
 		String Mail_strJSONArray=Mail_JSONarray.toString();
 		Map request = (Map)ActionContext.getContext().get("request");

@@ -1,9 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.easybooks.bookstore.service.ISignService;
 import org.easybooks.bookstore.vo.Sign;
 
@@ -25,17 +24,11 @@ public class SignAction extends ActionSupport {
 		int n = sign.size();
 
 		System.out.println("nnn:" + n);
-			
-		Sign a0 = (Sign) sign.get(0);
-	
-		JSONArray Sign_JSONarray = JSONArray.fromObject(a0);
-		
-		for(int i=1;i<n;i++){
-			Sign a = (Sign)sign.get(i);
-			
-			JSONObject json = JSONObject.fromObject(a);
 
-			Sign_JSONarray.add(json);
+		JSONArray Sign_JSONarray = new JSONArray();
+		for(int i=0;i<n;i++){
+			Sign a = (Sign)sign.get(i);
+			Sign_JSONarray.add(a);
 		}
 	
 		String Sign_strJSONArray=Sign_JSONarray.toString();

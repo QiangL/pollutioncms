@@ -1,8 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
 import org.easybooks.bookstore.service.IEnvironmentService;
 import org.easybooks.bookstore.vo.Environment;
 
@@ -28,7 +28,7 @@ public class EnvironmentAction extends ActionSupport{
 		Environment e0 = (Environment) environments.get(0);
 		System.out.println(e0.toString());
 		
-		JSONArray JSONarray = JSONArray.fromObject(e0);
+		JSONArray JSONarray =  new JSONArray();
 		System.out.println(JSONarray.toString());
 		
 	/*	Environment e = (Environment) environments.get(1);

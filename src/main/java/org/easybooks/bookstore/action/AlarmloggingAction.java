@@ -1,9 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.easybooks.bookstore.service.IAlarmloggingService;
 import org.easybooks.bookstore.vo.Alarmlogging;
 
@@ -21,14 +20,11 @@ public class AlarmloggingAction extends ActionSupport{
 		//System.out.println("SCYAction_size:"+s);
 		
 		
-		Alarmlogging a0 = (Alarmlogging) alarmloggings.get(0);
-		JSONArray JSONarray = JSONArray.fromObject(a0);
+		JSONArray JSONarray =  new JSONArray();
 		
 		for(int i=1;i<s;i++){
 			Alarmlogging a1 = (Alarmlogging) alarmloggings.get(i);
-			JSONObject json = JSONObject.fromObject(a1);
-			System.out.println(json.toString());
-			JSONarray.add(json);
+			JSONarray.add(a1);
 		}
 		
 		String strJSONArray=JSONarray.toString();

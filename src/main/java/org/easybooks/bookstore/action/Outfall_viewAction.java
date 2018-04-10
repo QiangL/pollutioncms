@@ -1,9 +1,8 @@
 package org.easybooks.bookstore.action;
 
+import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.easybooks.bookstore.service.IOutfall_viewService;
 import org.easybooks.bookstore.vo.Outfall_view;
 
@@ -22,16 +21,11 @@ public class Outfall_viewAction extends ActionSupport{
 		
 		int s = outfall_views.size();
 		//System.out.println("Outfall_viewAction size="+s);
-		
-		Outfall_view ov0 = (Outfall_view) outfall_views.get(0);
-        JSONArray JSONarray = JSONArray.fromObject(ov0);
-		
 
-		for(int i=1;i<s;i++){
+		JSONArray JSONarray = new JSONArray();
+		for(int i=0;i<s;i++){
 			Outfall_view ov = (Outfall_view) outfall_views.get(i);
-			JSONObject json = JSONObject.fromObject(ov);
-			//System.out.println(json.toString());
-			JSONarray.add(json);
+			JSONarray.add(ov);
 		}
 		String strJSONArray=JSONarray.toString();
 		//System.out.println(strJSONArray);
