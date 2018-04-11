@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <configuration scan="true">
 
     <property name="log_dir" value="/home/log/${project.artifactId}/" />
-    <!-- 日志最大的历史 30天 -->
+    <!-- 日至最大历史 30天 -->
     <property name="maxHistory" value="30" />
 
-    <!-- ConsoleAppender 控制台输出日志 -->
+    <!-- ConsoleAppender 控制台输出日志-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>

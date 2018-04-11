@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -66,15 +67,6 @@ public class SynchronizedBloceDemo {
     }
 
     public static void main(String[] args) {
-        SynchronizedBloceDemo demo = new SynchronizedBloceDemo();
-        List<String> list = new ArrayList<>();
-        list.add("20160705");
-        list.add("20160701");
-        list.add("20160704");
-        list.add("20160702");
-        demo.init(list);
-        demo.getTradeDay(new Date(2017, 7, 1, 8, 0, 0), 0);
-        demo.getTradeDay(new Date(2017, 7, 1, 15, 0, 0), 0);
     }
 }
 

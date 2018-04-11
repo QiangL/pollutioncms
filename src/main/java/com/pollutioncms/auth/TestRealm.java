@@ -1,15 +1,18 @@
 package com.pollutioncms.auth;
 
+import com.pollutioncms.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class TestRealm extends AuthorizingRealm {
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 权限认证
