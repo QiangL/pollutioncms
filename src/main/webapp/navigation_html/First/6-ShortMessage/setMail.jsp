@@ -1,6 +1,8 @@
 <%@ page language="java"
-	import="java.util.*,org.easybooks.bookstore.vo.*,org.easybooks.bookstore.dao.impl.*,net.sf.json.JSONArray,net.sf.json.JSONObject,net.sf.json.JsonConfig"
+	import="java.util.*,org.easybooks.bookstore.vo.*,org.easybooks.bookstore.dao.impl.*"
 	pageEncoding="utf-8"%>
+<%@ page import="com.alibaba.fastjson.serializer.SimplePropertyPreFilter" %>
+<%@ page import="com.alibaba.fastjson.JSONArray" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
@@ -56,9 +58,12 @@
 
 <%
  Object obj =request.getAttribute("signList");
- JsonConfig con = new JsonConfig();
+ /*JsonConfig con = new JsonConfig();
  con.setExcludes(new String[]{"user"});
- JSONArray m1Json = JSONArray.fromObject(obj,con);
+ JSONArray m1Json = JSONArray.fromObject(obj,con);*/
+ //用作 字段过滤 实现和上面一样的功能
+SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Sign.class, "signId","signTitle","signText","signState");
+String m1Json=JSONArray.toJSONString(obj,filter);
  %>
  
   <body style="overflow-x:hidden; padding:2px;">
@@ -69,7 +74,7 @@
            <input name="_sign" id="_sign" type="hidden">
 		   <select name="sign" id="sign" style="width:150px;height:30px" onchange="changeItem(this);">
 
-			     <s:iterator value="signList" id="sl">
+			     <s:iterator value="signList" var="sl">
 			     	 		<s:if test="#sl.signState=='open'">
 			                  <option selected="selected">
 			                  <s:property  value="#sl.signTitle" />  

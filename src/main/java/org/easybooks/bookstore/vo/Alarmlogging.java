@@ -1,7 +1,5 @@
 package org.easybooks.bookstore.vo;
 
-import java.sql.Timestamp;
-
 /**
  * Alarmlogging entity. @author MyEclipse Persistence Tools
  */
@@ -13,7 +11,7 @@ public class Alarmlogging implements java.io.Serializable {
 	private Integer alaNo;
 	private String alaState;
 	private String alaOutName;
-	private Timestamp alaTime;
+	private String alaTime;
 	private String alaType;
 	private String alaWrwName;
 	private Float alaWrwValue;
@@ -27,7 +25,7 @@ public class Alarmlogging implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Alarmlogging(String alaState, String alaOutName, Timestamp alaTime,
+	public Alarmlogging(String alaState, String alaOutName, String alaTime,
 			String alaType, String alaWrwName, Float alaWrwValue,
 			Float alaUpper, Float alaLower) {
 		this.alaState = alaState;
@@ -66,11 +64,11 @@ public class Alarmlogging implements java.io.Serializable {
 		this.alaOutName = alaOutName;
 	}
 
-	public Timestamp getAlaTime() {
+	public String getAlaTime() {
 		return this.alaTime;
 	}
 
-	public void setAlaTime(Timestamp alaTime) {
+	public void setAlaTime(String alaTime) {
 		this.alaTime = alaTime;
 	}
 

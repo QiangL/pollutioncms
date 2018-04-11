@@ -16,7 +16,7 @@
         <property name="alaOutName" type="java.lang.String">
             <column name="Ala_out_name" length="25" />
         </property>
-        <property name="alaTime" type="java.sql.Timestamp">
+        <property name="alaTime" type="java.lang.String">
             <column name="Ala_time" length="19" />
         </property>
         <property name="alaType" type="java.lang.String">

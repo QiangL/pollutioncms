@@ -1,5 +1,5 @@
 <%@ page language="java"
-	import="java.util.*,org.easybooks.bookstore.vo.*,org.easybooks.bookstore.dao.impl.*,net.sf.json.JSONArray,net.sf.json.JSONObject"
+	import="java.util.*,org.easybooks.bookstore.vo.*,org.easybooks.bookstore.dao.impl.*"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
@@ -75,7 +75,7 @@
 				<tr>
 					<th style="text-align:center">联系人</th>
 				</tr>
-				<s:iterator value="#contactList" id="ct">
+				<s:iterator value="#contactList" var="ct">
 				<tr>
 					<td onclick=addToDest_email(this)>
 						  <s:property value="#ct.conName"/>       

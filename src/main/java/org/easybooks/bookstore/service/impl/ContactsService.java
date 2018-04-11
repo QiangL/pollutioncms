@@ -2,6 +2,7 @@ package org.easybooks.bookstore.service.impl;
 
 import org.easybooks.bookstore.dao.IContactsDAO;
 import org.easybooks.bookstore.service.IContactsService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -12,6 +13,7 @@ public class ContactsService implements IContactsService {
 	
 	//属性contactsDAO
 		@ManyToOne
+		@Autowired
 		private IContactsDAO contactsDAO;
 		//得到通讯录中所有联系人
 		public List getAllContacts() {
