@@ -24,7 +24,7 @@
       (select role_auth.module_op_uuid
       FROM role_auth
       WHERE role_auth.role_id IN
-        (SELECT role.id FROM role_user WHERE role_user.user_id = #{id})
+        (SELECT role_id FROM role_user WHERE role_user.user_id = #{id})
       )
   </select>
 </mapper>
