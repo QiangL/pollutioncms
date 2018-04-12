@@ -9,7 +9,7 @@
         <property name="typeAliasesPackage" value="com.pullutioncms.module.domin"/>
     </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.pollutioncms.module.mapper" />
     </bean>
 </beans>

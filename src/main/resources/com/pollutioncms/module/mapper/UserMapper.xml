@@ -27,4 +27,11 @@
         (SELECT role_id FROM role_user WHERE role_user.user_id = #{id})
       )
   </select>
+  <select id="listRoles" parameterType="int" resultType="String">
+    select name from role
+    WHERE id in
+    (select role_id from role_user
+      WHERE user_id=#{id}
+    )
+  </select>
 </mapper>

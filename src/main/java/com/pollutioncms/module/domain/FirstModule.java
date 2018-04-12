@@ -3,7 +3,7 @@ package com.pollutioncms.module.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@Table(name = "hiwater..first_module")
+@Table(name = "first_module")
 public class FirstModule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "select uuid()")

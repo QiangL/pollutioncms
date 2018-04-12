@@ -9,4 +9,6 @@ import java.util.Set;
 public interface UserMapper extends Mapper<User> {
 
     Set<String> listPermissions(@Param("id") Integer id);
+
+    Set<String> listRoles(@Param("id") Integer id);
 }

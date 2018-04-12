@@ -1,8 +1,11 @@
 package com.pollutioncms.auth;
 
+import com.pollutioncms.module.domain.User;
+import com.pollutioncms.module.mapper.UserMapper;
 import com.pollutioncms.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,29 +15,25 @@ import org.springframework.stereotype.Service;
 public class TestRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
 
     /**
      * 权限认证
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取登录时输入的用户名
-        /*String loginName=(String) principalCollection.fromRealm(getName()).iterator().next();
+        String loginName=(String) principalCollection.fromRealm(getName()).iterator().next();
         //到数据库查是否有此对象
-        User user=userService.findByName(loginName);
-        if(user!=null){
-            //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
-            SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-            //用户的角色集合
-            info.setRoles(user.getRolesName());
-            //用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要
-            List<Role> roleList=user.getRoleList();
-            for (Role role : roleList) {
-                info.addStringPermissions(role.getPermissionsName());
-            }
-            return info;
-        }*/
-        return null;
+        User user=new User();
+        user.setUserName(loginName);
+        user = userMapper.selectOne(user);
+        //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
+        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+        //用户的角色集合
+        info.setRoles(userMapper.listRoles(user.getId()));
+        //用户权限集合
+        info.setStringPermissions(userMapper.listPermissions(user.getId()));
+        return info;
     }
 
     /**

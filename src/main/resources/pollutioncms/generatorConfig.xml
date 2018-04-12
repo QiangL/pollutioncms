@@ -47,28 +47,29 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table catalog="hiwater" schema="hiwater" tableName="first_module">
+        <table tableName="first_module">
+            <property name="ignoreQualifiersAtRuntime" value="false"/>
             <generatedKey column="uuid" sqlStatement="select uuid()"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="second_module">
+        <table tableName="second_module">
             <generatedKey column="uuid" sqlStatement="select uuid()"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="module_operate">
+        <table tableName="module_operate">
             <generatedKey column="uuid" sqlStatement="select uuid()"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="role_auth">
+        <table tableName="role_auth">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="navigation">
+        <table tableName="navigation">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="role">
+        <table tableName="role">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="role_user">
+        <table tableName="role_user">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-        <table catalog="hiwater" schema="hiwater" tableName="user">
+        <table tableName="user">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
     </context>
