@@ -30,5 +30,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    Set<String> listPermissions();
+    Set<String> listPermissions(@Param("id") Integer id);
 }
