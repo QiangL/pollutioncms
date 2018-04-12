@@ -6,8 +6,12 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="last_opt_time" jdbcType="TIMESTAMP" property="lastOptTime" />
     <result column="show_name" jdbcType="VARCHAR" property="showName" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_tel" jdbcType="CHAR" property="userTel" />
+    <result column="user_addr" jdbcType="VARCHAR" property="userAddr" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="last_opt_time" jdbcType="TIMESTAMP" property="lastOptTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,8 +72,19 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, pwd, create_time, last_opt_time, show_name
+    id, user_name, pwd, create_time, show_name, user_sex, user_tel, user_addr, user_email, 
+    last_opt_time
   </sql>
+  <select id="listPermissions" parameterType="com.pollutioncms.module.domain.User" resultType="String">
+    select permission
+    from module_operate
+    WHERE module_operate.uuid in
+    (select role_auth.module_op_uuid
+    FROM role_auth
+    WHERE role_auth.role_id IN
+    (SELECT role.id FROM role_user WHERE role_user.user_id = #{id})
+    )
+  </select>
   <select id="selectByExample" parameterType="com.pollutioncms.module.domain.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -105,11 +120,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hiwater..user (id, user_name, pwd, 
-      create_time, last_opt_time, show_name
-      )
+      create_time, show_name, user_sex, 
+      user_tel, user_addr, user_email, 
+      last_opt_time)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastOptTime,jdbcType=TIMESTAMP}, #{showName,jdbcType=VARCHAR}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{showName,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, 
+      #{userTel,jdbcType=CHAR}, #{userAddr,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{lastOptTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.pollutioncms.module.domain.User">
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
@@ -127,11 +144,23 @@
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="lastOptTime != null">
-        last_opt_time,
-      </if>
       <if test="showName != null">
         show_name,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userTel != null">
+        user_tel,
+      </if>
+      <if test="userAddr != null">
+        user_addr,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="lastOptTime != null">
+        last_opt_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -145,11 +174,23 @@
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastOptTime != null">
-        #{lastOptTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="showName != null">
         #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userTel != null">
+        #{userTel,jdbcType=CHAR},
+      </if>
+      <if test="userAddr != null">
+        #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOptTime != null">
+        #{lastOptTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -174,11 +215,23 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.lastOptTime != null">
-        last_opt_time = #{record.lastOptTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.showName != null">
         show_name = #{record.showName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        user_sex = #{record.userSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.userTel != null">
+        user_tel = #{record.userTel,jdbcType=CHAR},
+      </if>
+      <if test="record.userAddr != null">
+        user_addr = #{record.userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null">
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastOptTime != null">
+        last_opt_time = #{record.lastOptTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -191,8 +244,12 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       pwd = #{record.pwd,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      last_opt_time = #{record.lastOptTime,jdbcType=TIMESTAMP},
-      show_name = #{record.showName,jdbcType=VARCHAR}
+      show_name = #{record.showName,jdbcType=VARCHAR},
+      user_sex = #{record.userSex,jdbcType=INTEGER},
+      user_tel = #{record.userTel,jdbcType=CHAR},
+      user_addr = #{record.userAddr,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      last_opt_time = #{record.lastOptTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,11 +266,23 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastOptTime != null">
-        last_opt_time = #{lastOptTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="showName != null">
         show_name = #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userTel != null">
+        user_tel = #{userTel,jdbcType=CHAR},
+      </if>
+      <if test="userAddr != null">
+        user_addr = #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOptTime != null">
+        last_opt_time = #{lastOptTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -223,8 +292,12 @@
     set user_name = #{userName,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_opt_time = #{lastOptTime,jdbcType=TIMESTAMP},
-      show_name = #{showName,jdbcType=VARCHAR}
+      show_name = #{showName,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_tel = #{userTel,jdbcType=CHAR},
+      user_addr = #{userAddr,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      last_opt_time = #{lastOptTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

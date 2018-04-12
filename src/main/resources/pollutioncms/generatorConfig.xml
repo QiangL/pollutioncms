@@ -31,18 +31,18 @@
         </javaTypeResolver>
 
         <!-- 生成module -->
-        <javaModelGenerator targetPackage="com.pollutioncms.module.domain" targetProject="src\main\java">
+        <javaModelGenerator targetPackage="com.pollutioncms.module.domain" targetProject="src\main\resources">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 生成mapper -->
-        <sqlMapGenerator targetPackage="com.pollutioncms.module.mapper" targetProject="src\main\resources">
+        <sqlMapGenerator targetPackage="com.pollutioncms.module.mapper.example" targetProject="src\main\resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- 生成Dao接口的包 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.pollutioncms.module.mapper" targetProject="src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.pollutioncms.module.mapper" targetProject="src\main\resources">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
@@ -70,6 +70,5 @@
         <table catalog="hiwater" schema="hiwater" tableName="user">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-
     </context>
 </generatorConfiguration>

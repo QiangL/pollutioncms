@@ -6,6 +6,7 @@
     <result column="parent_uuid" jdbcType="CHAR" property="parentUuid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, parent_uuid, name, url
+    uuid, parent_uuid, name, url, permission
   </sql>
   <select id="selectByExample" parameterType="com.pollutioncms.module.domain.ModuleOperateExample" resultMap="BaseResultMap">
     select
@@ -103,9 +104,9 @@
       select uuid()
     </selectKey>
     insert into hiwater..module_operate (uuid, parent_uuid, name, 
-      url)
+      url, permission)
     values (#{uuid,jdbcType=CHAR}, #{parentUuid,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR})
+      #{url,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pollutioncms.module.domain.ModuleOperate">
     <selectKey keyProperty="uuid" order="BEFORE" resultType="java.lang.String">
@@ -123,6 +124,9 @@
       <if test="url != null">
         url,
       </if>
+      <if test="permission != null">
+        permission,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{uuid,jdbcType=CHAR},
@@ -134,6 +138,9 @@
       </if>
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -158,6 +165,9 @@
       <if test="record.url != null">
         url = #{record.url,jdbcType=VARCHAR},
       </if>
+      <if test="record.permission != null">
+        permission = #{record.permission,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -168,7 +178,8 @@
     set uuid = #{record.uuid,jdbcType=CHAR},
       parent_uuid = #{record.parentUuid,jdbcType=CHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR}
+      url = #{record.url,jdbcType=VARCHAR},
+      permission = #{record.permission,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -185,6 +196,9 @@
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
     </set>
     where uuid = #{uuid,jdbcType=CHAR}
   </update>
@@ -192,7 +206,8 @@
     update hiwater..module_operate
     set parent_uuid = #{parentUuid,jdbcType=CHAR},
       name = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR}
+      url = #{url,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=CHAR}
   </update>
 </mapper>

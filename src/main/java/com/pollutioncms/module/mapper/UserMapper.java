@@ -3,8 +3,9 @@ package com.pollutioncms.module.mapper;
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.module.domain.UserExample;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -28,4 +29,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    Set<String> listPermissions();
 }

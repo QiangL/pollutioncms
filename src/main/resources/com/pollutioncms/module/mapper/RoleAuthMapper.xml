@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.RoleAuth">
     <id column="id" jdbcType="CHAR" property="id" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
-    <result column="module_uuid" jdbcType="CHAR" property="moduleUuid" />
+    <result column="module_op_uuid" jdbcType="CHAR" property="moduleOpUuid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, role_id, module_uuid
+    id, role_id, module_op_uuid
   </sql>
   <select id="selectByExample" parameterType="com.pollutioncms.module.domain.RoleAuthExample" resultMap="BaseResultMap">
     select
@@ -101,9 +101,9 @@
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hiwater..role_auth (id, role_id, module_uuid
+    insert into hiwater..role_auth (id, role_id, module_op_uuid
       )
-    values (#{id,jdbcType=CHAR}, #{roleId,jdbcType=INTEGER}, #{moduleUuid,jdbcType=CHAR}
+    values (#{id,jdbcType=CHAR}, #{roleId,jdbcType=INTEGER}, #{moduleOpUuid,jdbcType=CHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pollutioncms.module.domain.RoleAuth">
@@ -116,8 +116,8 @@
       <if test="roleId != null">
         role_id,
       </if>
-      <if test="moduleUuid != null">
-        module_uuid,
+      <if test="moduleOpUuid != null">
+        module_op_uuid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -125,8 +125,8 @@
       <if test="roleId != null">
         #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="moduleUuid != null">
-        #{moduleUuid,jdbcType=CHAR},
+      <if test="moduleOpUuid != null">
+        #{moduleOpUuid,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -145,8 +145,8 @@
       <if test="record.roleId != null">
         role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
-      <if test="record.moduleUuid != null">
-        module_uuid = #{record.moduleUuid,jdbcType=CHAR},
+      <if test="record.moduleOpUuid != null">
+        module_op_uuid = #{record.moduleOpUuid,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -157,7 +157,7 @@
     update hiwater..role_auth
     set id = #{record.id,jdbcType=CHAR},
       role_id = #{record.roleId,jdbcType=INTEGER},
-      module_uuid = #{record.moduleUuid,jdbcType=CHAR}
+      module_op_uuid = #{record.moduleOpUuid,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -168,8 +168,8 @@
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="moduleUuid != null">
-        module_uuid = #{moduleUuid,jdbcType=CHAR},
+      <if test="moduleOpUuid != null">
+        module_op_uuid = #{moduleOpUuid,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
@@ -177,7 +177,7 @@
   <update id="updateByPrimaryKey" parameterType="com.pollutioncms.module.domain.RoleAuth">
     update hiwater..role_auth
     set role_id = #{roleId,jdbcType=INTEGER},
-      module_uuid = #{moduleUuid,jdbcType=CHAR}
+      module_op_uuid = #{moduleOpUuid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

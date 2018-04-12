@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.FirstModule">
     <id column="uuid" jdbcType="CHAR" property="uuid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="descript" jdbcType="VARCHAR" property="descript" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, name, descript
+    uuid, name
   </sql>
   <select id="selectByExample" parameterType="com.pollutioncms.module.domain.FirstModuleExample" resultMap="BaseResultMap">
     select
@@ -101,10 +100,8 @@
     <selectKey keyProperty="uuid" order="BEFORE" resultType="java.lang.String">
       select uuid()
     </selectKey>
-    insert into hiwater..first_module (uuid, name, descript
-      )
-    values (#{uuid,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{descript,jdbcType=VARCHAR}
-      )
+    insert into hiwater..first_module (uuid, name)
+    values (#{uuid,jdbcType=CHAR}, #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pollutioncms.module.domain.FirstModule">
     <selectKey keyProperty="uuid" order="BEFORE" resultType="java.lang.String">
@@ -116,17 +113,11 @@
       <if test="name != null">
         name,
       </if>
-      <if test="descript != null">
-        descript,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{uuid,jdbcType=CHAR},
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="descript != null">
-        #{descript,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,9 +136,6 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.descript != null">
-        descript = #{record.descript,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -156,8 +144,7 @@
   <update id="updateByExample" parameterType="map">
     update hiwater..first_module
     set uuid = #{record.uuid,jdbcType=CHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      descript = #{record.descript,jdbcType=VARCHAR}
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -168,16 +155,12 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="descript != null">
-        descript = #{descript,jdbcType=VARCHAR},
-      </if>
     </set>
     where uuid = #{uuid,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pollutioncms.module.domain.FirstModule">
     update hiwater..first_module
-    set name = #{name,jdbcType=VARCHAR},
-      descript = #{descript,jdbcType=VARCHAR}
+    set name = #{name,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=CHAR}
   </update>
 </mapper>

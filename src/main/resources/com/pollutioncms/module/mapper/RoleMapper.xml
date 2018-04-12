@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.Role">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="descript" jdbcType="VARCHAR" property="descript" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, descript
+    id, name, note
   </sql>
   <select id="selectByExample" parameterType="com.pollutioncms.module.domain.RoleExample" resultMap="BaseResultMap">
     select
@@ -101,9 +101,9 @@
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hiwater..role (id, name, descript
+    insert into hiwater..role (id, name, note
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{descript,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pollutioncms.module.domain.Role">
@@ -116,8 +116,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="descript != null">
-        descript,
+      <if test="note != null">
+        note,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -125,8 +125,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="descript != null">
-        #{descript,jdbcType=VARCHAR},
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,8 +145,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.descript != null">
-        descript = #{record.descript,jdbcType=VARCHAR},
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -157,7 +157,7 @@
     update hiwater..role
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      descript = #{record.descript,jdbcType=VARCHAR}
+      note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -168,8 +168,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="descript != null">
-        descript = #{descript,jdbcType=VARCHAR},
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -177,7 +177,7 @@
   <update id="updateByPrimaryKey" parameterType="com.pollutioncms.module.domain.Role">
     update hiwater..role
     set name = #{name,jdbcType=VARCHAR},
-      descript = #{descript,jdbcType=VARCHAR}
+      note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

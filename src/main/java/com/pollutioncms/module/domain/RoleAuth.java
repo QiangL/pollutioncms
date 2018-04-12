@@ -7,7 +7,7 @@ public class RoleAuth implements Serializable {
 
     private Integer roleId;
 
-    private String moduleUuid;
+    private String moduleOpUuid;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class RoleAuth implements Serializable {
         this.roleId = roleId;
     }
 
-    public String getModuleUuid() {
-        return moduleUuid;
+    public String getModuleOpUuid() {
+        return moduleOpUuid;
     }
 
-    public void setModuleUuid(String moduleUuid) {
-        this.moduleUuid = moduleUuid == null ? null : moduleUuid.trim();
+    public void setModuleOpUuid(String moduleOpUuid) {
+        this.moduleOpUuid = moduleOpUuid == null ? null : moduleOpUuid.trim();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RoleAuth implements Serializable {
         RoleAuth other = (RoleAuth) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getModuleUuid() == null ? other.getModuleUuid() == null : this.getModuleUuid().equals(other.getModuleUuid()));
+            && (this.getModuleOpUuid() == null ? other.getModuleOpUuid() == null : this.getModuleOpUuid().equals(other.getModuleOpUuid()));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class RoleAuth implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
-        result = prime * result + ((getModuleUuid() == null) ? 0 : getModuleUuid().hashCode());
+        result = prime * result + ((getModuleOpUuid() == null) ? 0 : getModuleOpUuid().hashCode());
         return result;
     }
 
@@ -70,7 +70,7 @@ public class RoleAuth implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", roleId=").append(roleId);
-        sb.append(", moduleUuid=").append(moduleUuid);
+        sb.append(", moduleOpUuid=").append(moduleOpUuid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

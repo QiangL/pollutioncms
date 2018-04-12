@@ -18,22 +18,28 @@
 
     <context:component-scan base-package="com.pollutioncms.web.controller"/>
     <!--for static resource https://blog.csdn.net/geeloong/article/details/72476688 -->
-    <mvc:default-servlet-handler/>
     <!-- https://www.cnblogs.com/leeSmall/p/7829264.html -->
+    <mvc:default-servlet-handler/>
+
+    <!-- https://blog.csdn.net/makinglove0231/article/details/52874881 -->
+    <bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        <property name="serializerFeatures">
+            <list>
+                <value>WriteMapNullValue</value>
+                <value>QuoteFieldNames</value>
+                <value>DisableCircularReferenceDetect</value>
+            </list>
+        </property>
+    </bean>
     <mvc:annotation-driven>
         <!-- for response json格式 -->
         <mvc:message-converters>
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <property name="features">
-                    <list>
-                        <value>WriteMapNullValue</value>
-                        <value>QuoteFieldNames</value>
-                        <value>DisableCircularReferenceDetect</value>
-                    </list>
-                </property>
+                <property name="fastJsonConfig" ref="fastJsonConfig"/>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

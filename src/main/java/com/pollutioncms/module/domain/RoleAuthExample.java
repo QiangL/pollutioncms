@@ -234,73 +234,73 @@ public class RoleAuthExample {
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidIsNull() {
-            addCriterion("module_uuid is null");
+        public Criteria andModuleOpUuidIsNull() {
+            addCriterion("module_op_uuid is null");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidIsNotNull() {
-            addCriterion("module_uuid is not null");
+        public Criteria andModuleOpUuidIsNotNull() {
+            addCriterion("module_op_uuid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidEqualTo(String value) {
-            addCriterion("module_uuid =", value, "moduleUuid");
+        public Criteria andModuleOpUuidEqualTo(String value) {
+            addCriterion("module_op_uuid =", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidNotEqualTo(String value) {
-            addCriterion("module_uuid <>", value, "moduleUuid");
+        public Criteria andModuleOpUuidNotEqualTo(String value) {
+            addCriterion("module_op_uuid <>", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidGreaterThan(String value) {
-            addCriterion("module_uuid >", value, "moduleUuid");
+        public Criteria andModuleOpUuidGreaterThan(String value) {
+            addCriterion("module_op_uuid >", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidGreaterThanOrEqualTo(String value) {
-            addCriterion("module_uuid >=", value, "moduleUuid");
+        public Criteria andModuleOpUuidGreaterThanOrEqualTo(String value) {
+            addCriterion("module_op_uuid >=", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidLessThan(String value) {
-            addCriterion("module_uuid <", value, "moduleUuid");
+        public Criteria andModuleOpUuidLessThan(String value) {
+            addCriterion("module_op_uuid <", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidLessThanOrEqualTo(String value) {
-            addCriterion("module_uuid <=", value, "moduleUuid");
+        public Criteria andModuleOpUuidLessThanOrEqualTo(String value) {
+            addCriterion("module_op_uuid <=", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidLike(String value) {
-            addCriterion("module_uuid like", value, "moduleUuid");
+        public Criteria andModuleOpUuidLike(String value) {
+            addCriterion("module_op_uuid like", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidNotLike(String value) {
-            addCriterion("module_uuid not like", value, "moduleUuid");
+        public Criteria andModuleOpUuidNotLike(String value) {
+            addCriterion("module_op_uuid not like", value, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidIn(List<String> values) {
-            addCriterion("module_uuid in", values, "moduleUuid");
+        public Criteria andModuleOpUuidIn(List<String> values) {
+            addCriterion("module_op_uuid in", values, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidNotIn(List<String> values) {
-            addCriterion("module_uuid not in", values, "moduleUuid");
+        public Criteria andModuleOpUuidNotIn(List<String> values) {
+            addCriterion("module_op_uuid not in", values, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidBetween(String value1, String value2) {
-            addCriterion("module_uuid between", value1, value2, "moduleUuid");
+        public Criteria andModuleOpUuidBetween(String value1, String value2) {
+            addCriterion("module_op_uuid between", value1, value2, "moduleOpUuid");
             return (Criteria) this;
         }
 
-        public Criteria andModuleUuidNotBetween(String value1, String value2) {
-            addCriterion("module_uuid not between", value1, value2, "moduleUuid");
+        public Criteria andModuleOpUuidNotBetween(String value1, String value2) {
+            addCriterion("module_op_uuid not between", value1, value2, "moduleOpUuid");
             return (Criteria) this;
         }
     }

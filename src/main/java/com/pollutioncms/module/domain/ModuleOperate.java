@@ -11,6 +11,8 @@ public class ModuleOperate implements Serializable {
 
     private String url;
 
+    private String permission;
+
     private static final long serialVersionUID = 1L;
 
     public String getUuid() {
@@ -45,6 +47,14 @@ public class ModuleOperate implements Serializable {
         this.url = url == null ? null : url.trim();
     }
 
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission == null ? null : permission.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -60,7 +70,8 @@ public class ModuleOperate implements Serializable {
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
             && (this.getParentUuid() == null ? other.getParentUuid() == null : this.getParentUuid().equals(other.getParentUuid()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()));
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+            && (this.getPermission() == null ? other.getPermission() == null : this.getPermission().equals(other.getPermission()));
     }
 
     @Override
@@ -71,6 +82,7 @@ public class ModuleOperate implements Serializable {
         result = prime * result + ((getParentUuid() == null) ? 0 : getParentUuid().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
+        result = prime * result + ((getPermission() == null) ? 0 : getPermission().hashCode());
         return result;
     }
 
@@ -84,6 +96,7 @@ public class ModuleOperate implements Serializable {
         sb.append(", parentUuid=").append(parentUuid);
         sb.append(", name=").append(name);
         sb.append(", url=").append(url);
+        sb.append(", permission=").append(permission);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

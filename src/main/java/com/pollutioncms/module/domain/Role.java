@@ -7,7 +7,7 @@ public class Role implements Serializable {
 
     private String name;
 
-    private String descript;
+    private String note;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class Role implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDescript() {
-        return descript;
+    public String getNote() {
+        return note;
     }
 
-    public void setDescript(String descript) {
-        this.descript = descript == null ? null : descript.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Role implements Serializable {
         Role other = (Role) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getDescript() == null ? other.getDescript() == null : this.getDescript().equals(other.getDescript()));
+            && (this.getNote() == null ? other.getNote() == null : this.getNote().equals(other.getNote()));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Role implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getDescript() == null) ? 0 : getDescript().hashCode());
+        result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
         return result;
     }
 
@@ -70,7 +70,7 @@ public class Role implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", descript=").append(descript);
+        sb.append(", note=").append(note);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

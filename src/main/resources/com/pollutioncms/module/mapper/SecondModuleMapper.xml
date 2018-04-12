@@ -5,7 +5,6 @@
     <id column="uuid" jdbcType="CHAR" property="uuid" />
     <result column="parent_uuid" jdbcType="CHAR" property="parentUuid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="descript" jdbcType="VARCHAR" property="descript" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, parent_uuid, name, descript
+    uuid, parent_uuid, name
   </sql>
   <select id="selectByExample" parameterType="com.pollutioncms.module.domain.SecondModuleExample" resultMap="BaseResultMap">
     select
@@ -102,10 +101,10 @@
     <selectKey keyProperty="uuid" order="BEFORE" resultType="java.lang.String">
       select uuid()
     </selectKey>
-    insert into hiwater..second_module (uuid, parent_uuid, name, 
-      descript)
-    values (#{uuid,jdbcType=CHAR}, #{parentUuid,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
-      #{descript,jdbcType=VARCHAR})
+    insert into hiwater..second_module (uuid, parent_uuid, name
+      )
+    values (#{uuid,jdbcType=CHAR}, #{parentUuid,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.pollutioncms.module.domain.SecondModule">
     <selectKey keyProperty="uuid" order="BEFORE" resultType="java.lang.String">
@@ -120,9 +119,6 @@
       <if test="name != null">
         name,
       </if>
-      <if test="descript != null">
-        descript,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{uuid,jdbcType=CHAR},
@@ -131,9 +127,6 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="descript != null">
-        #{descript,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -155,9 +148,6 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.descript != null">
-        descript = #{record.descript,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -167,8 +157,7 @@
     update hiwater..second_module
     set uuid = #{record.uuid,jdbcType=CHAR},
       parent_uuid = #{record.parentUuid,jdbcType=CHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      descript = #{record.descript,jdbcType=VARCHAR}
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -182,17 +171,13 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="descript != null">
-        descript = #{descript,jdbcType=VARCHAR},
-      </if>
     </set>
     where uuid = #{uuid,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pollutioncms.module.domain.SecondModule">
     update hiwater..second_module
     set parent_uuid = #{parentUuid,jdbcType=CHAR},
-      name = #{name,jdbcType=VARCHAR},
-      descript = #{descript,jdbcType=VARCHAR}
+      name = #{name,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=CHAR}
   </update>
 </mapper>

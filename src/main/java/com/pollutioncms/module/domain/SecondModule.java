@@ -9,8 +9,6 @@ public class SecondModule implements Serializable {
 
     private String name;
 
-    private String descript;
-
     private static final long serialVersionUID = 1L;
 
     public String getUuid() {
@@ -37,14 +35,6 @@ public class SecondModule implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDescript() {
-        return descript;
-    }
-
-    public void setDescript(String descript) {
-        this.descript = descript == null ? null : descript.trim();
-    }
-
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -59,8 +49,7 @@ public class SecondModule implements Serializable {
         SecondModule other = (SecondModule) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
             && (this.getParentUuid() == null ? other.getParentUuid() == null : this.getParentUuid().equals(other.getParentUuid()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getDescript() == null ? other.getDescript() == null : this.getDescript().equals(other.getDescript()));
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
     }
 
     @Override
@@ -70,7 +59,6 @@ public class SecondModule implements Serializable {
         result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
         result = prime * result + ((getParentUuid() == null) ? 0 : getParentUuid().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getDescript() == null) ? 0 : getDescript().hashCode());
         return result;
     }
 
@@ -83,7 +71,6 @@ public class SecondModule implements Serializable {
         sb.append(", uuid=").append(uuid);
         sb.append(", parentUuid=").append(parentUuid);
         sb.append(", name=").append(name);
-        sb.append(", descript=").append(descript);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
