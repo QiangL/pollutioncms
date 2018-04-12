@@ -16,4 +16,15 @@
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
     <result column="last_opt_time" jdbcType="TIMESTAMP" property="lastOptTime" />
   </resultMap>
+
+  <select id="listPermissions" parameterType="int" resultType="String">
+    select permission
+    from module_operate
+    WHERE module_operate.uuid in
+      (select role_auth.module_op_uuid
+      FROM role_auth
+      WHERE role_auth.role_id IN
+        (SELECT role.id FROM role_user WHERE role_user.user_id = #{id})
+      )
+  </select>
 </mapper>
