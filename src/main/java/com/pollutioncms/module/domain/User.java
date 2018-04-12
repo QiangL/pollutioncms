@@ -2,106 +2,199 @@ package com.pollutioncms.module.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "hiwater..user")
 public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private Integer id;
 
+    /**
+     * 登录名
+     */
+    @Column(name = "user_name")
     private String userName;
 
     private String pwd;
 
+    @Column(name = "create_time")
     private Date createTime;
 
+    /**
+     * 显示名称，展示用
+     */
+    @Column(name = "show_name")
     private String showName;
 
+    @Column(name = "user_sex")
     private Integer userSex;
 
+    @Column(name = "user_tel")
     private String userTel;
 
+    @Column(name = "user_addr")
     private String userAddr;
 
+    @Column(name = "user_email")
     private String userEmail;
 
+    /**
+     * 最后一次操作事件
+     */
+    @Column(name = "last_opt_time")
     private Date lastOptTime;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 获取登录名
+     *
+     * @return user_name - 登录名
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * 设置登录名
+     *
+     * @param userName 登录名
+     */
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
     }
 
+    /**
+     * @return pwd
+     */
     public String getPwd() {
         return pwd;
     }
 
+    /**
+     * @param pwd
+     */
     public void setPwd(String pwd) {
         this.pwd = pwd == null ? null : pwd.trim();
     }
 
+    /**
+     * @return create_time
+     */
     public Date getCreateTime() {
         return createTime;
     }
 
+    /**
+     * @param createTime
+     */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
+    /**
+     * 获取显示名称，展示用
+     *
+     * @return show_name - 显示名称，展示用
+     */
     public String getShowName() {
         return showName;
     }
 
+    /**
+     * 设置显示名称，展示用
+     *
+     * @param showName 显示名称，展示用
+     */
     public void setShowName(String showName) {
         this.showName = showName == null ? null : showName.trim();
     }
 
+    /**
+     * @return user_sex
+     */
     public Integer getUserSex() {
         return userSex;
     }
 
+    /**
+     * @param userSex
+     */
     public void setUserSex(Integer userSex) {
         this.userSex = userSex;
     }
 
+    /**
+     * @return user_tel
+     */
     public String getUserTel() {
         return userTel;
     }
 
+    /**
+     * @param userTel
+     */
     public void setUserTel(String userTel) {
         this.userTel = userTel == null ? null : userTel.trim();
     }
 
+    /**
+     * @return user_addr
+     */
     public String getUserAddr() {
         return userAddr;
     }
 
+    /**
+     * @param userAddr
+     */
     public void setUserAddr(String userAddr) {
         this.userAddr = userAddr == null ? null : userAddr.trim();
     }
 
+    /**
+     * @return user_email
+     */
     public String getUserEmail() {
         return userEmail;
     }
 
+    /**
+     * @param userEmail
+     */
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail == null ? null : userEmail.trim();
     }
 
+    /**
+     * 获取最后一次操作事件
+     *
+     * @return last_opt_time - 最后一次操作事件
+     */
     public Date getLastOptTime() {
         return lastOptTime;
     }
 
+    /**
+     * 设置最后一次操作事件
+     *
+     * @param lastOptTime 最后一次操作事件
+     */
     public void setLastOptTime(Date lastOptTime) {
         this.lastOptTime = lastOptTime;
     }

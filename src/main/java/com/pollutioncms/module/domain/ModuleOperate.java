@@ -1,10 +1,15 @@
 package com.pollutioncms.module.domain;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
+@Table(name = "hiwater..module_operate")
 public class ModuleOperate implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "select uuid()")
     private String uuid;
 
+    @Column(name = "parent_uuid")
     private String parentUuid;
 
     private String name;
@@ -15,42 +20,72 @@ public class ModuleOperate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return uuid
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     * @param uuid
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
+    /**
+     * @return parent_uuid
+     */
     public String getParentUuid() {
         return parentUuid;
     }
 
+    /**
+     * @param parentUuid
+     */
     public void setParentUuid(String parentUuid) {
         this.parentUuid = parentUuid == null ? null : parentUuid.trim();
     }
 
+    /**
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 
+    /**
+     * @return url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * @param url
+     */
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
     }
 
+    /**
+     * @return permission
+     */
     public String getPermission() {
         return permission;
     }
 
+    /**
+     * @param permission
+     */
     public void setPermission(String permission) {
         this.permission = permission == null ? null : permission.trim();
     }

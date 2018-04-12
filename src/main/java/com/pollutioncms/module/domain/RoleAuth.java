@@ -1,36 +1,60 @@
 package com.pollutioncms.module.domain;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
+@Table(name = "hiwater..role_auth")
 public class RoleAuth implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private String id;
 
+    @Column(name = "role_id")
     private Integer roleId;
 
+    @Column(name = "module_op_uuid")
     private String moduleOpUuid;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
 
+    /**
+     * @return role_id
+     */
     public Integer getRoleId() {
         return roleId;
     }
 
+    /**
+     * @param roleId
+     */
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
+    /**
+     * @return module_op_uuid
+     */
     public String getModuleOpUuid() {
         return moduleOpUuid;
     }
 
+    /**
+     * @param moduleOpUuid
+     */
     public void setModuleOpUuid(String moduleOpUuid) {
         this.moduleOpUuid = moduleOpUuid == null ? null : moduleOpUuid.trim();
     }

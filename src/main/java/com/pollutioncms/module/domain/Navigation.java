@@ -1,36 +1,66 @@
 package com.pollutioncms.module.domain;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
+@Table(name = "hiwater..navigation")
 public class Navigation implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private Integer id;
 
+    @Column(name = "role_id")
     private Integer roleId;
 
+    /**
+     * 生成权限树的json
+     */
     private String content;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * @return role_id
+     */
     public Integer getRoleId() {
         return roleId;
     }
 
+    /**
+     * @param roleId
+     */
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
+    /**
+     * 获取生成权限树的json
+     *
+     * @return content - 生成权限树的json
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * 设置生成权限树的json
+     *
+     * @param content 生成权限树的json
+     */
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
