@@ -21,11 +21,11 @@ public class UserDAO extends BaseDAO implements IUserDAO{
 		query.setParameter(1,password);
 		System.out.println("UserDAO:query"+query);
 		List users = query.list();
+		session.close();
 		if(users.size() != 0){
 			User user = (User)users.get(0);
 			return user;
 		}
-		session.close();
 		return null;
 	}
 

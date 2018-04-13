@@ -2,3 +2,7 @@
 target/
 *.iml
 *.class
+.settings/
+.classpath
+.mymetadata
+.project

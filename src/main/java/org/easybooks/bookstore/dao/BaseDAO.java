@@ -9,15 +9,16 @@ import org.springframework.stereotype.Repository;
 public class BaseDAO {
 	@Autowired
 	private SessionFactory sessionFactory1;
-	public SessionFactory getSessionFactory(){
-		return sessionFactory1;
-	}
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.sessionFactory1 = sessionFactory;
-	}
 	public Session getSession(){
 		Session session = sessionFactory1.openSession();
 		return session;
 	}
-
+	public SessionFactory getSessionFactory1() {
+		return sessionFactory1;
+	}
+	public void setSessionFactory1(SessionFactory sessionFactory1) {
+		this.sessionFactory1 = sessionFactory1;
+	}
+	
+	
 }
