@@ -9,6 +9,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * @discription UserServiceImpl
  * @date 2018-04-13
  **/
+@Service
 public class UserServiceImpl implements UserService{
 
     private static final Logger logger= LoggerFactory.getLogger(UserService.class);
