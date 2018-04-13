@@ -16,22 +16,34 @@
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
     <result column="last_opt_time" jdbcType="TIMESTAMP" property="lastOptTime" />
   </resultMap>
-
-  <select id="listPermissions" parameterType="int" resultType="String">
+  <sql id="allParam">
+    id,user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time
+  </sql>
+  <select id="listPermissions" parameterType="String" resultType="String">
     select permission
     from module_operate
     WHERE module_operate.uuid in
       (select role_auth.module_op_uuid
-      FROM role_auth
-      WHERE role_auth.role_id IN
-        (SELECT role_id FROM role_user WHERE role_user.user_id = #{id})
+        FROM role_auth
+        WHERE role_auth.role_id IN
+          (select role_id
+          from role_user,user
+          WHERE user.user_name = #{userName}
+            and user.id=role_user.user_id)
       )
   </select>
-  <select id="listRoles" parameterType="int" resultType="String">
-    select name from role
+  <select id="listRoles" parameterType="String" resultType="String">
+    select id from role
     WHERE id in
-    (select role_id from role_user
-      WHERE user_id=#{id}
-    )
+      (select role_id
+          from role_user,user
+          WHERE user.user_name = #{userName}
+            and user.id=role_user.user_id);
+  </select>
+  <select id="listUserByRole" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="allParam"/>
+    from user,role_user
+    where role_user.role_id=#{roleId} and role_user.user_id=user.id
   </select>
 </mapper>

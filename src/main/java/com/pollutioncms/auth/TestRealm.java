@@ -10,6 +10,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 public class TestRealm extends AuthorizingRealm {
@@ -26,6 +27,7 @@ public class TestRealm extends AuthorizingRealm {
         //到数据库查是否有此对象
         User user=new User();
         user.setUserName(loginName);
+        //TODO 查看返回null时的执行流程
         user = userMapper.selectOne(user);
         //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
@@ -42,13 +44,14 @@ public class TestRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
         //UsernamePasswordToken对象用来存放提交的登录信息
-        /*UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
+        UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
         //查出是否有此用户
-        User user=userService.findByName(token.getUsername());
+        User user = userMapper.selectOneByExample(new Example(User.class)
+                .createCriteria().andEqualTo("userName", token.getPrincipal()));
         if(user!=null){
             //若存在，将此用户存放到登录认证info中
-            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
-        }*/
+            return new SimpleAuthenticationInfo(user.getUserName(), user.getPwd(), getName());
+        }
         return null;
     }
 

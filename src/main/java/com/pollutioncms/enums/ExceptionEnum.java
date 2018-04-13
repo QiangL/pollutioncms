@@ -6,7 +6,8 @@ package com.pollutioncms.enums;
 public enum ExceptionEnum {
 
     /** 数据访问异常 **/
-    DaoException("DAO Exception", "数据访问出错")
+    DaoException("DAO Exception", "数据访问出错"),
+    CopyPropertiesException("Bean copy Exception","拷贝Bean属性出错")
     ;
 
 

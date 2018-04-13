@@ -1,28 +1,24 @@
 package com.pollutioncms.service;
 
 import com.pollutioncms.module.domain.User;
-import com.pollutioncms.module.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
+import com.pollutioncms.service.dto.AuthUserDTO;
+import com.pollutioncms.service.dto.LoginUserDTO;
 
-@Service
-public class UserService {
-    @Autowired
-    private UserMapper userMapper;
+import java.util.List;
 
+public interface UserService {
 
-    public User getUser(String username) {
-        Example e = new Example(User.class);
-        Example.Criteria c = e.createCriteria();
-        c.andEqualTo("userName", "liqiang");
-        return userMapper.selectOneByExample(e);
-    }
+    /**
+     * 根据userName查找一个LoginUserDTO
+     * @param userName
+     * @return
+     */
+    LoginUserDTO findLoginUser(String userName);
 
-    public User getUser(){
-        User u = new User();
-        u.setUserName("liqiang");
-        return userMapper.selectOne(u);
-    }
+    List<User> listUserByRole(Integer roleId);
+
+    List<User> listUser();
+
+    AuthUserDTO findAuthUser(String userName);
 
 }
