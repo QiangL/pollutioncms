@@ -1,5 +1,7 @@
-package com.pollutioncms.web.vo;
+package com.pollutioncms.service.dto;
 
+
+import com.pollutioncms.web.vo.SecondModuleVO;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * @discription FirstModuleDTO
  * @date 2018-04-13
  **/
-public class FirstModuleVO {
+public class FirstModuleDTO {
 
     private String uuid;
 

@@ -15,7 +15,7 @@
                   value="jdbc:mysql://localhost:3306/monitoredcontrol?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC">
         </property>
         <property name="username" value="root"/>
-        <property name="password" value="123456"/>
+        <property name="password" value="root"/>
     </bean>
     <bean id="sessionFactory1"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

@@ -22,25 +22,25 @@ import java.util.List;
  * @date 2018-04-13
  **/
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-    private static final Logger logger= LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserMapper userMapper;
 
     @Override
     public LoginUserDTO findLoginUser(String userName) {
         User user = userMapper.selectOneByExample(Example.builder(User.class)
-                .where(Sqls.custom().andEqualTo("userName",userName))
+                .where(Sqls.custom().andEqualTo("userName", userName))
                 .build());
         if (user == null) {
-            logger.warn("login user isn't exit,userName:{}",userName);
+            logger.warn("login user isn't exit,userName:{}", userName);
             return null;
         }
         LoginUserDTO loginUserDTO = new LoginUserDTO();
-        try{
+        try {
             PropertyUtils.copyProperties(loginUserDTO, user);
-        }catch (IllegalAccessException | InvocationTargetException |NoSuchMethodException e){
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             logger.error("copy user properties error", e);
             return null;
         }
