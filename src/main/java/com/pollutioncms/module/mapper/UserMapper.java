@@ -13,5 +13,5 @@ public interface UserMapper extends Mapper<User> {
 
     Set<String> listRoles(@Param("userName") String userName);
 
-    List<User> listUserByRole(@Param("roleId") Integer roleId);
+    List<User> listUserByRole(@Param("roleName") String roleName);
 }

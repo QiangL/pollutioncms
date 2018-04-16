@@ -1,4 +1,4 @@
-package com.pollutioncms.enums;
+package com.pollutioncms.common.enums;
 
 /**
  * 异常枚举

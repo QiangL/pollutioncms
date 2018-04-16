@@ -1,7 +1,5 @@
-package com.pollutioncms.auth;
+package com.pollutioncms.web.auth;
 
-import com.pollutioncms.module.domain.User;
-import com.pollutioncms.module.mapper.UserMapper;
 import com.pollutioncms.service.UserService;
 import com.pollutioncms.service.dto.AuthUserDTO;
 import com.pollutioncms.service.dto.LoginUserDTO;
@@ -12,10 +10,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 @Service
-public class TestRealm extends AuthorizingRealm {
+public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
@@ -39,7 +36,7 @@ public class TestRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
-        LoginUserDTO user = userService.findLoginUser(token.getPrincipal().toString());
+        LoginUserDTO user = userService.findLoginUser((String)token.getPrincipal());
         if(user == null){
             throw new UnknownAccountException("未知用户名");
         }

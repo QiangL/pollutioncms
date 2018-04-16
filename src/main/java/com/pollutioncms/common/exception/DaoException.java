@@ -1,6 +1,6 @@
-package com.pollutioncms.exception;
+package com.pollutioncms.common.exception;
 
-import com.pollutioncms.enums.ExceptionEnum;
+import com.pollutioncms.common.enums.ExceptionEnum;
 
 /**
  * 数据访问异常

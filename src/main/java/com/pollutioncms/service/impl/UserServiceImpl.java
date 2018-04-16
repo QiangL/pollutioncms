@@ -6,6 +6,8 @@ import com.pollutioncms.service.UserService;
 import com.pollutioncms.service.dto.AuthUserDTO;
 import com.pollutioncms.service.dto.LoginUserDTO;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,17 +48,15 @@ public class UserServiceImpl implements UserService {
         }
         return loginUserDTO;
     }
-
     @Override
-    public List<User> listUserByRole(Integer roleId) {
-        return userMapper.listUserByRole(roleId);
+    public List<User> listUserByRole(String roleName) {
+        return userMapper.listUserByRole(roleName);
     }
-
     @Override
+    @RequiresRoles("admin")
     public List<User> listUser() {
         return userMapper.selectAll();
     }
-
     @Override
     public AuthUserDTO findAuthUser(String userName) {
         AuthUserDTO authUserDTO = new AuthUserDTO();
@@ -65,4 +65,5 @@ public class UserServiceImpl implements UserService {
         authUserDTO.setPermissions(userMapper.listPermissions(userName));
         return authUserDTO;
     }
+
 }

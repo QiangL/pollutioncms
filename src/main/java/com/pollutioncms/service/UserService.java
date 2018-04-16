@@ -3,6 +3,7 @@ package com.pollutioncms.service;
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.service.dto.AuthUserDTO;
 import com.pollutioncms.service.dto.LoginUserDTO;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface UserService {
      */
     LoginUserDTO findLoginUser(String userName);
 
-    List<User> listUserByRole(Integer roleId);
+    List<User> listUserByRole(String roleName);
 
     List<User> listUser();
 

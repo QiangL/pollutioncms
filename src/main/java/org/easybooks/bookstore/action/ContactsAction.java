@@ -3,6 +3,7 @@ package org.easybooks.bookstore.action;
 import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.dispatcher.HttpParameters;
 import org.easybooks.bookstore.service.IContactsService;
 import org.easybooks.bookstore.vo.Contacts;
 
@@ -40,33 +41,33 @@ public class ContactsAction extends ActionSupport {
 	}
     
     public String addContacts() throws Exception{
-    	Map request = (Map)ActionContext.getContext().getParameters(); 
-    	String name = ((String[])request.get("name"))[0] ;
-    	String tel = ((String[])request.get("tel"))[0] ;
-    	String email = ((String[])request.get("email"))[0] ;
-    	String company = ((String[])request.get("company"))[0] ;
-    	String division = ((String[])request.get("division"))[0] ;
-    	String post= ((String[])request.get("post"))[0] ;
-    	contactsService.addContacts(name, tel, email, company, division, post);
+		HttpParameters request = ActionContext.getContext().getParameters();
+		String Name =request.get("Name").getValue() ;
+		String Tel = request.get("Tel").getValue() ;
+		String Email =request.get("Email").getValue() ;
+		String Company =request.get("Company").getValue() ;
+		String Division = request.get("Division").getValue() ;
+		String Post =request.get("Post").getValue() ;
+    	contactsService.addContacts(Name, Tel, Email, Company, Division, Post);
     	return SUCCESS;
     }
     
-    public String deleteContact() throws Exception{  	
-    	Map request = (Map)ActionContext.getContext().getParameters(); 
-    	String conId = ((String[])request.get("conId"))[0] ;    	
+    public String deleteContact() throws Exception{
+		HttpParameters request = ActionContext.getContext().getParameters();
+		String conId = request.get("conId").getValue();
     	contactsService.deleteContact(conId);
     	return SUCCESS;
     }
     
     public String updateContacts() throws Exception{
-    	Map request = (Map)ActionContext.getContext().getParameters();
-    	String Id = ((String[])request.get("Id"))[0] ;
-    	String Name = ((String[])request.get("Name"))[0] ;
-    	String Tel = ((String[])request.get("Tel"))[0] ;
-    	String Email = ((String[])request.get("Email"))[0] ;
-    	String Company = ((String[])request.get("Company"))[0] ;
-    	String Division = ((String[])request.get("Division"))[0] ;
-    	String Post = ((String[])request.get("Post"))[0] ;
+		HttpParameters request =ActionContext.getContext().getParameters();
+    	String Id = request.get("Id").getValue() ;
+    	String Name =request.get("Name").getValue() ;
+    	String Tel = request.get("Tel").getValue() ;
+    	String Email =request.get("Email").getValue() ;
+    	String Company =request.get("Company").getValue() ;
+    	String Division = request.get("Division").getValue() ;
+    	String Post =request.get("Post").getValue() ;
         contactsService.updateContacts(Id, Name, Tel, Email, Company, Division, Post);
     	return SUCCESS;
     } 

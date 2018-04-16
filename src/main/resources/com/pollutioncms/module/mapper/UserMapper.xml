@@ -33,17 +33,17 @@
       )
   </select>
     <select id="listRoles" parameterType="String" resultType="String">
-    select id from role
+    select role_name from role
     WHERE id in
       (select role_id
           from role_user,user
           WHERE user.user_name = #{userName}
             and user.id=role_user.user_id);
   </select>
-    <select id="listUserByRole" parameterType="int" resultMap="BaseResultMap">
+    <select id="listUserByRole" parameterType="String" resultMap="BaseResultMap">
         select
         <include refid="allParam"/>
         from user,role_user
-        where role_user.role_id=#{roleId} and role_user.user_id=user.id
+        where role_user.role_id=#{roleName} and role_user.user_id=user.id
     </select>
 </mapper>
