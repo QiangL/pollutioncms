@@ -1,58 +1,52 @@
 package com.test;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class SynchronizedBloceDemo {
-
-    static int typeNum = 0;
-    static int numEachBox = 0;
-    static int[] downlimit;
-    static int[] uplimit;
-    static long result = 0;
-
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            result = 0;
-            typeNum = sc.nextInt();
-            numEachBox = sc.nextInt();
-            downlimit = new int[typeNum];
-            uplimit = new int[typeNum];
-            int sum = 0;
-            for (int i = 0; i < typeNum; i++) {
-                downlimit[i] = sc.nextInt();
-                uplimit[i] = sc.nextInt();
-                sum += downlimit[i];
+            String[] arrStr=sc.nextLine().split(" ");
+            int target = Integer.valueOf(sc.nextLine());
+            int[] arr = new int[arrStr.length];
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = Integer.valueOf(arrStr[i]);
             }
 
-            for (int j = downlimit[0]; j <= uplimit[0]; j++) {
-                getNum(0, j);
+            if (arr[arr.length - 1] < target) {
+                System.out.println(arr.length);
+            }else if(arr[0] > target){
+                System.out.println(0);
+            }else{
+                System.out.println(binarySearch(0,arr.length,arr,target));
             }
 
-            System.out.println(result);
+            /*BigInteger x = sc.nextBigInteger();
+            BigInteger y = sc.nextBigInteger();
+            BigInteger z = sc.nextBigInteger();
 
+            System.out.format("%s", x.modPow(y, z).toString());*/
 
         }
-    }
 
-    static void getNum(int limit, int count) {
-        if(limit >= typeNum-1) return;
-        for (int j = downlimit[limit]; j <= uplimit[limit]; j++) {
-            System.out.println(limit + "," + j);
-            if (j + count == numEachBox) {
-                System.out.println(limit + "," + count + "," + j);
-                result++;
-            } else if (j + count > numEachBox) {
-                continue;
-            } else {
-                getNum(limit + 1, count + j);
-            }
+
+    }
+    static int binarySearch(int start,int end, int[] arr,int target){
+        if (start == end) {
+            return start;
         }
-
+        int mid = (end - start) / 2 + start;
+        if (arr[mid] > target) {
+            return binarySearch(start, mid, arr, target);
+        }else if(arr[mid] < target){
+            return binarySearch(mid+1, end, arr, target);
+        }else{
+            return mid;
+        }
     }
-
 
 }
 
