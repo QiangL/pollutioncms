@@ -15,6 +15,12 @@ public class RoleAuth implements Serializable {
     @Column(name = "module_op_uuid")
     private String moduleOpUuid;
 
+    /**
+     * 能否传递，给别人授权
+     */
+    @Column(name = "can_authoriz")
+    private Boolean canAuthoriz;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -59,6 +65,24 @@ public class RoleAuth implements Serializable {
         this.moduleOpUuid = moduleOpUuid == null ? null : moduleOpUuid.trim();
     }
 
+    /**
+     * 获取能否传递，给别人授权
+     *
+     * @return can_authoriz - 能否传递，给别人授权
+     */
+    public Boolean getCanAuthoriz() {
+        return canAuthoriz;
+    }
+
+    /**
+     * 设置能否传递，给别人授权
+     *
+     * @param canAuthoriz 能否传递，给别人授权
+     */
+    public void setCanAuthoriz(Boolean canAuthoriz) {
+        this.canAuthoriz = canAuthoriz;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -73,7 +97,8 @@ public class RoleAuth implements Serializable {
         RoleAuth other = (RoleAuth) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getModuleOpUuid() == null ? other.getModuleOpUuid() == null : this.getModuleOpUuid().equals(other.getModuleOpUuid()));
+            && (this.getModuleOpUuid() == null ? other.getModuleOpUuid() == null : this.getModuleOpUuid().equals(other.getModuleOpUuid()))
+            && (this.getCanAuthoriz() == null ? other.getCanAuthoriz() == null : this.getCanAuthoriz().equals(other.getCanAuthoriz()));
     }
 
     @Override
@@ -83,6 +108,7 @@ public class RoleAuth implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         result = prime * result + ((getModuleOpUuid() == null) ? 0 : getModuleOpUuid().hashCode());
+        result = prime * result + ((getCanAuthoriz() == null) ? 0 : getCanAuthoriz().hashCode());
         return result;
     }
 
@@ -95,6 +121,7 @@ public class RoleAuth implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", roleId=").append(roleId);
         sb.append(", moduleOpUuid=").append(moduleOpUuid);
+        sb.append(", canAuthoriz=").append(canAuthoriz);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,6 +1,6 @@
 package com.pollutioncms.web.controller;
 
-import com.pollutioncms.service.UserService;
+import com.pollutioncms.service.api.UserService;
 import com.pollutioncms.service.dto.LoginUserDTO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -22,8 +22,8 @@ public class TestController {
     @RequestMapping(value="/test.mvc",method = RequestMethod.GET)
     @ResponseBody
     public LoginUserDTO test(){
-        userService.listUser();
-        return userService.findLoginUser("liqiang");
+        //userService.listUser();
+        return userService.getLoginUser("liqiang").getDate();
     }
 
 }

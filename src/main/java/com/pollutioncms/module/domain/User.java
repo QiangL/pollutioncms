@@ -45,6 +45,19 @@ public class User implements Serializable {
     @Column(name = "last_opt_time")
     private Date lastOptTime;
 
+    /**
+     * 密码加盐
+     */
+    private String salt;
+
+    /**
+     * 用户状态
+1：正常
+2：锁定，不能登录
+3：删除
+     */
+    private Integer status;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -199,6 +212,54 @@ public class User implements Serializable {
         this.lastOptTime = lastOptTime;
     }
 
+    /**
+     * 获取密码加盐
+     *
+     * @return salt - 密码加盐
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * 设置密码加盐
+     *
+     * @param salt 密码加盐
+     */
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    /**
+     * 获取用户状态
+1：正常
+2：锁定，不能登录
+3：删除
+     *
+     * @return status - 用户状态
+1：正常
+2：锁定，不能登录
+3：删除
+     */
+    public Integer getStatus() {
+        return status;
+    }
+
+    /**
+     * 设置用户状态
+1：正常
+2：锁定，不能登录
+3：删除
+     *
+     * @param status 用户状态
+1：正常
+2：锁定，不能登录
+3：删除
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -220,7 +281,9 @@ public class User implements Serializable {
             && (this.getUserTel() == null ? other.getUserTel() == null : this.getUserTel().equals(other.getUserTel()))
             && (this.getUserAddr() == null ? other.getUserAddr() == null : this.getUserAddr().equals(other.getUserAddr()))
             && (this.getUserEmail() == null ? other.getUserEmail() == null : this.getUserEmail().equals(other.getUserEmail()))
-            && (this.getLastOptTime() == null ? other.getLastOptTime() == null : this.getLastOptTime().equals(other.getLastOptTime()));
+            && (this.getLastOptTime() == null ? other.getLastOptTime() == null : this.getLastOptTime().equals(other.getLastOptTime()))
+            && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
     }
 
     @Override
@@ -237,6 +300,8 @@ public class User implements Serializable {
         result = prime * result + ((getUserAddr() == null) ? 0 : getUserAddr().hashCode());
         result = prime * result + ((getUserEmail() == null) ? 0 : getUserEmail().hashCode());
         result = prime * result + ((getLastOptTime() == null) ? 0 : getLastOptTime().hashCode());
+        result = prime * result + ((getSalt() == null) ? 0 : getSalt().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         return result;
     }
 
@@ -256,6 +321,8 @@ public class User implements Serializable {
         sb.append(", userAddr=").append(userAddr);
         sb.append(", userEmail=").append(userEmail);
         sb.append(", lastOptTime=").append(lastOptTime);
+        sb.append(", salt=").append(salt);
+        sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

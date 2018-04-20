@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:pollutioncms/applicationContext.xml",
-                "classpath:monitoredcontrol/applicationContext.xml",
                 "classpath:pollutioncms/spring-mvc.xml"})
 public class BaseTest {
 }

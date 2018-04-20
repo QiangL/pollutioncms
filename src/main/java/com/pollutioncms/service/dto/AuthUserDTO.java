@@ -1,9 +1,13 @@
 package com.pollutioncms.service.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.Set;
 
 /**
  * 只针对权限的UserDTO对象
+ *
  * @author liqiag
  * @discription AuthUserDTO
  * @date 2018-04-13
@@ -42,10 +46,6 @@ public class AuthUserDTO {
 
     @Override
     public String toString() {
-        return "AuthUserDTO{" +
-                "userName='" + userName + '\'' +
-                ", roles=" + roles +
-                ", permissions=" + permissions +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

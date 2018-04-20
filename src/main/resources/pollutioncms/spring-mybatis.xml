@@ -7,6 +7,19 @@
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:pollutioncms/mybatis-config.xml"/>
         <property name="typeAliasesPackage" value="com.pollutioncms.module.domain,com.pollutioncms.service.dto"/>
+        <property name="plugins">
+        <array>
+        <bean class="com.github.pagehelper.PageInterceptor">
+            <property name="properties">
+            <!--使用下面的方式配置参数，一行配置一个 -->
+            <value>
+                helperDialect=mysql
+                
+            </value>
+            </property>
+        </bean>
+        </array>
+    </property>
     </bean>
 
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">

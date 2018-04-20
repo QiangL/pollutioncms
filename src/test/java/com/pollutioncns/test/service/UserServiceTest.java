@@ -1,7 +1,7 @@
 package com.pollutioncns.test.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pollutioncms.service.UserService;
+import com.pollutioncms.service.api.UserService;
 import com.pollutioncns.test.BaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void test(){
-        logger.warn(JSONObject.toJSONString(userService.findLoginUser("liqiang")));
-        logger.warn(JSONObject.toJSONString(userService.findLoginUser("li")));
+        logger.warn(JSONObject.toJSONString(userService.getLoginUser("liqiang")));
+        logger.warn(JSONObject.toJSONString(userService.getLoginUser("li")));
     }
 }

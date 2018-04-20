@@ -7,7 +7,12 @@ public enum ExceptionEnum {
 
     /** 数据访问异常 **/
     DaoException("DAO Exception", "数据访问出错"),
-    CopyPropertiesException("Bean copy Exception","拷贝Bean属性出错")
+    /** 使用BeanUtils拷贝属性异常 **/
+    CopyPropertiesException("Bean copy Exception","拷贝Bean属性出错"),
+    /** 入参错误 **/
+    ParamErrException("param value is not suit","参数不合适"),
+
+    INTRA_ERROR_EXCEPTION("intra error", "内部错误")
     ;
 
 
@@ -23,12 +28,13 @@ public enum ExceptionEnum {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
 
     public String getErrorMsg() {
         return errorMsg;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     public void setErrorMsg(String errorMsg) {

@@ -16,12 +16,6 @@
      http://www.springframework.org/schema/util
      http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-    <!-- 对shiro 注解的支持-->
-    <aop:config proxy-target-class="true"/>
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-
 	<context:annotation-config />
 
 	<context:component-scan base-package="com.pollutioncms.service"/>
@@ -38,4 +32,12 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+    <!-- 对shiro 注解的支持-->
+    <aop:config proxy-target-class="true"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <aop:aspectj-autoproxy/>
+
 </beans>

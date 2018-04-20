@@ -8,9 +8,18 @@ import java.util.List;
 import java.util.Set;
 
 public interface UserMapper extends Mapper<User> {
-
+    /**
+     * 根据UserName获取对应User的所有权限
+     * @param userName
+     * @return
+     */
     Set<String> listPermissions(@Param("userName") String userName);
 
+    /**
+     * 根据UserName获取对应User的所有角色
+     * @param userName
+     * @return
+     */
     Set<String> listRoles(@Param("userName") String userName);
 
     List<User> listUserByRole(@Param("roleName") String roleName);

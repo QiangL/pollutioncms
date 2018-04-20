@@ -15,9 +15,11 @@
         <result column="user_addr" jdbcType="VARCHAR" property="userAddr"/>
         <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
         <result column="last_opt_time" jdbcType="TIMESTAMP" property="lastOptTime"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="status" jdbcType="INTEGER" property="status" />
     </resultMap>
     <sql id="allParam">
-    id,user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time
+    id,user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time,stlt,status
   </sql>
     <select id="listPermissions" parameterType="String" resultType="String">
     select permission
