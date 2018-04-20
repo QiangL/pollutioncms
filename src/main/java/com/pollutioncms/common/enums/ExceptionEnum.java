@@ -12,7 +12,7 @@ public enum ExceptionEnum {
     /** 入参错误 **/
     ParamErrException("param value is not suit","参数不合适"),
 
-    INTRA_ERROR_EXCEPTION("intra error", "内部错误")
+    Internal_ERROR_EXCEPTION("internal error", "内部错误")
     ;
 
 

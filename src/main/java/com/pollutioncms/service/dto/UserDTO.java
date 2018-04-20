@@ -1,7 +1,7 @@
 package com.pollutioncms.service.dto;
 
 import com.pollutioncms.module.domain.User;
-import com.pollutioncms.service.validator.UserDTOValidator;
+import com.pollutioncms.web.validator.UserDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;

@@ -1,4 +1,4 @@
-package com.pollutioncms.service.validator;
+package com.pollutioncms.web.validator;
 
 /**
  * UserDTO检验器

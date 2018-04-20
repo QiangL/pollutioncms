@@ -23,7 +23,7 @@ public class TestController {
     @ResponseBody
     public LoginUserDTO test(){
         //userService.listUser();
-        return userService.getLoginUser("liqiang").getDate();
+        return userService.getLoginUser("liqiang");
     }
 
 }

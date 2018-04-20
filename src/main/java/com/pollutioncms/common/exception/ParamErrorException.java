@@ -4,20 +4,20 @@ import com.pollutioncms.common.enums.ExceptionEnum;
 
 /**
  * @author liqiag
- * @discription ParamErrException
+ * @discription ParamErrorException
  * @date 2018-04-19
  **/
-public class ParamErrException extends BaseException {
+public class ParamErrorException extends BaseException {
 
-    public ParamErrException(String detail) {
+    public ParamErrorException(String detail) {
         super(ExceptionEnum.ParamErrException.getErrorCode(),detail);
     }
 
-    public ParamErrException() {
+    public ParamErrorException() {
         super(ExceptionEnum.ParamErrException);
     }
 
-    public ParamErrException(Throwable throwable) {
+    public ParamErrorException(Throwable throwable) {
         super(ExceptionEnum.ParamErrException, throwable);
     }
 }

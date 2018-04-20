@@ -1,6 +1,6 @@
 package com.pollutioncms.service.dto;
 
-import com.pollutioncms.service.enums.RespError;
+import com.pollutioncms.web.enums.RespError;
 
 import java.util.ArrayList;
 import java.util.List;

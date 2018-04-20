@@ -1,7 +1,7 @@
 package com.pollutioncms.service.dto;
 
 import com.pollutioncms.module.domain.Role;
-import com.pollutioncms.service.validator.RoleDTOValidator;
+import com.pollutioncms.web.validator.RoleDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotBlank;

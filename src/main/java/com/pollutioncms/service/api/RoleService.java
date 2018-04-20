@@ -12,11 +12,11 @@ import java.util.List;
  **/
 public interface RoleService {
 
-    Response<List<RoleDTO>> listRoles(Integer pageNum, Integer count);
+    List<RoleDTO> listRoles(Integer pageNum, Integer count);
 
-    Response<Void> saveRole(RoleDTO roleDTO);
+    boolean saveRole(RoleDTO roleDTO);
 
-    Response<Void> deleteRole(RoleDTO roleDTO);
+    boolean deleteRole(RoleDTO roleDTO);
 
-    Response<Void> updateRole(RoleDTO roleDTO);
+    boolean updateRole(RoleDTO roleDTO);
 }
