@@ -6,3 +6,5 @@ target/
 .classpath
 .mymetadata
 .project
+
+*/web.xml
