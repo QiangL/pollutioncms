@@ -7,7 +7,7 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <filter>
+    <!--<filter>
         <filter-name>struts2</filter-name>
         <filter-class>
             org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
@@ -20,14 +20,14 @@
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>*.action</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:pollutioncms/applicationContext.xml,
-            classpath:monitoredcontrol/applicationContext.xml
+            <!--classpath:monitoredcontrol/applicationContext.xml-->
         </param-value>
     </context-param>
 
