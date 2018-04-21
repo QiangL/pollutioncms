@@ -15,6 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 扩展shiro权限的realm.
+ * 用于访问数据库取得权限
+ */
 @Service
 public class UserRealm extends AuthorizingRealm {
     private static final Logger logger= LoggerFactory.getLogger(UserRealm.class);
@@ -43,10 +47,10 @@ public class UserRealm extends AuthorizingRealm {
             AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
         LoginUserDTO user = userService.getLoginUser((String)token.getPrincipal());
-        if(user.getStatus() == UserStatusEnum.LOCKED.getStatus()){
+        if(user.getStatus() == UserStatusEnum.LOCKED){
             logger.error("locked account login in,username:{}",token.getPrincipal());
             throw new LockedAccountException("已锁定账户，请联系管理员");
-        } else if (user.getStatus() == UserStatusEnum.DELETED.getStatus()) {
+        } else if (user.getStatus() == UserStatusEnum.DELETED) {
             logger.error("deleted account login,username:{}",token.getPrincipal());
             throw new UnknownAccountException("已删除账户");
         }

@@ -1,5 +1,6 @@
 package com.pollutioncms.service.dto;
 
+import com.pollutioncms.common.enums.AuthEnum;
 import com.pollutioncms.module.domain.Role;
 import com.pollutioncms.web.validator.RoleDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -32,15 +33,21 @@ public class RoleDTO {
 
     private String comment;
 
+    private Integer parentId;
+
+    private AuthEnum canInherit;
+
     public static RoleDTO toRoleDTO(Role role) throws BeansException {
         RoleDTO roleDTO = new RoleDTO();
         BeanUtils.copyProperties(role, roleDTO);
+        roleDTO.setCanInherit(AuthEnum.getAuthEnum(role.getCanInherit()));
         return roleDTO;
     }
 
     public Role toDO() throws BeansException {
         Role role = new Role();
         BeanUtils.copyProperties(this, role);
+        role.setCanInherit(canInherit.getCode());
         return role;
     }
 
@@ -75,6 +82,22 @@ public class RoleDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public AuthEnum getCanInherit() {
+        return canInherit;
+    }
+
+    public void setCanInherit(AuthEnum canInherit) {
+        this.canInherit = canInherit;
     }
 
     @Override

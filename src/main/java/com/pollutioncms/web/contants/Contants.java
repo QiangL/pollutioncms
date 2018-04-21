@@ -11,4 +11,6 @@ public interface Contants {
     int NUM_EACH_PAGE = 20;
     /** json返回结果的key **/
     String RESULT = "result";
+
+    String USER = "user";
 }

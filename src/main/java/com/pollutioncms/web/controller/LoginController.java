@@ -3,7 +3,7 @@ package com.pollutioncms.web.controller;
 import com.pollutioncms.common.exception.BaseException;
 import com.pollutioncms.service.api.UserService;
 import com.pollutioncms.service.dto.LoginUserDTO;
-import com.pollutioncms.web.module.Response;
+import com.pollutioncms.web.contants.Contants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 登录放置session的controller
  * @author liqiag
  * @discription LoginController
  * @date 2018-04-21
@@ -50,12 +51,13 @@ public class LoginController {
         }
         try {
             subject.login(token);
-            Session session = subject.getSession();
-            session.setAttribute("username", user.getUserName());
         } catch (AuthenticationException | BaseException e) {
             ramm.addFlashAttribute("loginError", e.getMessage());
             return "redirect:/login.jsp";
         }
+        Session session = subject.getSession();
+        ;
+        session.setAttribute(Contants.USER, userService.getLoginUser(user.getUserName()));
         return "index";
     }
 

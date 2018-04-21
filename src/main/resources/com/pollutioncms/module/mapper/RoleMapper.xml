@@ -6,8 +6,32 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="role_cn_name" jdbcType="VARCHAR" property="roleCnName" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_cn_name" jdbcType="VARCHAR" property="roleCnName" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="can_inherit" jdbcType="INTEGER" property="canInherit" />
   </resultMap>
+
+  <sql id="allParam">
+    id,parent_id,role_name,role_cn_name,comment,can_inherit
+  </sql>
+
+  <insert id="saveRole">
+    <selectKey keyProperty="id" order="BEFORE" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into role
+    ( <include refid="allParam"/> ) VALUES
+    (#{id},(select id from role where role_name = #{parentRoleName}),#{role.roleName},#{role.roleCnName},#{role.comment},#{role.canInherit})
+
+    <!-- 复制父role权限 -->
+    <if test="#{role.canInherit} == 1">
+      insert into role_auth
+        (role_id,module_op_uuid,can_authoriz) VALUES
+          (select #{id},module_op_uuid,can_authoriz from role_auth
+            where role_id= (select id from role where role_name =#{parentRoleName})
+          )
+    </if>
+  </insert>
 </mapper>

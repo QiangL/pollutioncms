@@ -35,7 +35,7 @@ public class LoginUserDTO {
      */
     private String salt;
 
-    private int status;
+    private UserStatusEnum status;
 
     public String getSalt() {
         return salt;
@@ -61,11 +61,11 @@ public class LoginUserDTO {
         this.pwd = pwd;
     }
 
-    public int getStatus() {
+    public UserStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(UserStatusEnum status) {
         this.status = status;
     }
 
@@ -80,6 +80,7 @@ public class LoginUserDTO {
     public static LoginUserDTO toLoginUserDTO(User user) {
         LoginUserDTO d = new LoginUserDTO();
         BeanUtils.copyProperties(user, d);
+        d.setStatus(UserStatusEnum.getUserStatusEnum(user.getStatus()));
         return d;
     }
 

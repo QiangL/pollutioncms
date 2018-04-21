@@ -26,6 +26,7 @@
         <mapper.version>4.0.0</mapper.version>
 
         <struts2.version>2.5.14.1</struts2.version>
+        <freemarket.version>2.3.23</freemarket.version>
 
         <shiro.version>1.4.0</shiro.version>
         <aspect.version>1.6.12</aspect.version>
@@ -169,6 +170,12 @@
             <version>${struts2.version}</version>
         </dependency>
         <!-- struts end -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarket.version}</version>
+        </dependency>
+
 
         <!-- hibernate -->
         <dependency>

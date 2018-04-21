@@ -1,6 +1,5 @@
 package com.pollutioncns.test.controller;
 
-import com.pollutioncms.web.controller.TestController;
 import com.pollutioncns.test.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,4 @@ import org.springframework.beans.factory.annotation.Autowired;
  **/
 public class UserControllerTest extends BaseTest{
 
-    @Autowired
-    private TestController testController;
-    @Test
-    public void test(){
-        testController.test();
-    }
 }

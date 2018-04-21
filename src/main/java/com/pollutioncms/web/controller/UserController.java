@@ -21,6 +21,7 @@ import javax.validation.groups.Default;
 import static com.pollutioncms.web.contants.Contants.NUM_EACH_PAGE;
 
 /**
+ * 用户管理的controller
  * @author liqiag
  * @discription UserController
  * @date 2018-04-21

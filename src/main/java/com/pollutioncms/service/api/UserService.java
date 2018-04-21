@@ -2,12 +2,14 @@ package com.pollutioncms.service.api;
 
 import com.pollutioncms.service.dto.AuthUserDTO;
 import com.pollutioncms.service.dto.LoginUserDTO;
-import com.pollutioncms.service.dto.Response;
 import com.pollutioncms.service.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
+
+
+    UserDTO getUser(String userName);
 
     /**
      * 根据userName查找一个LoginUserDTO

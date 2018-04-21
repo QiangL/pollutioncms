@@ -23,4 +23,12 @@ public interface UserMapper extends Mapper<User> {
     Set<String> listRoles(@Param("userName") String userName);
 
     List<User> listUserByRole(@Param("roleName") String roleName);
+
+    /**
+     * 业务上的删除.
+     * 会删除对应role_user关联表的记录
+     * @param user
+     * @return
+     */
+    int deleteUser(@Param("user") User user);
 }
