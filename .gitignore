@@ -7,4 +7,4 @@ target/
 .mymetadata
 .project
 
-*/web.xml
+src/main/webapp/WEB-INF/web.xml
