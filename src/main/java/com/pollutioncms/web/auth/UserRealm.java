@@ -26,6 +26,7 @@ public class UserRealm extends AuthorizingRealm {
      * 权限认证
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        // 身份集合，身份和Realm返回的集合对应
         String loginName=(String) principalCollection.fromRealm(getName()).iterator().next();
         //TODO 查看返回无权限时的执行流程
         AuthUserDTO user = userService.getAuthUser(loginName);

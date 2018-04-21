@@ -1,6 +1,6 @@
-package com.pollutioncms.web.controller;
+package com.pollutioncms.web.controller.exceptionController;
 
-import com.alibaba.fastjson.JSONObject;
+import com.pollutioncms.common.exception.DaoException;
 import com.pollutioncms.common.exception.ParamErrorException;
 import com.pollutioncms.web.enums.RespError;
 import com.pollutioncms.web.module.Response;
@@ -31,6 +31,13 @@ public class InternalExceptionController {
         logger.error("database error",e);
         return Response.failResp(RespError.OPERATION_FAIL).toJSON();
     }
+    @ExceptionHandler(DaoException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String daoExceptionHandle(DataAccessException e) {
+        logger.error("database error",e);
+        return Response.failResp(RespError.OPERATION_FAIL).toJSON();
+    }
 
     @ExceptionHandler(ParamErrorException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -45,6 +52,6 @@ public class InternalExceptionController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String beansCopyExHandler(BeansException e) {
         logger.error("copy properties error", e);
-        return Response.failResp(RespError.INTRA_ERROR).toJSON();
+        return Response.failResp(RespError.INTERNAL_ERROR).toJSON();
     }
 }

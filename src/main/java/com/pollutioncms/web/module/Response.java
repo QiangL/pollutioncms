@@ -22,6 +22,9 @@ public class Response<T> {
     private T date;
 
 
+    public static <T> Response<T> succResp() {
+        return new Response<>(true, null);
+    }
     public static <T> Response<T> succResp(T date) {
         return new Response<>(true, date);
     }
@@ -41,6 +44,12 @@ public class Response<T> {
 
     public static <T> Response<T> failResp(RespError errorCode) {
         return failResp(errorCode.getErrorCode());
+    }
+    public static <T> Response<T> failResp() {
+        Response<T> r = new Response<>(false, null);
+        r.errorCodes = new ArrayList<String>();
+        r.errorCodes.add(RespError.OPERATION_FAIL.getErrorCode());
+        return r;
     }
 
     public T getDate() {

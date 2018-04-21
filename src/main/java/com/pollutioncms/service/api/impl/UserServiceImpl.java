@@ -1,6 +1,8 @@
 package com.pollutioncms.service.api.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.pollutioncms.common.enums.ExceptionEnum;
+import com.pollutioncms.common.exception.DaoException;
 import com.pollutioncms.common.exception.ParamErrorException;
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.module.mapper.UserMapper;
@@ -71,18 +73,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean saveUser(UserDTO userDTO) {
-        return userMapper.insert(userDTO.toDO()) == 1;
+        if (userMapper.insert(userDTO.toDO()) != 1){
+            logger.error("dao operate effect num error,dto:{}",userDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        else return true;
 
     }
 
     @Override
     public boolean deleteUser(UserDTO userDTO) {
-        return userMapper.delete(userDTO.toDO()) == 1;
+        if (userMapper.delete(userDTO.toDO()) != 1){
+            logger.error("dao operate effect num error,dto:{}",userDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        else return true;
     }
 
     @Override
     public boolean updateUser(UserDTO userDTO) {
-        return userMapper.updateByPrimaryKey(userDTO.toDO()) == 1;
+        if (userMapper.updateByPrimaryKey(userDTO.toDO()) != 1){
+            logger.error("dao operate effect num error,dto:{}",userDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        else return true;
     }
 
     private List<UserDTO> toDTOList(List<User> list) {

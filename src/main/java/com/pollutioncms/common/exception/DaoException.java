@@ -11,4 +11,8 @@ public class DaoException extends BaseException {
         super(ExceptionEnum.DaoException);
     }
 
+    public DaoException(ExceptionEnum exceptionEnum){
+        super(exceptionEnum);
+    }
+
 }

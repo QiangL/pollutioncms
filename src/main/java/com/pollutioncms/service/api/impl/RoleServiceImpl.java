@@ -1,6 +1,8 @@
 package com.pollutioncms.service.api.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.pollutioncms.common.enums.ExceptionEnum;
+import com.pollutioncms.common.exception.DaoException;
 import com.pollutioncms.module.domain.Role;
 import com.pollutioncms.module.mapper.RoleMapper;
 import com.pollutioncms.service.api.RoleService;
@@ -36,18 +38,30 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public boolean saveRole(RoleDTO roleDTO) {
-        return rolemapper.insert(roleDTO.toDO()) == 1;
+        if (rolemapper.insert(roleDTO.toDO()) != 1) {
+            logger.error("dao operate effect num error,dto:{}",roleDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        return true;
 
     }
 
     @Override
     public boolean deleteRole(RoleDTO roleDTO) {
-        return rolemapper.delete(roleDTO.toDO()) == 1;
+        if (rolemapper.delete(roleDTO.toDO()) != 1){
+            logger.error("dao operate effect num error,dto:{}",roleDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        return true;
     }
 
     @Override
     public boolean updateRole(RoleDTO roleDTO) {
-        return rolemapper.updateByPrimaryKey(roleDTO.toDO()) == 1;
+        if (rolemapper.updateByPrimaryKey(roleDTO.toDO()) != 1){
+            logger.error("dao operate effect num error,dto:{}",roleDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        return true;
     }
 
     private List<RoleDTO> toDTOList(List<Role> list) {

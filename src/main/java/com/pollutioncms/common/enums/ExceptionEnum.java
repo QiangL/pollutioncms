@@ -7,6 +7,7 @@ public enum ExceptionEnum {
 
     /** 数据访问异常 **/
     DaoException("DAO Exception", "数据访问出错"),
+    DATA_EFFECT_NUM_ERROR("data effect num error", "数据操作影响数据数目不正确"),
     /** 使用BeanUtils拷贝属性异常 **/
     CopyPropertiesException("Bean copy Exception","拷贝Bean属性出错"),
     /** 入参错误 **/

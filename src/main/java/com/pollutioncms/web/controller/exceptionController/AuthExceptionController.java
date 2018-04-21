@@ -1,4 +1,4 @@
-package com.pollutioncms.web.controller;
+package com.pollutioncms.web.controller.exceptionController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.web.module.Response;

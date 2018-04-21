@@ -1,8 +1,12 @@
 package com.pollutioncms.service.dto;
 
+import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.module.domain.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,9 +21,14 @@ import java.lang.reflect.InvocationTargetException;
  **/
 public class LoginUserDTO {
 
+    @NotBlank(message = "user name is blank")
+    @Length(min = 3, max = 10,message = "user name's length should between 3 and 10")
     private String userName;
 
+    @NotBlank(message = "password is blank")
+    @Length(min = 5,max = 16,message = "password's length should between 5 and 16")
     private String pwd;
+
 
     /**
      * 密码加盐字段

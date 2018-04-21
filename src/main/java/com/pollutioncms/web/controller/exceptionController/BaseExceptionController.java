@@ -1,6 +1,5 @@
-package com.pollutioncms.web.controller;
+package com.pollutioncms.web.controller.exceptionController;
 
-import com.pollutioncms.common.exception.BaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

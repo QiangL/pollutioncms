@@ -22,6 +22,6 @@ public class LogAop {
 
     @Before(value = "@annotation(com.pollutioncms.service.aop.annotation.NeedLog)")
     public void validate(JoinPoint joinPoint) {
-        logger.info("login info:{}", Arrays.toString(joinPoint.getArgs()));
+        logger.info("invoke info:{}", Arrays.toString(joinPoint.getArgs()));
     }
 }
