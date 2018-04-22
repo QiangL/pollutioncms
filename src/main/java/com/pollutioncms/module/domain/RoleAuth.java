@@ -18,8 +18,8 @@ public class RoleAuth implements Serializable {
     /**
      * 能否传递，给别人授权
      */
-    @Column(name = "can_authoriz")
-    private Boolean canAuthoriz;
+    @Column(name = "can_inherit")
+    private Boolean canInherit;
 
     private static final long serialVersionUID = 1L;
 
@@ -68,19 +68,19 @@ public class RoleAuth implements Serializable {
     /**
      * 获取能否传递，给别人授权
      *
-     * @return can_authoriz - 能否传递，给别人授权
+     * @return can_inherit - 能否传递，给别人授权
      */
-    public Boolean getCanAuthoriz() {
-        return canAuthoriz;
+    public Boolean getCanInherit() {
+        return canInherit;
     }
 
     /**
      * 设置能否传递，给别人授权
      *
-     * @param canAuthoriz 能否传递，给别人授权
+     * @param canInherit 能否传递，给别人授权
      */
-    public void setCanAuthoriz(Boolean canAuthoriz) {
-        this.canAuthoriz = canAuthoriz;
+    public void setCanInherit(Boolean canInherit) {
+        this.canInherit = canInherit;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class RoleAuth implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
             && (this.getModuleOpUuid() == null ? other.getModuleOpUuid() == null : this.getModuleOpUuid().equals(other.getModuleOpUuid()))
-            && (this.getCanAuthoriz() == null ? other.getCanAuthoriz() == null : this.getCanAuthoriz().equals(other.getCanAuthoriz()));
+            && (this.getCanInherit() == null ? other.getCanInherit() == null : this.getCanInherit().equals(other.getCanInherit()));
     }
 
     @Override
@@ -108,7 +108,7 @@ public class RoleAuth implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         result = prime * result + ((getModuleOpUuid() == null) ? 0 : getModuleOpUuid().hashCode());
-        result = prime * result + ((getCanAuthoriz() == null) ? 0 : getCanAuthoriz().hashCode());
+        result = prime * result + ((getCanInherit() == null) ? 0 : getCanInherit().hashCode());
         return result;
     }
 
@@ -121,7 +121,7 @@ public class RoleAuth implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", roleId=").append(roleId);
         sb.append(", moduleOpUuid=").append(moduleOpUuid);
-        sb.append(", canAuthoriz=").append(canAuthoriz);
+        sb.append(", canInherit=").append(canInherit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -28,9 +28,10 @@
     <!-- 复制父role权限 -->
     <if test="#{role.canInherit} == 1">
       insert into role_auth
-        (role_id,module_op_uuid,can_authoriz) VALUES
+        (role_id,module_op_uuid,can_inherit) VALUES
           (select #{id},module_op_uuid,can_authoriz from role_auth
-            where role_id= (select id from role where role_name =#{parentRoleName})
+            where role_id = (select id from role where role_name =#{parentRoleName})
+                  and can_inherit= 1
           )
     </if>
   </insert>
