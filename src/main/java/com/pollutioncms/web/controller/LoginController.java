@@ -36,7 +36,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("login")
+    //@PostMapping("login.mvc")
     public String login(@RequestParam @Validated LoginUserDTO user, BindingResult result, RedirectAttributesModelMap ramm) {
         if (result.hasErrors()) {
             List<String> error = new ArrayList<>();

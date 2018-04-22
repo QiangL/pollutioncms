@@ -61,11 +61,11 @@
                 /css/**     =anon
                 /images/**  =anon
                 <!-- 登入过滤器 -->
-                /login      =loginFilter
+                /login  =loginFilter
                 <!-- 登出过滤器 -->
                 /logout     =logout
                 <!-- TODO 等写完权限管理了去掉这个，使用/** = perms-->
-                /         =authc
+                /**         =authc
             </value>
         </property>
     </bean>

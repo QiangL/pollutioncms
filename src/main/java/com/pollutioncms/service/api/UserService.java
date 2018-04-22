@@ -38,6 +38,7 @@ public interface UserService {
 
     AuthUserDTO getAuthUser(String userName);
 
+    int getCount();
     boolean saveUser(UserDTO userDTOv);
 
     boolean deleteUser(UserDTO userDTO);

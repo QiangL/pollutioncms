@@ -70,7 +70,7 @@
                         <input type="text" name="username"  class="TextBoxStyle" tabindex="1" />                    </td>
                     <td valign="top" rowspan="2">
 
-					<input name="LoginBtn" type="submit" class="LoginBtn" id="LoginBtn" tabindex="3" onClick="btnLogin_Click()"  onmouseover="mouseOver()" onmouseout="mouseOut()" value="" />
+					<input name="LoginBtn" type="submit" class="LoginBtn" id="LoginBtn" tabindex="3" onmouseover="mouseOver()" onmouseout="mouseOut()" value="" />
 
 
 					</td>

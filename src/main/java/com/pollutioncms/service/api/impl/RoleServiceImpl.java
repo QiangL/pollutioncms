@@ -47,6 +47,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public int getCount() {
+        return rolemapper.selectCount(null);
+    }
+
+    @Override
     public boolean saveRole(String parentRoleName,RoleDTO roleDTO) {
         rolemapper.saveRole(parentRoleName,roleDTO.toDO());
         return true;

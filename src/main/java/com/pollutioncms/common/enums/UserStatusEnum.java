@@ -1,5 +1,6 @@
 package com.pollutioncms.common.enums;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,6 +30,7 @@ public enum UserStatusEnum {
 
     public static UserStatusEnum getUserStatusEnum(Integer status) {
         if (map == null) {
+            map = new HashMap<>();
             for (UserStatusEnum u : UserStatusEnum.values()) {
                 map.put(u.getStatus(), u);
             }

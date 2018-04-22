@@ -1,5 +1,6 @@
 package com.pollutioncms.common.enums;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,6 +30,7 @@ public enum AuthEnum {
 
     public static AuthEnum getAuthEnum(Integer code){
         if (map == null) {
+            map = new HashMap<>();
             for (AuthEnum a : AuthEnum.values()) {
                 map.put(a.getCode(), a);
             }

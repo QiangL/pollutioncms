@@ -77,6 +77,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int getCount() {
+        return userMapper.selectCount(null);
+    }
+
+    @Override
     public boolean saveUser(UserDTO userDTO) {
         if (userMapper.insert(userDTO.toDO()) != 1){
             logger.error("dao operate effect num error,dto:{}",userDTO);

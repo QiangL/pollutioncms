@@ -6,5 +6,5 @@ target/
 .classpath
 .mymetadata
 .project
-
+.vscode/
 */web.xml

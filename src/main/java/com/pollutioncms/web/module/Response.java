@@ -19,7 +19,7 @@ public class Response<T> {
 
     private List<String> errorCodes;
 
-    private T date;
+    private T data;
 
 
     public static <T> Response<T> succResp() {
@@ -52,11 +52,11 @@ public class Response<T> {
         return r;
     }
 
-    public T getDate() {
+    public T getData() {
         if (success) {
-            return date;
+            return data;
         } else {
-            throw new UnsupportedOperationException("response fail,no date");
+            throw new UnsupportedOperationException("response fail,no data");
         }
     }
 
@@ -68,9 +68,9 @@ public class Response<T> {
         return errorCodes;
     }
 
-    private Response(boolean success, T date) {
+    private Response(boolean success, T data) {
         this.success = success;
-        this.date = date;
+        this.data = data;
     }
 
     public String toJSON() {

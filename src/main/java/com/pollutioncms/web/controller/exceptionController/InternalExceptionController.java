@@ -27,31 +27,31 @@ public class InternalExceptionController {
     @ExceptionHandler(DataAccessException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String dataAccessHandle(DataAccessException e) {
+    public Response<?> dataAccessHandle(DataAccessException e) {
         logger.error("database error",e);
-        return Response.failResp(RespError.OPERATION_FAIL).toJSON();
+        return Response.failResp(RespError.OPERATION_FAIL);
     }
     @ExceptionHandler(DaoException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String daoExceptionHandle(DataAccessException e) {
+    public Response<?> daoExceptionHandle(DataAccessException e) {
         logger.error("database error",e);
-        return Response.failResp(RespError.OPERATION_FAIL).toJSON();
+        return Response.failResp(RespError.OPERATION_FAIL);
     }
 
     @ExceptionHandler(ParamErrorException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String badParamExceptionHandler(ParamErrorException e){
+    public Response<?> badParamExceptionHandler(ParamErrorException e){
         logger.error("input param not suit", e);
-        return Response.failResp(e.getMessage()).toJSON();
+        return Response.failResp(e.getMessage());
     }
 
     @ExceptionHandler(BeansException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String beansCopyExHandler(BeansException e) {
+    public Response<?> beansCopyExHandler(BeansException e) {
         logger.error("copy properties error", e);
-        return Response.failResp(RespError.INTERNAL_ERROR).toJSON();
+        return Response.failResp(RespError.INTERNAL_ERROR);
     }
 }

@@ -1,5 +1,6 @@
 package com.pollutioncms.web.utils;
 
+import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.web.module.Response;
 import org.springframework.validation.ObjectError;
 
@@ -14,9 +15,9 @@ import java.util.List;
  **/
 public class BindErrorHandler {
 
-    public static String handler(List<ObjectError> errorList) {
+    public static Response<List<String>> handler(List<ObjectError> errorList) {
         List<String> errprResp = new ArrayList<>();
         errorList.forEach((ObjectError err) -> errprResp.add(err.getDefaultMessage()));
-        return Response.failResp(errprResp).toJSON();
+        return Response.failResp(errprResp);
     }
 }

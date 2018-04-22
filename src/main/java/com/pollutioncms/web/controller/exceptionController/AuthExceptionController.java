@@ -22,7 +22,7 @@ public class AuthExceptionController {
     @ExceptionHandler(value = {UnknownAccountException.class, LockedAccountException.class,UnknownAccountException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String accountExceptionHandler(Exception e) {
-        return Response.failResp(e.getMessage()).toJSON();
+    public Response<?> accountExceptionHandler(Exception e) {
+        return Response.failResp(e.getMessage());
     }
 }

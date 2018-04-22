@@ -8,6 +8,7 @@ import com.pollutioncms.web.contants.Contants;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
 import com.pollutioncms.web.validator.RoleDTOValidator;
+import com.pollutioncms.web.vo.LigerGridVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.groups.Default;
 
+import java.util.List;
+
 import static com.pollutioncms.web.contants.Contants.NUM_EACH_PAGE;
 
 /**
@@ -30,28 +33,29 @@ import static com.pollutioncms.web.contants.Contants.NUM_EACH_PAGE;
  * @date 2018-04-20
  **/
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/framework/role")
 public class RoleController {
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/listRoles")
+    @GetMapping("/listRoles.mvc")
     @RequiresPermissions("role:list")
-    public String listRoles(@RequestParam("pageNum") Integer pageNum, @RequestParam("count") Integer count) {
+    public LigerGridVo<RoleDTO> listRoles(@RequestParam(value="pageNum",required = false) Integer pageNum,
+                                             @RequestParam(value="count",required = false) Integer count) {
         if (pageNum == null) {
             pageNum = 0;
         }
         if (count == null) {
             count = NUM_EACH_PAGE;
         }
-        return JSONObject.toJSONString(Response.succResp(roleService.listRoles(pageNum, count)));
+        return LigerGridVo.Resp(roleService.listRoles(pageNum, count),roleService.getCount());
     }
 
-    @PostMapping("/addRole")
+    @PostMapping("/addRole.mvc")
     @RequiresPermissions("role:add")
-    public String addRole(@RequestParam("role") @Validated RoleDTO roleDTO, BindingResult result) {
+    public Response<?> addRole(@RequestParam("role") @Validated RoleDTO roleDTO, BindingResult result) {
         if (result.hasErrors()) {
             return BindErrorHandler.handler(result.getAllErrors());
         }
@@ -59,12 +63,12 @@ public class RoleController {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         roleService.saveRole(((UserDTO)session.getAttribute(Contants.USER)).getUserName(),roleDTO);
-        return Response.succResp().toJSON();
+        return Response.succResp();
     }
 
-    @PostMapping("/deleteRole")
+    @PostMapping("/deleteRole.mvc")
     @RequiresPermissions("role:delete")
-    public String deleteRole(@RequestParam @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
+    public Response<?> deleteRole(@RequestParam @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
                              BindingResult result) {
 
         if (result.hasErrors()) {
@@ -72,12 +76,12 @@ public class RoleController {
         }
         logger.info("delete role,dto:{}",roleDTO);
         roleService.deleteRole(roleDTO);
-        return Response.succResp().toJSON();
+        return Response.succResp();
     }
 
-    @PostMapping("/updateRole")
+    @PostMapping("/updateRole.mvc")
     @RequiresPermissions("role:update")
-    public String updateRole(@RequestParam @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
+    public Response<?> updateRole(@RequestParam @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
                              BindingResult result) {
 
         if (result.hasErrors()) {
@@ -85,6 +89,6 @@ public class RoleController {
         }
         logger.info("update role,dto:{}",roleDTO);
         roleService.updateRole(roleDTO);
-        return Response.succResp().toJSON();
+        return Response.succResp();
     }
 }
