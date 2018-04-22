@@ -43,8 +43,7 @@
     var toolbarItem = [
         <shiro:hasPermission name="role:add">{id: 'add', text: '增加', click: addRole, icon: 'add'},</shiro:hasPermission>
         <shiro:hasPermission name="role:update">{id: 'update', text: '修改', click: updateRole, icon: 'modify'},</shiro:hasPermission>
-        <%--<shiro:hasPermission name="role:delete">{id: 'delete', text: '删除', click: deleteRole, img: 'lib/ligerUI/skins/icons/delete.gif'},</shiro:hasPermission>--%>
-        {id: 'delete', text: '删除', click: deleteRole, img: 'lib/ligerUI/skins/icons/delete.gif'},
+        <shiro:hasPermission name="role:delete">{id: 'delete', text: '删除', click: deleteRole, img: 'lib/ligerUI/skins/icons/delete.gif'},</shiro:hasPermission>
         {line:true}
     ];
     $(document).ready(function () {
