@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.service.api.RoleService;
 import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.service.dto.UserDTO;
+import com.pollutioncms.web.bind.annotation.JSONParam;
 import com.pollutioncms.web.contants.Contants;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
@@ -55,20 +56,22 @@ public class RoleController {
 
     @PostMapping("/addRole.mvc")
     @RequiresPermissions("role:add")
-    public Response<?> addRole(@RequestParam("role") @Validated RoleDTO roleDTO, BindingResult result) {
+    public Response<?> addRole(@RequestBody @Validated RoleDTO roleDTO,
+                               BindingResult result) {
         if (result.hasErrors()) {
             return BindErrorHandler.handler(result.getAllErrors());
         }
         logger.info("add role,dto:{}",roleDTO);
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
+        //TODO  获取session
         roleService.saveRole(((UserDTO)session.getAttribute(Contants.USER)).getUserName(),roleDTO);
         return Response.succResp();
     }
 
     @PostMapping("/deleteRole.mvc")
     @RequiresPermissions("role:delete")
-    public Response<?> deleteRole(@RequestParam @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
+    public Response<?> deleteRole(@RequestBody @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
                              BindingResult result) {
 
         if (result.hasErrors()) {
@@ -81,7 +84,7 @@ public class RoleController {
 
     @PostMapping("/updateRole.mvc")
     @RequiresPermissions("role:update")
-    public Response<?> updateRole(@RequestParam @Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
+    public Response<?> updateRole(@Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
                              BindingResult result) {
 
         if (result.hasErrors()) {

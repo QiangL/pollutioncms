@@ -53,11 +53,7 @@ public class Response<T> {
     }
 
     public T getData() {
-        if (success) {
-            return data;
-        } else {
-            throw new UnsupportedOperationException("response fail,no data");
-        }
+        return data;
     }
 
     public boolean isSuccess() {

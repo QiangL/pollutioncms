@@ -1,10 +1,4 @@
-Array.prototype.contain = function (elem) {
-    for (let i in this) {
-        if (this[i] === elem) return true;
-    }
-    return false;
-};
-
+/** 封装一层加载表格 **/
 function loadSheet(divId, columns, toolbarItems, url, method) {
     $(divId).ligerGrid({
         height: '100%',
@@ -16,11 +10,34 @@ function loadSheet(divId, columns, toolbarItems, url, method) {
         toolbarShowInLeft: false,
         pageParmName: 'pageNum',
         pagesizeParmName: 'count',
-        root:'rows',
-        record:'total',
+        root: 'rows',
+        record: 'total',
         toolbar: {
             items: toolbarItems
         }
     });
+}
+/** 封装一层打开对话框**/
+function openDialog(title, target) {
+    $.ligerDialog.open({
+        width: 700,
+        title: title,
+        top: 100,
+        target: target
+    });
+}
 
+function closeDialog(target) {
+    $.ligerDialog.close({
+        target: target
+    });
+}
+function ajax(url,data,successFunc){
+    $.ajax(url,{
+        method:'POST',
+        data:data,
+        dataType:'json',
+        contentType:"application/json",
+        success:successFunc
+    });
 }

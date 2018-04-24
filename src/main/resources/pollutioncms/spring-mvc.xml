@@ -38,6 +38,9 @@
                 <property name="fastJsonConfig" ref="fastJsonConfig"/>
             </bean>
         </mvc:message-converters>
+        <mvc:argument-resolvers>
+            <bean class="com.pollutioncms.web.bind.method.JSONParamArgumentResolver"/>
+        </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
 
