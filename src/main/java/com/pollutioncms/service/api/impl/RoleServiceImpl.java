@@ -52,8 +52,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public boolean saveRole(String parentRoleName,RoleDTO roleDTO) {
-        rolemapper.saveRole(parentRoleName,roleDTO.toDO());
+    public boolean saveRole(String parentUserName, RoleDTO roleDTO) {
+        rolemapper.saveRole(parentUserName,roleDTO.toDO());
         return true;
 
     }
@@ -76,8 +76,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public boolean updateRole(RoleDTO roleDTO) {
-        if (rolemapper.updateByPrimaryKey(roleDTO.toDO()) != 1){
+    public boolean updateRoleSelective(RoleDTO roleDTO) {
+        if (rolemapper.updateByPrimaryKeySelective(roleDTO.toDO()) != 1){
             logger.error("dao operate effect num error,dto:{}",roleDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }

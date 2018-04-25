@@ -43,6 +43,7 @@ public interface UserService {
 
     boolean deleteUser(UserDTO userDTO);
 
-    boolean updateUser(UserDTO userDTO);
+    /** 根据已有不为null的字段更新数据，null的数据不会替换数据库的字段**/
+    boolean updateUserSelective(UserDTO userDTO);
 
 }

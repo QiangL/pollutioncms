@@ -22,15 +22,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into role
-    ( <include refid="allParam"/> )
-    select #{id},id,#{role.roleName},#{role.roleCnName},#{role.comment},#{role.canInherit} from role where role_name = #{parentRoleName}
-    <!-- 复制父role权限 -->
-    <if test="#{role.canInherit} == 1">
-      insert into role_auth
-        (role_id,module_op_uuid,can_inherit)
-        select #{id},module_op_uuid,can_authoriz from role_auth
-          where role_id = (select id from role where role_name =#{parentRoleName})
-          and can_inherit= 1
-    </if>
+    ( <include refid="allParam"/> ) values
+    (#{id},(select id from user where user_name = #{parentUserName}),#{role.roleName},#{role.roleCnName},#{role.comment},#{role.canInherit})
   </insert>
 </mapper>

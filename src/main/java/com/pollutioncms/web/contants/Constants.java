@@ -2,10 +2,10 @@ package com.pollutioncms.web.contants;
 
 /**
  * @author liqiag
- * @discription Contants
+ * @discription Constants
  * @date 2018-04-20
  **/
-public interface Contants {
+public interface Constants {
 
     /** 分页默认每页条目数 **/
     int NUM_EACH_PAGE = 20;

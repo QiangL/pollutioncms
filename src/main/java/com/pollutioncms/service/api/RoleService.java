@@ -15,9 +15,9 @@ public interface RoleService {
 
     int getCount();
 
-    boolean saveRole(String parentRoleName,RoleDTO roleDTO);
+    boolean saveRole(String parentUserName,RoleDTO roleDTO);
 
     boolean deleteRole(RoleDTO roleDTO);
 
-    boolean updateRole(RoleDTO roleDTO);
+    boolean updateRoleSelective(RoleDTO roleDTO);
 }

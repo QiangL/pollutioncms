@@ -3,7 +3,7 @@ package com.pollutioncms.web.controller;
 import com.pollutioncms.common.exception.BaseException;
 import com.pollutioncms.service.api.UserService;
 import com.pollutioncms.service.dto.LoginUserDTO;
-import com.pollutioncms.web.contants.Contants;
+import com.pollutioncms.web.contants.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
@@ -57,7 +56,7 @@ public class LoginController {
         }
         Session session = subject.getSession();
         ;
-        session.setAttribute(Contants.USER, userService.getLoginUser(user.getUserName()));
+        session.setAttribute(Constants.USER, userService.getLoginUser(user.getUserName()));
         return "index";
     }
 

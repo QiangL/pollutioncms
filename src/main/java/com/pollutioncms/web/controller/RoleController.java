@@ -1,11 +1,9 @@
 package com.pollutioncms.web.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.service.api.RoleService;
 import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.service.dto.UserDTO;
-import com.pollutioncms.web.bind.annotation.JSONParam;
-import com.pollutioncms.web.contants.Contants;
+import com.pollutioncms.web.contants.Constants;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
 import com.pollutioncms.web.validator.RoleDTOValidator;
@@ -23,9 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.groups.Default;
 
-import java.util.List;
-
-import static com.pollutioncms.web.contants.Contants.NUM_EACH_PAGE;
+import static com.pollutioncms.web.contants.Constants.NUM_EACH_PAGE;
 
 /**
  * 角色管理的Controller
@@ -64,8 +60,7 @@ public class RoleController {
         logger.info("add role,dto:{}",roleDTO);
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        //TODO  获取session
-        roleService.saveRole(((UserDTO)session.getAttribute(Contants.USER)).getUserName(),roleDTO);
+        roleService.saveRole(((UserDTO)session.getAttribute(Constants.USER)).getUserName(),roleDTO);
         return Response.succResp();
     }
 
@@ -84,14 +79,14 @@ public class RoleController {
 
     @PostMapping("/updateRole.mvc")
     @RequiresPermissions("role:update")
-    public Response<?> updateRole(@Validated(value = {Default.class, RoleDTOValidator.NeedId.class}) RoleDTO roleDTO,
+    public Response<?> updateRole(@RequestBody @Validated({RoleDTOValidator.NeedId.class,Default.class}) RoleDTO roleDTO,
                              BindingResult result) {
 
         if (result.hasErrors()) {
             return BindErrorHandler.handler(result.getAllErrors());
         }
         logger.info("update role,dto:{}",roleDTO);
-        roleService.updateRole(roleDTO);
+        roleService.updateRoleSelective(roleDTO);
         return Response.succResp();
     }
 }

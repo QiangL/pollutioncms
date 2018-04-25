@@ -1,6 +1,11 @@
-function add(url) {
+function add(url,grid) {
     let form = $("#form");
+    clearFormInput(form);
+    form.off("submit");
+
+    let dialog=openDialog("增加", form);
     form.on("submit", function () {
+
         $.ajax(url,{
             method:'POST',
             data:JSON.stringify(form.serializeJSON()),
@@ -8,42 +13,17 @@ function add(url) {
             contentType:"application/json",
             success:function (res) {
                 if (res.success) {
+                    dialog.hide();
                     $.ligerDialog.success('增加成功');
-                    closeDialog(form);
                     grid.loadData();
                 } else {
-                    $.ligerDialog.error('增加失败');
+                    $.ligerDialog.error('增加失败,原因:'+res.errorCodes);
                 }
             }
 
         });
         return false;
     });
-    openDialog("增加", form);
-}
-
-function update(url, grid) {
-    let form = $("#form");
-    form.on("submit", function () {
-        $.ajax(url,{
-            method:'POST',
-            data:JSON.stringify(form.serializeJSON()),
-            dataType:'json',
-            contentType:"application/json",
-            success:function (res) {
-                if (res.success) {
-                    $.ligerDialog.success('更新成功');
-                    closeDialog(form);
-                    grid.loadData();
-                } else {
-                    $.ligerDialog.error('更新失败');
-                }
-            }
-        });
-        return false;
-    });
-
-    openDialog("更新", form);
 }
 
 function delet(url, grid) {
@@ -63,7 +43,7 @@ function delet(url, grid) {
                 $.ligerDialog.success('删除成功');
                 grid.loadData();
             } else {
-                $.ligerDialog.error('删除失败');
+                $.ligerDialog.error('删除失败,原因:'+res.errorCodes);
             }
         }
     });
@@ -76,4 +56,16 @@ function filterUnderLine(param,dd){
         }
     }
     return t;
+}
+
+function clearFormInput(form){
+    let inputs=form.find("input");
+    for(let i=0;i<inputs.length;i++){
+        let inp=$(inputs[i]);
+        if(inp.attr("type") === 'text'){
+            inp.val("");
+        }else if(inp.attr("type") === 'radio'){
+            inp.attr('checked',false);
+        }
+    }
 }

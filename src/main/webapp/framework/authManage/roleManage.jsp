@@ -52,8 +52,8 @@
             <label for="canInherit" class="col-md-5 control-label">能否继承当前角色权限：</label>
             <div class="col-md-7" id="canInherit">
                 <div class="col-md-2"></div>
-                <label for="canInherit" class="radio-inline col-md-4"><input name="canInherit" type="radio" value="0">不能</label>
-                <label for="canInherit" class="radio-inline  col-md-4"><input name="canInherit" type="radio" value="1">能</label>
+                <label for="canInherit" class="radio-inline col-md-4"><input name="canInherit" type="radio" value="CANNOT_INHERIT">不能</label>
+                <label for="canInherit" class="radio-inline  col-md-4"><input name="canInherit" type="radio" value="CAN_INHERIT">能</label>
             </div>
         </div>
         <div class="form-group">
@@ -95,7 +95,7 @@
     ];
 
     function addRole() {
-        add('/framework/role/addRole.mvc');
+        add('/framework/role/addRole.mvc', liger.get("maingrid"));
     }
 
     function updateRole() {

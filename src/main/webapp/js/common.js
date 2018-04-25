@@ -19,20 +19,14 @@ function loadSheet(divId, columns, toolbarItems, url, method) {
 }
 /** 封装一层打开对话框**/
 function openDialog(title, target) {
-    $.ligerDialog.open({
+    return $.ligerDialog.open({
         width: 700,
         title: title,
         top: 100,
         target: target
     });
 }
-
-function closeDialog(target) {
-    $.ligerDialog.close({
-        target: target
-    });
-}
-function ajax(url,data,successFunc){
+function ajaxJSONPost(url,data,successFunc){
     $.ajax(url,{
         method:'POST',
         data:data,

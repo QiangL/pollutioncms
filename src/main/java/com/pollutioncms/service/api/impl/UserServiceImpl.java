@@ -102,8 +102,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(UserDTO userDTO) {
-        if (userMapper.updateByPrimaryKey(userDTO.toDO()) != 1){
+    public boolean updateUserSelective(UserDTO userDTO) {
+        if (userMapper.updateByPrimaryKeySelective(userDTO.toDO()) != 1){
             logger.error("dao operate effect num error,dto:{}",userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }

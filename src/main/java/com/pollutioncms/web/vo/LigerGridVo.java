@@ -1,6 +1,8 @@
 package com.pollutioncms.web.vo;
 
 import com.pollutioncms.service.dto.RoleDTO;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
 
@@ -39,4 +41,8 @@ public class LigerGridVo<T> {
     }
 
     private LigerGridVo(){}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }
