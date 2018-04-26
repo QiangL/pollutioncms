@@ -31,4 +31,6 @@ public interface UserMapper extends Mapper<User> {
      * @return
      */
     int deleteUser(@Param("user") User user);
+
+    int saveUser(@Param("user") User user);
 }

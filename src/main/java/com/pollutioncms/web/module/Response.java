@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.web.enums.RespError;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class Response<T> {
 
     private boolean success;
 
-    private List<String> errorCodes;
+    private Collection<String> errorCodes;
 
     private T data;
 
@@ -29,7 +30,7 @@ public class Response<T> {
         return new Response<>(true, date);
     }
 
-    public static <T> Response<T> failResp(List<String> errorCodes) {
+    public static <T> Response<T> failResp(Collection<String> errorCodes) {
         Response<T> r = new Response<T>(false, null);
         r.errorCodes = errorCodes;
         return r;
@@ -60,7 +61,7 @@ public class Response<T> {
         return success;
     }
 
-    public List<String> getErrorCodes() {
+    public Collection<String> getErrorCodes() {
         return errorCodes;
     }
 

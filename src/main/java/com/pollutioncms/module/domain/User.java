@@ -52,9 +52,9 @@ public class User implements Serializable {
 
     /**
      * 用户状态
-1：正常
-2：锁定，不能登录
-3：删除
+        1：正常
+        2：锁定，不能登录
+        3：删除
      */
     private Integer status;
 

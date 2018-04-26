@@ -3,6 +3,7 @@ package com.pollutioncms.service.api;
 import com.pollutioncms.service.dto.RoleDTO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author liqiag
@@ -20,4 +21,13 @@ public interface RoleService {
     boolean deleteRole(RoleDTO roleDTO);
 
     boolean updateRoleSelective(RoleDTO roleDTO);
+
+    boolean addRoles(String userName,Set<String> roleNames);
+
+    boolean removeRoles(String userName,Set<String> roleNames);
+
+    Set<String> queryRole(String userName);
+
+    /** 返回表中没有的roleName的集合 **/
+    Set<String> notExitRoleNames(Set<String> roleNames);
 }

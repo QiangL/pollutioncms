@@ -19,10 +19,10 @@
         <result column="status" jdbcType="INTEGER" property="status"/>
     </resultMap>
     <sql id="allParam">
-    id,user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time,stlt,status
+    id,user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time,salt,status
   </sql>
     <select id="listPermissions" parameterType="String" resultType="String">
-    select permission
+    select permission DISTINCT
     from module_operate
     WHERE module_operate.uuid in
       (select role_auth.module_op_uuid
@@ -35,7 +35,7 @@
       )
   </select>
     <select id="listRoles" parameterType="String" resultType="String">
-    select role_name from role
+    select role_name DISTINCT from role
     WHERE id in
       (select role_id
           from role_user,user
@@ -50,7 +50,7 @@
     </select>
     <delete id="deleteUser">
         delete from role_user
-        where user_id=#{user.id}
+        where user_id=#{user.id};
 
         delete from user
         where id=#{user.id}
@@ -58,19 +58,27 @@
             AND user_name=#{user.userName}
         </if>
         <if test="#{user.showName} != null">
-            AND user_name=#{user.showName}
+            AND show_name=#{user.showName}
         </if>
         <if test="#{user.userSex} != null">
-            AND user_name=#{user.userSex}
+            AND user_sex=#{user.userSex}
         </if>
         <if test="#{user.userTel} != null">
-            AND user_name=#{user.userTel}
+            AND user_tel=#{user.userTel}
         </if>
         <if test="#{user.userAddr} != null">
-            AND user_name=#{user.userAddr}
+            AND user_addr=#{user.userAddr}
         </if>
         <if test="#{user.userEmail} != null">
-            AND user_name=#{user.userEmail}
+            AND user_email=#{user.userEmail}
         </if>
     </delete>
+
+    <insert id="saveUser">
+        insert into USER
+        (user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time,salt,status)
+        VALUES
+        (#{user.userName},#{user.pwd},sysdate(),#{user.showName},#{user.userSex},#{user.userTel},#{user.userAddr},#{user.userEmail},
+        sysdate(),#{user.salt},1)
+    </insert>
 </mapper>

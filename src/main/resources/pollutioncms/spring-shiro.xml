@@ -62,6 +62,7 @@
                 /css/**     =anon
                 /images/**  =anon
                 /login.jsp  =anon
+                /unAuth     =anon
                 <!-- 登入过滤器 -->
                 /login  =loginFilter
                 <!-- 登出过滤器 -->

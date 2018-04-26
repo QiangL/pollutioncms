@@ -5,7 +5,9 @@ public enum RespError {
     PARAM_WRONG("参数错误"),
     USER_NOT_EXIT("用户不存在"),
     OPERATION_FAIL("操作失败"),
-    INTERNAL_ERROR("内部错误")
+    INTERNAL_ERROR("内部错误"),
+    UN_AUTH_OPS("未授权的操作"),
+    ROLE_NAME_NOT_EXIT("角色名不存在"),
     ;
 
     private String errorCode;

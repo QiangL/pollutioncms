@@ -21,10 +21,10 @@ public class AjaxUtils {
     private static final String XMLHTTP_REQUEST = "XMLHttpRequest";
 
     public static void handleErrorResponse(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
-        handleResponse(request, response, error, "error.jsp");
+        handleResponse(request, response, error, "error");
     }
     public static void handleUnAuthResponse(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
-        handleResponse(request, response, error, "unAuth.jsp");
+        handleResponse(request, response, error, "unAuth");
     }
 
     private static void handleResponse(HttpServletRequest request, HttpServletResponse response, String error, String page) throws IOException {

@@ -14,10 +14,11 @@
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
         <!-- https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter -->
-        <property name="filters" value="stat,wall" />
+        <property name="filters" value="stat,wall-filter" />
         <property name="proxyFilters">
             <list>
                 <ref bean="log-filter"/>
+                <ref bean="wall-filter"/>
             </list>
         </property>
         <!-- https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8 -->
@@ -37,6 +38,12 @@
     <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
         <property name="statementExecutableSqlLogEnable" value="true" />
         <property name="resultSetLogEnabled" value="true" />
+    </bean>
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="config" ref="wallConfig"/>
+    </bean>
+    <bean id="wallConfig" class="com.alibaba.druid.wall.WallConfig">
+        <property name="multiStatementAllow" value="true"/>
     </bean>
 
 </beans>

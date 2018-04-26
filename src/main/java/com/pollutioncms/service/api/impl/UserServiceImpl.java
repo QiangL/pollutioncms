@@ -2,6 +2,7 @@ package com.pollutioncms.service.api.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.pollutioncms.common.enums.ExceptionEnum;
+import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.common.exception.DaoException;
 import com.pollutioncms.common.exception.ParamErrorException;
 import com.pollutioncms.module.domain.User;
@@ -20,6 +21,7 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listUserByRole(String roleName, Integer pageNum, Integer count) {
+        //TODO 验证分页插件
         PageHelper.startPage(pageNum, count);
         return toDTOList(userMapper.listUserByRole(roleName));
     }
@@ -83,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean saveUser(UserDTO userDTO) {
-        if (userMapper.insert(userDTO.toDO()) != 1){
+        if (userMapper.saveUser(userDTO.toDO()) != 1){
             logger.error("dao operate effect num error,dto:{}",userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }
@@ -93,12 +96,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(UserDTO userDTO) {
-        if (userMapper.delete(userDTO.toDO()) != 2){
+        userDTO.setStatus(UserStatusEnum.DELETED);
+        if (userMapper.updateByPrimaryKeySelective(userDTO.toDO()) !=1){
             // == 2说明 user表和role_user表都删除了
             logger.error("dao operate effect num error,dto:{}",userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }
         else return true;
+    }
+
+    @Override
+    public boolean deleteUserPhysic(UserDTO userDTO) {
+        return false;
     }
 
     @Override

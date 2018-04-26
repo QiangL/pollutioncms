@@ -23,6 +23,7 @@ import tk.mybatis.mapper.util.Sqls;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author liqiag
@@ -82,6 +83,35 @@ public class RoleServiceImpl implements RoleService {
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }
         return true;
+    }
+
+    @Override
+    public boolean addRoles(String userName,Set<String> roleNames) {
+        if (roleUserMapper.addRoles(userName,roleNames) != roleNames.size()) {
+            logger.error("add role effect num error,userName:{},roleNames:{}",userName,roleNames);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean removeRoles(String userName,Set<String> roleNames) {
+        if (roleUserMapper.removeRoles(userName,roleNames) != roleNames.size()) {
+            logger.error("remove role effect num error,userName:{},roleNames:{}",userName,roleNames);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        }
+        return true;
+    }
+
+    @Override
+    public Set<String> queryRole(String userName) {
+        return roleUserMapper.queryRole(userName);
+    }
+
+    @Override
+    public Set<String> notExitRoleNames(Set<String> roleNames) {
+        //TODO 实现有问题
+        return roleUserMapper.checkRoleNames(roleNames);
     }
 
     private List<RoleDTO> toDTOList(List<Role> list) {

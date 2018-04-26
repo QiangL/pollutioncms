@@ -1,5 +1,6 @@
 package com.pollutioncms.web.vo;
 
+import com.pollutioncms.common.enums.SexEnum;
 import com.pollutioncms.service.dto.UserDTO;
 import com.pollutioncms.web.validator.UserDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,14 +11,13 @@ import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
 
 /**
  * @author liqiag
- * @discription UserVO
+ * @discription UserRequestVO
  * @date 2018-04-25
  **/
-public class UserVO {
+public class UserRequestVO {
     @NotNull(message = "user id is null", groups = {UserDTOValidator.NeedId.class})
     private Integer id;
 
@@ -37,7 +37,7 @@ public class UserVO {
      */
     private String showName;
 
-    private Integer userSex;
+    private SexEnum userSex;
 
     @Pattern(regexp = "1[35678][0-9]{9}", message = "phone pattern wrong")
     private String userTel;
@@ -57,10 +57,10 @@ public class UserVO {
         return userDTO;
     }
 
-    public static UserVO toVO(UserDTO userDTO) {
-        UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(userDTO, userVO);
-        return userVO;
+    public static UserRequestVO toVO(UserDTO userDTO) {
+        UserRequestVO userRequestVO = new UserRequestVO();
+        BeanUtils.copyProperties(userDTO, userRequestVO);
+        return userRequestVO;
     }
 
     public void setId(Integer id) {
@@ -99,11 +99,11 @@ public class UserVO {
         this.showName = showName;
     }
 
-    public Integer getUserSex() {
+    public SexEnum getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(Integer userSex) {
+    public void setUserSex(SexEnum userSex) {
         this.userSex = userSex;
     }
 

@@ -1,38 +1,26 @@
-package com.pollutioncms.service.dto;
+package com.pollutioncms.web.vo;
 
 import com.pollutioncms.common.enums.SexEnum;
-import com.pollutioncms.common.enums.UserStatusEnum;
-import com.pollutioncms.module.domain.User;
-import com.pollutioncms.web.validator.UserDTOValidator;
+import com.pollutioncms.service.dto.UserDTO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.Set;
 
 /**
  * @author liqiag
- * @discription UserDTO
- * @date 2018-04-19
+ * @discription UserResponseVO
+ * @date 2018-04-26
  **/
-public class UserDTO {
-
-    @NotNull(message = "user id is null", groups = {UserDTOValidator.NeedId.class})
+public class UserResponseVO {
     private Integer id;
 
     /**
      * 登录名
      */
-    @NotBlank(message = "user name is null")
     private String userName;
-
-    private String pwd;
 
     private Date createTime;
 
@@ -43,12 +31,10 @@ public class UserDTO {
 
     private SexEnum userSex;
 
-    @Pattern(regexp = "1[35678][0-9]{9}", message = "phone pattern wrong")
     private String userTel;
 
     private String userAddr;
 
-    @Email(message = "mail pattern wrong")
     private String userEmail;
 
     /**
@@ -56,34 +42,7 @@ public class UserDTO {
      */
     private Date lastOptTime;
 
-    /**
-     * 密码加盐
-     */
-    private String salt;
-
-    /**
-     * 用户状态
-     1：正常
-     2：锁定，不能登录
-     3：删除
-     */
-    private UserStatusEnum status;
-
-    public static UserDTO toUserDTO(User user) throws BeansException {
-        UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(user, userDTO);
-        userDTO.setUserSex(SexEnum.getSexEnum(user.getUserSex()));
-        userDTO.setStatus(UserStatusEnum.getUserStatusEnum(user.getStatus()));
-        return userDTO;
-    }
-
-    public User toDO() throws BeansException {
-        User u = new User();
-        BeanUtils.copyProperties(this, u);
-        u.setUserSex(this.getUserSex().getCode());
-        u.setStatus(this.getStatus().getStatus());
-        return u;
-    }
+    private Set<String> roleNames;
 
     public Integer getId() {
         return id;
@@ -99,14 +58,6 @@ public class UserDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
     }
 
     public Date getCreateTime() {
@@ -165,20 +116,23 @@ public class UserDTO {
         this.lastOptTime = lastOptTime;
     }
 
-    public String getSalt() {
-        return salt;
+    public Set<String> getRoleNames() {
+        return roleNames;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setRoleNames(Set<String> roleNames) {
+        this.roleNames = roleNames;
     }
 
-    public UserStatusEnum getStatus() {
-        return status;
+    public static UserResponseVO toVO(UserDTO userDTO) {
+        UserResponseVO userResponseVO = new UserResponseVO();
+        BeanUtils.copyProperties(userDTO, userResponseVO);
+        return userResponseVO;
     }
-
-    public void setStatus(UserStatusEnum status) {
-        this.status = status;
+    public UserDTO toDTO(){
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(this, userDTO);
+        return userDTO;
     }
 
     @Override
