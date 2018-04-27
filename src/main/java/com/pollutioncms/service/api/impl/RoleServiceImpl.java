@@ -110,8 +110,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Set<String> notExitRoleNames(Set<String> roleNames) {
-        //TODO 实现有问题
-        return roleUserMapper.checkRoleNames(roleNames);
+        return rolemapper.checkRoleNames(roleNames);
     }
 
     private List<RoleDTO> toDTOList(List<Role> list) {

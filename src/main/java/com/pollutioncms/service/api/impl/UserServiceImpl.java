@@ -11,6 +11,7 @@ import com.pollutioncms.service.api.UserService;
 import com.pollutioncms.service.dto.AuthUserDTO;
 import com.pollutioncms.service.dto.LoginUserDTO;
 import com.pollutioncms.service.dto.UserDTO;
+import com.pollutioncms.service.utils.PasswordHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -37,6 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PasswordHelper passwordHelper;
 
     @Override
     public UserDTO getUser(String userName) {
@@ -86,7 +89,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean saveUser(UserDTO userDTO) {
-        if (userMapper.saveUser(userDTO.toDO()) != 1){
+        // 加密
+        User user = passwordHelper.encryption(userDTO.toDO());
+        if (userMapper.saveUser(user) != 1){
             logger.error("dao operate effect num error,dto:{}",userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }

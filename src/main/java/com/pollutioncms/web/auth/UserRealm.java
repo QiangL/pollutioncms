@@ -5,6 +5,7 @@ import com.pollutioncms.service.api.UserService;
 import com.pollutioncms.service.dto.AuthUserDTO;
 import com.pollutioncms.service.dto.LoginUserDTO;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -25,6 +26,13 @@ public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HashedCredentialsMatcher hashedCredentialsMatcher;
+
+    public UserRealm(){
+        setCredentialsMatcher(hashedCredentialsMatcher);
+    }
 
     /**
      * 权限认证

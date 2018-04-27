@@ -18,6 +18,21 @@
 
     <context:component-scan base-package="com.pollutioncms.web.auth"/>
 
+
+    <context:property-placeholder location="classpath:pollutioncms/cryption.properties"/>
+
+    <bean id="hashService" class="org.apache.shiro.crypto.hash.DefaultHashService">
+        <property name="hashAlgorithmName" value="${shiro.Algorith}"/>
+        <property name="hashIterations" value="${shiro.hashNum}"/>
+        <property name="generatePublicSalt" value="true"/>
+    </bean>
+    <bean id="hashedCredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashIterations" value="${shiro.hashNum}"/>
+        <property name="hashAlgorithmName" value="${shiro.Algorith}"/>
+    </bean>
+
+
+
     <!-- 配置权限管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- ref对应我们写的realm  MyShiro -->

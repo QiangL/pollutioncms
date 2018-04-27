@@ -32,8 +32,6 @@ public class UserDTO {
     @NotBlank(message = "user name is null")
     private String userName;
 
-    private String pwd;
-
     private Date createTime;
 
     /**
@@ -55,11 +53,6 @@ public class UserDTO {
      * 最后一次操作事件
      */
     private Date lastOptTime;
-
-    /**
-     * 密码加盐
-     */
-    private String salt;
 
     /**
      * 用户状态
@@ -99,14 +92,6 @@ public class UserDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
     }
 
     public Date getCreateTime() {
@@ -163,14 +148,6 @@ public class UserDTO {
 
     public void setLastOptTime(Date lastOptTime) {
         this.lastOptTime = lastOptTime;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public UserStatusEnum getStatus() {

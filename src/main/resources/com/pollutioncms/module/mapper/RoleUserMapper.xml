@@ -34,21 +34,4 @@
     AND
     user_id =(select id from user where user_name=#{userName})
   </select>
-
-  <select id="checkRoleNames" resultType="string">
-    select role_name from role
-    WHERE
-      role_name not in
-        <foreach collection="roleNames" separator="," open="(" close=")" item="roleName">
-          #{roleName}
-        </foreach>
-    UNION
-    select role_name from role
-    WHERE
-      role_name in
-        <foreach collection="roleNames" separator="," open="(" close=")" item="roleName">
-          #{roleName}
-        </foreach>
-  </select>
-
 </mapper>

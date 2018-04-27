@@ -14,7 +14,4 @@ public interface RoleUserMapper extends Mapper<RoleUser> {
     int removeRoles(@Param("userName") String userName, @Param("roleNames") Set<String> roleNames);
 
     Set<String> queryRole(@Param("userName") String userName);
-
-    //TODO 差集 检验roleName
-    Set<String> checkRoleNames(@Param("roleNames") Set<String> roleNames);
 }

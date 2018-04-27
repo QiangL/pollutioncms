@@ -37,8 +37,4 @@ public class RoleUserMapperTest extends BaseTest {
         roleUserMapper.queryRole("mapperTest");
         roleUserMapper.removeRoles("mapperTest", Sets.newSet("admin", "guest"));
     }
-    @Test
-    public void test2(){
-        System.out.println("---------------"+roleUserMapper.checkRoleNames(Sets.newSet("admin", "aaaaa")).toString());
-    }
 }
