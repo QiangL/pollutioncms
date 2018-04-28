@@ -19,10 +19,9 @@ public class PasswordHelper {
     @Autowired
     private HashService hashService;
 
-    public User encryption(User user) {
+    public void encryption(User user) {
         String salt = randomNumberGenerator.nextBytes().toHex();
         user.setSalt(salt);
-        user.setPwd(hashService.computeHash(new HashRequest.Builder().setSource(user.getPwd()).build()).toHex());
-        return user;
+        user.setPwd(hashService.computeHash(new HashRequest.Builder().setSource(user.getPwd()).setSalt(salt).build()).toHex());
     }
 }

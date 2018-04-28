@@ -2,6 +2,7 @@ package com.pollutioncms.web.utils;
 
 import com.pollutioncms.web.module.Response;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,14 +21,14 @@ public class AjaxUtils {
 
     private static final String XMLHTTP_REQUEST = "XMLHttpRequest";
 
-    public static void handleErrorResponse(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
-        handleResponse(request, response, error, "error");
+    public static void handleErrorResponse(HttpServletRequest request, HttpServletResponse response, String error) throws IOException,ServletException {
+        handleResponse(request, response, error, "/error.jsp");
     }
-    public static void handleUnAuthResponse(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
-        handleResponse(request, response, error, "unAuth");
+    public static void handleUnAuthResponse(HttpServletRequest request, HttpServletResponse response, String error) throws IOException,ServletException {
+        handleResponse(request, response, error, "/unAuth.jsp");
     }
 
-    private static void handleResponse(HttpServletRequest request, HttpServletResponse response, String error, String page) throws IOException {
+    private static void handleResponse(HttpServletRequest request, HttpServletResponse response, String error, String page) throws IOException,ServletException {
         String requestWith = request.getHeader(REQUEST_WITH);
         if (requestWith != null && XMLHTTP_REQUEST.equals(requestWith)) {
             response.setCharacterEncoding("UTF-8");
@@ -37,7 +38,8 @@ public class AjaxUtils {
             pw.flush();
             pw.close();
         } else {
-            response.sendRedirect(page);
+            request.setAttribute("error", error);
+            request.getRequestDispatcher(page).forward(request,response);
         }
     }
 }

@@ -53,17 +53,19 @@ public class UserRealm extends AuthorizingRealm {
      */
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
-        LoginUserDTO user = userService.getLoginUser((String)token.getPrincipal());
-        if(user.getStatus() == UserStatusEnum.LOCKED){
-            logger.error("locked account login in,username:{}",token.getPrincipal());
+        //TODO 异常捕获
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        LoginUserDTO user = userService.getLoginUser((String) token.getPrincipal());
+        if (user.getStatus() == UserStatusEnum.LOCKED) {
+            logger.error("locked account login in,username:{}", token.getPrincipal());
             throw new LockedAccountException("已锁定账户，请联系管理员");
         } else if (user.getStatus() == UserStatusEnum.DELETED) {
-            logger.error("deleted account login,username:{}",token.getPrincipal());
+            logger.error("deleted account login,username:{}", token.getPrincipal());
             throw new UnknownAccountException("已删除账户");
         }
+        setCredentialsMatcher(hashedCredentialsMatcher);
         return new SimpleAuthenticationInfo(user.getUserName(), user.getPwd(),
-                ByteSource.Util.bytes(user.getSalt()),getName());
+                ByteSource.Util.bytes(user.getSalt()), getName());
     }
 
 }

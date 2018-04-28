@@ -26,6 +26,8 @@ public class UserDTO {
     @NotNull(message = "user id is null", groups = {UserDTOValidator.NeedId.class})
     private Integer id;
 
+    private String pwd;
+
     /**
      * 登录名
      */
@@ -104,6 +106,14 @@ public class UserDTO {
 
     public String getShowName() {
         return showName;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public void setShowName(String showName) {

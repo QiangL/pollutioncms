@@ -22,11 +22,11 @@ public interface RoleService {
 
     boolean updateRoleSelective(RoleDTO roleDTO);
 
-    boolean addRoles(String userName,Set<String> roleNames);
+    boolean motifyRoles(String userName, Set<String> roleNames);
 
-    boolean removeRoles(String userName,Set<String> roleNames);
+    Set<String> queryRoleNames(String userName);
 
-    Set<String> queryRole(String userName);
+    Set<String> queryRoleNames();
 
     /** 返回表中没有的roleName的集合 **/
     Set<String> notExitRoleNames(Set<String> roleNames);

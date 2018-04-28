@@ -26,8 +26,8 @@ function add(url, grid) {
     });
 }
 function update(url, grid) {
-    let form = $("#form");
     let data = grid.getSelectedRow();
+    let form = $("#form");
     if (!data) {
         $.ligerDialog.error('请选择更新的行');
         return;
@@ -38,7 +38,7 @@ function update(url, grid) {
     form.on("submit", function () {
         let pwd=form.find("#pwd");
         if(pwd){
-            let pwd=form.find("#pwd2");
+            let pwd2=form.find("#pwd2");
             if(pwd.val() !== pwd2.val()){
                 $.ligerDialog.error("两次输入密码不一致");
                 return false;

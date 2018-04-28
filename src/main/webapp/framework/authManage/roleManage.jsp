@@ -52,8 +52,10 @@
             <label for="canInherit" class="col-md-5 control-label">能否继承当前角色权限：</label>
             <div class="col-md-7" id="canInherit">
                 <div class="col-md-2"></div>
-                <label for="canInherit" class="radio-inline col-md-4"><input name="canInherit" type="radio" value="CANNOT_INHERIT">不能</label>
-                <label for="canInherit" class="radio-inline  col-md-4"><input name="canInherit" type="radio" value="CAN_INHERIT">能</label>
+                <label for="canInherit" class="radio-inline col-md-4"><input name="canInherit" type="radio"
+                                                                             value="CANNOT_INHERIT">不能</label>
+                <label for="canInherit" class="radio-inline  col-md-4"><input name="canInherit" type="radio"
+                                                                              value="CAN_INHERIT">能</label>
             </div>
         </div>
         <div class="form-group">
@@ -73,37 +75,37 @@
 <script src="js/framework/authManage/role.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var toolbarItem = [
+    let toolbarItem = [
             <shiro:hasPermission name="role:add">{
             id: 'add',
             text: '增加',
             click: addRole,
             icon: 'add'
-        }, </shiro:hasPermission>
-            <shiro:hasPermission name="role:update">{
-            id: 'update',
-            text: '修改',
-            click: updateRole,
-            icon: 'modify'
-        }, </shiro:hasPermission>
-            <shiro:hasPermission name="role:delete">{
-            id: 'delete',
-            text: '删除',
-            click: deleteRole,
-            img: 'lib/ligerUI/skins/icons/delete.gif'
-        }, </shiro:hasPermission>
+        }</shiro:hasPermission>
+    ];
+    let roleColumns = [
+        {display: '角色名', name: 'roleName'},
+        {display: '角色中文名', name: 'roleCnName'},
+        {display: '角色说明', name: 'comment'},
+        {
+            display: '是否可以继承', name: 'canInherit', render: function (rowData) {
+                if (rowData.canInherit === 'CANNOT_INHERIT') {
+                    return "不能";
+                } else {
+                    return "能";
+                }
+            },
+            <shiro:hasPermission name="role:update">display: '修改', render: function (rowData) {
+                update('/framework/user/updateRole.mvc', liger.get("maingrid"), rowData);
+            }, </shiro:hasPermission>
+            <shiro:hasPermission name="role:delete">display: '删除', render: function (rowData) {
+                delet('/framework/user/deleteRole.mvc', liger.get("maingrid"), rowData);
+            }, </shiro:hasPermission>
+        }
     ];
 
     function addRole() {
         add('/framework/role/addRole.mvc', liger.get("maingrid"));
-    }
-
-    function updateRole() {
-        update('/framework/role/updateRole.mvc', liger.get("maingrid"));
-    }
-
-    function deleteRole() {
-        delet('/framework/role/deleteRole.mvc', liger.get("maingrid"));
     }
 
     $(document).ready(function () {

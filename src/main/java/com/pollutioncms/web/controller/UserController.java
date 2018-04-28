@@ -68,7 +68,11 @@ public class UserController {
         if (result.hasErrors()) {
             return BindErrorHandler.handler(result.getAllErrors());
         }
-        //TODO 密码加盐
+        if ((userRequestVO.getPwd() == null && userRequestVO.getPwd2() != null) ||
+                (userRequestVO.getPwd() != null && userRequestVO.getPwd2() ==null) ||
+                (userRequestVO.getPwd() != null && !userRequestVO.getPwd().equals(userRequestVO.getPwd2()))) {
+            return Response.failResp(RespError.PASSWORD_ERROR);
+        }
         logger.info("add user,vo:{}", userRequestVO);
         userService.saveUser(userRequestVO.toDTO());
         return Response.succResp();
@@ -95,16 +99,20 @@ public class UserController {
         if (result.hasErrors()) {
             return BindErrorHandler.handler(result.getAllErrors());
         }
+        if ((userRequestVO.getPwd() == null && userRequestVO.getPwd2() != null) ||
+                (userRequestVO.getPwd() != null && userRequestVO.getPwd2() ==null) ||
+                (userRequestVO.getPwd() != null && !userRequestVO.getPwd().equals(userRequestVO.getPwd2()))) {
+            return Response.failResp(RespError.PASSWORD_ERROR);
+        }
+
         logger.info("update user,vo:{}", userRequestVO);
         userService.updateUserSelective(userRequestVO.toDTO());
         return Response.succResp();
     }
-    //TODO 增加角色相关的前端逻辑
 
-    @PostMapping("/addRoles.mvc")
-    @RequiresPermissions("user:addRoles")
+    @PostMapping("/motifyRoles.mvc")
+    @RequiresPermissions("user:motifyRoles")
     public Response<?> addRoles(@RequestParam("roleNames") Set<String> roleNames, @RequestParam("userName") String userName) {
-        //TODO 校验入参
         Set<String> notExitRoleNames = roleService.notExitRoleNames(roleNames);
         if (notExitRoleNames.size() != 0) {
             return Response.failResp(RespError.ROLE_NAME_NOT_EXIT.getErrorCode() + notExitRoleNames);
@@ -113,25 +121,7 @@ public class UserController {
             return Response.failResp(RespError.USER_NOT_EXIT.getErrorCode() + notExitRoleNames);
         }
 
-        if (roleService.addRoles(userName, roleNames)) {
-            return Response.succResp();
-        }
-        return Response.failResp(RespError.OPERATION_FAIL);
-    }
-
-    @PostMapping("/removeRoles.mvc")
-    @RequiresPermissions("user:removeRoles")
-    public Response<?> removeRoles(@RequestParam("roleNames") Set<String> roleNames, @RequestParam("userName") String userName) {
-        //TODO 校验入参
-        Set<String> notExitRoleNames = roleService.notExitRoleNames(roleNames);
-        if (notExitRoleNames.size() != 0) {
-            return Response.failResp(RespError.ROLE_NAME_NOT_EXIT.getErrorCode() + notExitRoleNames);
-        }
-        if (userService.getUser(userName) == null) {
-            return Response.failResp(RespError.USER_NOT_EXIT.getErrorCode() + notExitRoleNames);
-        }
-
-        if (roleService.removeRoles(userName, roleNames)) {
+        if (roleService.motifyRoles(userName, roleNames)) {
             return Response.succResp();
         }
         return Response.failResp(RespError.OPERATION_FAIL);
@@ -139,7 +129,7 @@ public class UserController {
 
     private UserResponseVO fillVO(UserDTO userDTO) {
         UserResponseVO userResponseVO = UserResponseVO.toVO(userDTO);
-        userResponseVO.setRoleNames(roleService.queryRole(userDTO.getUserName()));
+        userResponseVO.setRoleNames(roleService.queryRoleNames(userDTO.getUserName()));
         return userResponseVO;
     }
 

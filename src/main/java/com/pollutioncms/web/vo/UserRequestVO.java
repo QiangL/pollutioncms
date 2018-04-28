@@ -1,6 +1,7 @@
 package com.pollutioncms.web.vo;
 
 import com.pollutioncms.common.enums.SexEnum;
+import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.service.dto.UserDTO;
 import com.pollutioncms.web.validator.UserDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -46,6 +47,8 @@ public class UserRequestVO {
 
     @Email(message = "mail pattern wrong")
     private String userEmail;
+
+    private UserStatusEnum status;
 
     public Integer getId() {
         return id;
@@ -129,6 +132,14 @@ public class UserRequestVO {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public UserStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatusEnum status) {
+        this.status = status;
     }
 
     @Override

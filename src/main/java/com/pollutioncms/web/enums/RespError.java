@@ -8,6 +8,7 @@ public enum RespError {
     INTERNAL_ERROR("内部错误"),
     UN_AUTH_OPS("未授权的操作"),
     ROLE_NAME_NOT_EXIT("角色名不存在"),
+    PASSWORD_ERROR("两次密码不一致")
     ;
 
     private String errorCode;

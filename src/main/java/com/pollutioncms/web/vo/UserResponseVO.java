@@ -1,6 +1,7 @@
 package com.pollutioncms.web.vo;
 
 import com.pollutioncms.common.enums.SexEnum;
+import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.service.dto.UserDTO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -43,6 +44,7 @@ public class UserResponseVO {
     private Date lastOptTime;
 
     private Set<String> roleNames;
+    private UserStatusEnum status;
 
     public Integer getId() {
         return id;
@@ -122,6 +124,14 @@ public class UserResponseVO {
 
     public void setRoleNames(Set<String> roleNames) {
         this.roleNames = roleNames;
+    }
+
+    public UserStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatusEnum status) {
+        this.status = status;
     }
 
     public static UserResponseVO toVO(UserDTO userDTO) {

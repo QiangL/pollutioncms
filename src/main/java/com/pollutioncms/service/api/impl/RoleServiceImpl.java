@@ -86,26 +86,19 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public boolean addRoles(String userName,Set<String> roleNames) {
-        if (roleUserMapper.addRoles(userName,roleNames) != roleNames.size()) {
-            logger.error("add role effect num error,userName:{},roleNames:{}",userName,roleNames);
-            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
-        }
+    public boolean motifyRoles(String userName, Set<String> roleNames) {
+        roleUserMapper.motifyRoles(userName, roleNames);
         return true;
     }
 
     @Override
-    public boolean removeRoles(String userName,Set<String> roleNames) {
-        if (roleUserMapper.removeRoles(userName,roleNames) != roleNames.size()) {
-            logger.error("remove role effect num error,userName:{},roleNames:{}",userName,roleNames);
-            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
-        }
-        return true;
-    }
-
-    @Override
-    public Set<String> queryRole(String userName) {
+    public Set<String> queryRoleNames(String userName) {
         return roleUserMapper.queryRole(userName);
+    }
+
+    @Override
+    public Set<String> queryRoleNames() {
+        return roleUserMapper.queryRole(null);
     }
 
     @Override

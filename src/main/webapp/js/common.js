@@ -22,7 +22,7 @@ function openDialog(title, target) {
     return $.ligerDialog.open({
         width: 700,
         title: title,
-        top: 100,
+        top: 50,
         target: target
     });
 }

@@ -18,11 +18,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginUserDTO getLoginUser(String userName) {
-        User user=getUserByName(userName);
+        User user = getUserByName(userName);
         if (user == null) {
-            logger.error("query username not exit,username:{}",userName);
+            logger.error("query username not exit,username:{}", userName);
             throw new ParamErrorException("user not exit");
         }
         return LoginUserDTO.toLoginUserDTO(user);
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public AuthUserDTO getAuthUser(String userName) {
         AuthUserDTO authUserDTO = new AuthUserDTO();
         if (getUserByName(userName) == null) {
-            logger.error("query username not exit,username:{}",userName);
+            logger.error("query username not exit,username:{}", userName);
             throw new ParamErrorException("user not exit");
         }
         authUserDTO.setUserName(userName);
@@ -90,24 +90,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean saveUser(UserDTO userDTO) {
         // 加密
-        User user = passwordHelper.encryption(userDTO.toDO());
-        if (userMapper.saveUser(user) != 1){
-            logger.error("dao operate effect num error,dto:{}",userDTO);
+        User user = userDTO.toDO();
+        passwordHelper.encryption(user);
+        if (userMapper.saveUser(user) != 1) {
+            logger.error("dao operate effect num error,dto:{}", userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
-        }
-        else return true;
+        } else return true;
 
     }
 
     @Override
     public boolean deleteUser(UserDTO userDTO) {
         userDTO.setStatus(UserStatusEnum.DELETED);
-        if (userMapper.updateByPrimaryKeySelective(userDTO.toDO()) !=1){
+        if (userMapper.updateByPrimaryKeySelective(userDTO.toDO()) != 1) {
             // == 2说明 user表和role_user表都删除了
-            logger.error("dao operate effect num error,dto:{}",userDTO);
+            logger.error("dao operate effect num error,dto:{}", userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
-        }
-        else return true;
+        } else return true;
     }
 
     @Override
@@ -117,11 +116,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUserSelective(UserDTO userDTO) {
-        if (userMapper.updateByPrimaryKeySelective(userDTO.toDO()) != 1){
-            logger.error("dao operate effect num error,dto:{}",userDTO);
-            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        User user = userDTO.toDO();
+        if (!StringUtils.isEmpty(userDTO.getPwd())) {
+            passwordHelper.encryption(user);
         }
-        else return true;
+        if (userMapper.updateByPrimaryKeySelective(user) != 1) {
+            logger.error("dao operate effect num error,dto:{}", userDTO);
+            throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
+        } else return true;
     }
 
     private List<UserDTO> toDTOList(List<User> list) {

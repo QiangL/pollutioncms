@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,27 +32,27 @@ public class InternalExceptionController {
 
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public void  dataAccessHandle(DataAccessException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void  dataAccessHandle(DataAccessException e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         logger.error("database error",e);
         AjaxUtils.handleErrorResponse(request,response,RespError.OPERATION_FAIL.getErrorCode());
     }
     @ExceptionHandler(DaoException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public void daoExceptionHandle(DataAccessException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void daoExceptionHandle(DataAccessException e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         logger.error("database error",e);
         AjaxUtils.handleErrorResponse(request,response,RespError.OPERATION_FAIL.getErrorCode());
     }
 
     @ExceptionHandler(ParamErrorException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void badParamExceptionHandler(ParamErrorException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void badParamExceptionHandler(ParamErrorException e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         logger.error("input param not suit", e);
         AjaxUtils.handleErrorResponse(request,response,e.getMessage());
     }
 
     @ExceptionHandler(BeansException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public void beansCopyExHandler(BeansException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void beansCopyExHandler(BeansException e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         logger.error("copy properties error", e);
         AjaxUtils.handleErrorResponse(request,response,RespError.INTERNAL_ERROR.getErrorCode());
     }

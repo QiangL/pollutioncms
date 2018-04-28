@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,13 +24,13 @@ import java.io.IOException;
 public class AuthExceptionController {
     @ExceptionHandler(value = {UnknownAccountException.class, LockedAccountException.class, UnknownAccountException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public void accountExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void accountExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         AjaxUtils.handleUnAuthResponse(request, response, e.getMessage());
     }
 
     @ExceptionHandler(value = {UnauthorizedException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public void unAuthExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void unAuthExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         AjaxUtils.handleUnAuthResponse(request, response, RespError.UN_AUTH_OPS.getErrorCode());
     }
 }

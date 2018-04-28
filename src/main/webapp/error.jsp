@@ -23,6 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   登录失败！ <br>
+   出错了:${error} <br>
   </body>
 </html>

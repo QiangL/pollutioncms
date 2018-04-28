@@ -35,6 +35,6 @@ public class RoleUserMapperTest extends BaseTest {
         Assert.assertEquals(1, userMapper.saveUser(user));
         roleUserMapper.addRoles("mapperTest",Sets.newSet("admin","guest"));
         roleUserMapper.queryRole("mapperTest");
-        roleUserMapper.removeRoles("mapperTest", Sets.newSet("admin", "guest"));
+        roleUserMapper.motifyRoles("mapperTest", Sets.newSet("admin", "guest"));
     }
 }

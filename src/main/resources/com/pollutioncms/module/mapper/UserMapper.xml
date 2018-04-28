@@ -22,7 +22,7 @@
     id,user_name,pwd,create_time,show_name,user_sex,user_tel,user_addr,user_email,last_opt_time,salt,status
   </sql>
     <select id="listPermissions" parameterType="String" resultType="String">
-    select permission DISTINCT
+    select DISTINCT permission
     from module_operate
     WHERE module_operate.uuid in
       (select role_auth.module_op_uuid
@@ -35,7 +35,7 @@
       )
   </select>
     <select id="listRoles" parameterType="String" resultType="String">
-    select role_name DISTINCT from role
+    select DISTINCT role_name from role
     WHERE id in
       (select role_id
           from role_user,user
@@ -54,22 +54,22 @@
 
         delete from user
         where id=#{user.id}
-        <if test="#{user.userName} != null">
+        <if test="user.userName != null">
             AND user_name=#{user.userName}
         </if>
-        <if test="#{user.showName} != null">
+        <if test="user.showName != null">
             AND show_name=#{user.showName}
         </if>
-        <if test="#{user.userSex} != null">
+        <if test="user.userSex != null">
             AND user_sex=#{user.userSex}
         </if>
-        <if test="#{user.userTel} != null">
+        <if test="user.userTel != null">
             AND user_tel=#{user.userTel}
         </if>
-        <if test="#{user.userAddr} != null">
+        <if test="user.userAddr != null">
             AND user_addr=#{user.userAddr}
         </if>
-        <if test="#{user.userEmail} != null">
+        <if test="user.userEmail != null">
             AND user_email=#{user.userEmail}
         </if>
     </delete>
