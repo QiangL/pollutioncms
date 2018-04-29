@@ -53,7 +53,6 @@ public class UserRealm extends AuthorizingRealm {
      */
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
-        //TODO 异常捕获
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         LoginUserDTO user = userService.getLoginUser((String) token.getPrincipal());
         if (user.getStatus() == UserStatusEnum.LOCKED) {

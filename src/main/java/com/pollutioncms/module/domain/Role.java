@@ -9,6 +9,9 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private Integer id;
 
+    /**
+     * 创造Role的User_id
+     */
     @Column(name = "parent_id")
     private Integer parentId;
 
@@ -22,9 +25,6 @@ public class Role implements Serializable {
     private String roleCnName;
 
     private String comment;
-
-    @Column(name = "can_inherit")
-    private Integer canInherit;
 
     private static final long serialVersionUID = 1L;
 
@@ -43,14 +43,18 @@ public class Role implements Serializable {
     }
 
     /**
-     * @return parent_id
+     * 获取创造Role的User_id
+     *
+     * @return parent_id - 创造Role的User_id
      */
     public Integer getParentId() {
         return parentId;
     }
 
     /**
-     * @param parentId
+     * 设置创造Role的User_id
+     *
+     * @param parentId 创造Role的User_id
      */
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
@@ -102,20 +106,6 @@ public class Role implements Serializable {
         this.comment = comment == null ? null : comment.trim();
     }
 
-    /**
-     * @return can_inherit
-     */
-    public Integer getCanInherit() {
-        return canInherit;
-    }
-
-    /**
-     * @param canInherit
-     */
-    public void setCanInherit(Integer canInherit) {
-        this.canInherit = canInherit;
-    }
-
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -132,8 +122,7 @@ public class Role implements Serializable {
             && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
             && (this.getRoleCnName() == null ? other.getRoleCnName() == null : this.getRoleCnName().equals(other.getRoleCnName()))
-            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()))
-            && (this.getCanInherit() == null ? other.getCanInherit() == null : this.getCanInherit().equals(other.getCanInherit()));
+            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()));
     }
 
     @Override
@@ -145,7 +134,6 @@ public class Role implements Serializable {
         result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
         result = prime * result + ((getRoleCnName() == null) ? 0 : getRoleCnName().hashCode());
         result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
-        result = prime * result + ((getCanInherit() == null) ? 0 : getCanInherit().hashCode());
         return result;
     }
 
@@ -160,7 +148,6 @@ public class Role implements Serializable {
         sb.append(", roleName=").append(roleName);
         sb.append(", roleCnName=").append(roleCnName);
         sb.append(", comment=").append(comment);
-        sb.append(", canInherit=").append(canInherit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

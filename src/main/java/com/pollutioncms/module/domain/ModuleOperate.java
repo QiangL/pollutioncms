@@ -14,9 +14,12 @@ public class ModuleOperate implements Serializable {
 
     private String name;
 
-    private String url;
-
     private String permission;
+
+    /**
+     * 备注
+     */
+    private String comment;
 
     private static final long serialVersionUID = 1L;
 
@@ -63,20 +66,6 @@ public class ModuleOperate implements Serializable {
     }
 
     /**
-     * @return url
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * @param url
-     */
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    /**
      * @return permission
      */
     public String getPermission() {
@@ -88,6 +77,24 @@ public class ModuleOperate implements Serializable {
      */
     public void setPermission(String permission) {
         this.permission = permission == null ? null : permission.trim();
+    }
+
+    /**
+     * 获取备注
+     *
+     * @return comment - 备注
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * 设置备注
+     *
+     * @param comment 备注
+     */
+    public void setComment(String comment) {
+        this.comment = comment == null ? null : comment.trim();
     }
 
     @Override
@@ -105,8 +112,8 @@ public class ModuleOperate implements Serializable {
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
             && (this.getParentUuid() == null ? other.getParentUuid() == null : this.getParentUuid().equals(other.getParentUuid()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getPermission() == null ? other.getPermission() == null : this.getPermission().equals(other.getPermission()));
+            && (this.getPermission() == null ? other.getPermission() == null : this.getPermission().equals(other.getPermission()))
+            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()));
     }
 
     @Override
@@ -116,8 +123,8 @@ public class ModuleOperate implements Serializable {
         result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
         result = prime * result + ((getParentUuid() == null) ? 0 : getParentUuid().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         result = prime * result + ((getPermission() == null) ? 0 : getPermission().hashCode());
+        result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
         return result;
     }
 
@@ -130,8 +137,8 @@ public class ModuleOperate implements Serializable {
         sb.append(", uuid=").append(uuid);
         sb.append(", parentUuid=").append(parentUuid);
         sb.append(", name=").append(name);
-        sb.append(", url=").append(url);
         sb.append(", permission=").append(permission);
+        sb.append(", comment=").append(comment);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

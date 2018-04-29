@@ -8,7 +8,7 @@
     <id column="uuid" jdbcType="CHAR" property="uuid" />
     <result column="parent_uuid" jdbcType="CHAR" property="parentUuid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
   </resultMap>
 </mapper>

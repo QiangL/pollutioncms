@@ -120,8 +120,8 @@
 <script src="lib/ligerUI/js/plugins/ligerListBox.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
-<script src="js/framework/authManage/authCommon.js" type="text/javascript"></script>
-<script src="js/framework/authManage/user.js" type="text/javascript"></script>
+<script src="js/systemManage/authManage/authCommon.js" type="text/javascript"></script>
+<script src="js/systemManage/authManage/user.js" type="text/javascript"></script>
 <script type="text/javascript">
     let toolbarItem = [
             <shiro:hasPermission name="role:add">{
@@ -136,7 +136,7 @@
         {display: '用户显示名称', name: 'showName'},
         {display: '用户角色', name: 'roleNames'},
         {
-            display: '用户状态', render: function (rowData) {
+            display: '用户状态', width:70,render: function (rowData) {
                 if (rowData.status === 'NORMAL') {
                     return '正常'
                 }
@@ -149,7 +149,7 @@
             }
         },
         {
-            display: '用户性别', name: 'userSex', render: function (rowData) {
+            display: '用户性别', width:50,name: 'userSex', render: function (rowData) {
                 if (rowData.userSex === 'FEMALE') {
                     return "女";
                 } else {
@@ -161,7 +161,7 @@
         {display: '用户邮箱', name: 'userEmail'},
         {display: '用户地址', name: 'userAddr'},
         {
-            display: '用户最后操作时间', name: 'lastOptTime', render: function (rowData) {
+            display: '最后修改时间', name: 'lastOptTime', render: function (rowData) {
                 return new Date(rowData.lastOptTime).toLocaleString();
             }
         }, {
@@ -178,17 +178,17 @@
         let form=$("#form");
         form.find("#pwd").attr("required",true);
         form.find("#pwd2").attr("required",true);
-        add('/framework/user/addUser.mvc', liger.get("maingrid"));
+        add('/authManage/user/addUser.mvc', liger.get("maingrid"));
     }
 
     function deleteUser() {
-        delet('/framework/user/deleteUser.mvc', liger.get("maingrid"));
+        delet('/authManage/user/deleteUser.mvc', liger.get("maingrid"));
     }
 
     function updateUser() {
         let form=$("#form");
         form.find("#pwd").attr("required",false);
-        form.find("#pwd2").attr("required",false);update('/framework/user/updateUser.mvc', liger.get("maingrid"));
+        form.find("#pwd2").attr("required",false);update('/authManage/user/updateUser.mvc', liger.get("maingrid"));
     }
 
     function motifyUser() {
@@ -200,14 +200,14 @@
     }
 
     $(document).ready(function () {
-        loadSheet('#maingrid', userColumns, toolbarItem, '/framework/user/listUsers.mvc', 'GET');
+        loadSheet('#maingrid', userColumns, toolbarItem, '/authManage/user/listUsers.mvc', '','GET');
         $("#pageloading").hide();
         $("#roleModify").ligerListBox({
             height:250,
             width:250,
             isShowCheckBox: true,
             isMultiSelect: true,
-            url: '/framework/role/queryRoleNames.mvc',
+            url: '/authManage/role/queryRoleNames.mvc',
             valueFieldID: 'motifyRoleNames',
             split: ",",
             ajaxType: 'GET'
@@ -216,7 +216,7 @@
         $("#btn-modifyRoleNames").on("click", function () {
             let grid = liger.get('maingrid');
             let userName=grid.getSelectedRow().userName;
-            $.ajax('/framework/user/motifyRoles.mvc',{
+            $.ajax('/authManage/user/motifyRoles.mvc',{
                 method:'POST',
                 data:{'roleNames':$("#motifyRoleNames").val(),'userName':userName},
                 dataType:'json',

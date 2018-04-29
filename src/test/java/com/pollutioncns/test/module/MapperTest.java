@@ -2,7 +2,6 @@ package com.pollutioncns.test.module;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.module.domain.User;
-import com.pollutioncms.module.mapper.FirstModuleMapper;
 import com.pollutioncms.module.mapper.UserMapper;
 import com.pollutioncns.test.BaseTest;
 import org.junit.Test;
@@ -11,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
-
-import java.util.Collections;
 
 /**
  * @author liqiag

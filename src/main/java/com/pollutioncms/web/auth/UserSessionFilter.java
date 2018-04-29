@@ -8,6 +8,7 @@ import com.pollutioncms.web.contants.Constants;
 import com.pollutioncms.web.utils.AjaxUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class UserSessionFilter extends AccessControlFilter {
 
     @Autowired
     private UserService userService;
+
     @Override
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         Subject subject = SecurityUtils.getSubject();

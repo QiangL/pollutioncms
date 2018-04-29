@@ -71,8 +71,8 @@
 <script src="lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerToolBar.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="js/framework/authManage/authCommon.js" type="text/javascript"></script>
-<script src="js/framework/authManage/role.js" type="text/javascript"></script>
+<script src="js/systemManage/authManage/authCommon.js" type="text/javascript"></script>
+<script src="js/systemManage/authManage/role.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
 <script type="text/javascript">
     let toolbarItem = [
@@ -88,28 +88,25 @@
         {display: '角色中文名', name: 'roleCnName'},
         {display: '角色说明', name: 'comment'},
         {
-            display: '是否可以继承', name: 'canInherit', render: function (rowData) {
-                if (rowData.canInherit === 'CANNOT_INHERIT') {
-                    return "不能";
-                } else {
-                    return "能";
-                }
-            },
-            <shiro:hasPermission name="role:update">display: '修改', render: function (rowData) {
-                update('/framework/user/updateRole.mvc', liger.get("maingrid"), rowData);
-            }, </shiro:hasPermission>
-            <shiro:hasPermission name="role:delete">display: '删除', render: function (rowData) {
-                delet('/framework/user/deleteRole.mvc', liger.get("maingrid"), rowData);
-            }, </shiro:hasPermission>
+            display: '编辑', render: function (rowData) {
+                let update='<shiro:hasPermission name="role:update"><a onclick="updateRole()">修改</a></shiro:hasPermission>';
+                let delet='<shiro:hasPermission name="role:delete"><a onclick="deleteRole()">删除</a></shiro:hasPermission>';
+                return update+' '+delet;
+            }
         }
     ];
 
     function addRole() {
-        add('/framework/role/addRole.mvc', liger.get("maingrid"));
+        add('/authManage/role/addRole.mvc', liger.get("maingrid"));
     }
-
+    function updateRole(){
+        update('/authManage/role/updateRole.mvc', liger.get("maingrid"));
+    }
+    function deleteRole(){
+        delet('/authManage/role/deleteRole.mvc', liger.get("maingrid"));
+    }
     $(document).ready(function () {
-        loadSheet('#maingrid', roleColumns, toolbarItem, '/framework/role/listRoles.mvc', 'GET');
+        loadSheet('#maingrid', roleColumns, toolbarItem, '/authManage/role/listRoles.mvc', '','GET');
         $("#pageloading").hide();
     });
 </script>

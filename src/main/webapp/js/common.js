@@ -1,9 +1,10 @@
 /** 封装一层加载表格 **/
-function loadSheet(divId, columns, toolbarItems, url, method) {
+function loadSheet(divId, columns, toolbarItems, url,urlParam, method) {
     $(divId).ligerGrid({
         height: '100%',
         columns: columns,
         url: url,
+        urlParms:urlParam,
         method: method,
         pageSize: 30,
         rownumbers: true,
@@ -34,4 +35,17 @@ function ajaxJSONPost(url,data,successFunc){
         contentType:"application/json",
         success:successFunc
     });
+}
+
+function loadTree(url,divId,successFunc){
+    $(divId).ligerTree({
+        url:url,
+        checkbox: false,
+        idFieldName: 'id',
+        isExpand: true,
+        slide: false,
+        single:true,
+        ajaxType:'GET',
+        onSelect:successFunc
+    })
 }

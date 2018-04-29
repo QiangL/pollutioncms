@@ -57,7 +57,7 @@ CREATE TABLE `module_operate` (
   UNIQUE KEY `uuid_UNIQUE` (`uuid`),
   KEY `uuid_fk_idx` (`parent_uuid`),
   KEY `uuid_permission` (`uuid`,`permission`),
-  CONSTRAINT `second_module_uuid_fk` FOREIGN KEY (`parent_uuid`) REFERENCES `second_module` (`uuid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `second_module_uuid_fk` FOREIGN KEY (`parent_uuid`) REFERENCES module (`uuid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -188,7 +188,7 @@ UNLOCK TABLES;
 -- Table structure for table `second_module`
 --
 
-DROP TABLE IF EXISTS `second_module`;
+DROP TABLE IF EXISTS module;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `second_module` (
@@ -206,10 +206,10 @@ CREATE TABLE `second_module` (
 -- Dumping data for table `second_module`
 --
 
-LOCK TABLES `second_module` WRITE;
-/*!40000 ALTER TABLE `second_module` DISABLE KEYS */;
-INSERT INTO `second_module` VALUES ('55f6b141-3ee7-11e8-8d99-a01d48d62fec','22d6ca44-3ee7-11e8-8d99-a01d48d62fec','测试第二模块');
-/*!40000 ALTER TABLE `second_module` ENABLE KEYS */;
+LOCK TABLES module WRITE;
+/*!40000 ALTER TABLE module DISABLE KEYS */;
+INSERT INTO module VALUES ('55f6b141-3ee7-11e8-8d99-a01d48d62fec','22d6ca44-3ee7-11e8-8d99-a01d48d62fec','测试第二模块');
+/*!40000 ALTER TABLE module ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

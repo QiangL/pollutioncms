@@ -47,17 +47,14 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--<table tableName="first_module">
+        <table tableName="module">
             <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <generatedKey column="uuid" sqlStatement="select uuid()"/>
-        </table>
-        <table tableName="second_module">
             <generatedKey column="uuid" sqlStatement="select uuid()"/>
         </table>
         <table tableName="module_operate">
             <generatedKey column="uuid" sqlStatement="select uuid()"/>
         </table>
-        <table tableName="role_auth">
+        <!--<table tableName="role_auth">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
         <table tableName="navigation">
@@ -68,9 +65,9 @@
         </table>
         <table tableName="role_user">
             <generatedKey column="id" sqlStatement="MySql"/>
-        </table>-->
+        </table>
         <table tableName="user">
             <generatedKey column="id" sqlStatement="MySql"/>
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>

@@ -5,9 +5,9 @@
         <!--
           WARNING - @mbg.generated
         -->
-        <id column="id" jdbcType="CHAR" property="id"/>
-        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
-        <result column="module_op_uuid" jdbcType="CHAR" property="moduleOpUuid"/>
-        <result column="can_inherit" jdbcType="BIT" property="canInherit"/>
+        <id column="id" jdbcType="CHAR" property="id" />
+        <result column="role_id" jdbcType="INTEGER" property="roleId" />
+        <result column="module_op_uuid" jdbcType="CHAR" property="moduleOpUuid" />
+        <result column="can_inherit" jdbcType="BIT" property="canInherit" />
     </resultMap>
 </mapper>

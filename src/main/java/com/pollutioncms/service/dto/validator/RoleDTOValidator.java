@@ -1,4 +1,4 @@
-package com.pollutioncms.web.validator;
+package com.pollutioncms.service.dto.validator;
 
 
 

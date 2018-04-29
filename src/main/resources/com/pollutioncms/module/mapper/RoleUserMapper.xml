@@ -9,26 +9,6 @@
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
-  <insert id="addRoles">
-    insert into role_user
-    (role_id,user_id)
-    select id,(select id from user where user_name=#{userName}) from role where role_name in
-    <foreach collection="roleNames" separator="," open="(" close=")" item="roleName">
-      #{userName}
-    </foreach>
-  </insert>
-  <delete id="removeRoles">
-    delete from role_user
-    where role_id in
-    (select id from role where role_name in
-    <foreach collection="roleNames" open="(" close=")" item="roleName" separator=",">
-      #{roleName}
-    </foreach>
-    )
-    AND
-    user_id=(select id from user where user_name=#{userName})
-  </delete>
-
   <delete id="motifyRoles">
     delete from role_user
     where user_id = (select id from user where user_name = #{userName});

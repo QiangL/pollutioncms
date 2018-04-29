@@ -6,7 +6,7 @@ import com.pollutioncms.service.dto.UserDTO;
 import com.pollutioncms.web.enums.RespError;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
-import com.pollutioncms.web.validator.UserDTOValidator;
+import com.pollutioncms.service.dto.validator.UserDTOValidator;
 import com.pollutioncms.web.vo.LigerGridVo;
 import com.pollutioncms.web.vo.UserRequestVO;
 import com.pollutioncms.web.vo.UserResponseVO;
@@ -33,7 +33,7 @@ import static com.pollutioncms.web.contants.Constants.NUM_EACH_PAGE;
  * @date 2018-04-21
  **/
 @RestController
-@RequestMapping("/framework/user")
+@RequestMapping("/authManage/user")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -53,7 +53,6 @@ public class UserController {
         if (count == null) {
             count = NUM_EACH_PAGE;
         }
-        //TODO 页面增加显示
         if (roleName == null) {
             return LigerGridVo.Resp(fillVOs(userService.listUser(pageNum, count)), userService.getCount());
         } else {

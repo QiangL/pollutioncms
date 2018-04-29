@@ -3,7 +3,7 @@ package com.pollutioncms.web.vo;
 import com.pollutioncms.common.enums.SexEnum;
 import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.service.dto.UserDTO;
-import com.pollutioncms.web.validator.UserDTOValidator;
+import com.pollutioncms.service.dto.validator.UserDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;

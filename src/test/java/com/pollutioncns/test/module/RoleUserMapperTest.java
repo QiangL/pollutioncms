@@ -33,7 +33,6 @@ public class RoleUserMapperTest extends BaseTest {
         user.setUserAddr("");
         user.setUserTel("133");
         Assert.assertEquals(1, userMapper.saveUser(user));
-        roleUserMapper.addRoles("mapperTest",Sets.newSet("admin","guest"));
         roleUserMapper.queryRole("mapperTest");
         roleUserMapper.motifyRoles("mapperTest", Sets.newSet("admin", "guest"));
     }

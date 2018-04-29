@@ -8,7 +8,7 @@ import com.pollutioncms.service.dto.UserDTO;
 import com.pollutioncms.web.contants.Constants;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
-import com.pollutioncms.web.validator.RoleDTOValidator;
+import com.pollutioncms.service.dto.validator.RoleDTOValidator;
 import com.pollutioncms.web.vo.LigerGridVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.groups.Default;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import static com.pollutioncms.web.contants.Constants.NUM_EACH_PAGE;
@@ -37,7 +35,7 @@ import static com.pollutioncms.web.contants.Constants.NUM_EACH_PAGE;
  * @date 2018-04-20
  **/
 @RestController
-@RequestMapping("/framework/role")
+@RequestMapping("/authManage/role")
 public class RoleController {
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 

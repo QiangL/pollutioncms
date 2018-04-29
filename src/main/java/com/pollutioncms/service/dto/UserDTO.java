@@ -3,7 +3,7 @@ package com.pollutioncms.service.dto;
 import com.pollutioncms.common.enums.SexEnum;
 import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.module.domain.User;
-import com.pollutioncms.web.validator.UserDTOValidator;
+import com.pollutioncms.service.dto.validator.UserDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;
@@ -14,7 +14,6 @@ import org.springframework.beans.BeansException;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * @author liqiag

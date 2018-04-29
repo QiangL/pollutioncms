@@ -3,11 +3,14 @@ package com.pollutioncms.module.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@Table(name = "first_module")
-public class FirstModule implements Serializable {
+@Table(name = "module")
+public class Module implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "select uuid()")
     private String uuid;
+
+    @Column(name = "parent_uuid")
+    private String parentUuid;
 
     private String name;
 
@@ -25,6 +28,20 @@ public class FirstModule implements Serializable {
      */
     public void setUuid(String uuid) {
         this.uuid = uuid == null ? null : uuid.trim();
+    }
+
+    /**
+     * @return parent_uuid
+     */
+    public String getParentUuid() {
+        return parentUuid;
+    }
+
+    /**
+     * @param parentUuid
+     */
+    public void setParentUuid(String parentUuid) {
+        this.parentUuid = parentUuid == null ? null : parentUuid.trim();
     }
 
     /**
@@ -52,8 +69,9 @@ public class FirstModule implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        FirstModule other = (FirstModule) that;
+        Module other = (Module) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
+            && (this.getParentUuid() == null ? other.getParentUuid() == null : this.getParentUuid().equals(other.getParentUuid()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
     }
 
@@ -62,6 +80,7 @@ public class FirstModule implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
+        result = prime * result + ((getParentUuid() == null) ? 0 : getParentUuid().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         return result;
     }
@@ -73,6 +92,7 @@ public class FirstModule implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", uuid=").append(uuid);
+        sb.append(", parentUuid=").append(parentUuid);
         sb.append(", name=").append(name);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
