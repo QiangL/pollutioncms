@@ -48,13 +48,12 @@
         </javaClientGenerator>
 
         <table tableName="module">
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <generatedKey column="uuid" sqlStatement="select uuid()"/>
+            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="module_operate">
-            <generatedKey column="uuid" sqlStatement="select uuid()"/>
+            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
-        <!--<table tableName="role_auth">
+        <table tableName="role_auth">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
         <table tableName="navigation">
@@ -68,6 +67,6 @@
         </table>
         <table tableName="user">
             <generatedKey column="id" sqlStatement="MySql"/>
-        </table>-->
+        </table>
     </context>
 </generatorConfiguration>

@@ -33,4 +33,20 @@ public class RoleMapperTest extends BaseTest {
         Assert.assertEquals(1, result.size());
         Assert.assertTrue(result.contains("test"));
     }
+
+    @Test
+    public void test2(){
+        Role role = new Role();
+        role.setParentId(2);
+        role.setRoleCnName("1");
+        role.setRoleName("1");
+
+        roleMapper.insert(role);
+        role.setRoleName("2");
+        roleMapper.insert(role);
+
+        role.setRoleName("3");
+        roleMapper.insert(role);
+
+    }
 }

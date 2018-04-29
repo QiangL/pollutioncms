@@ -25,13 +25,18 @@
     </selectKey>
   </insert>
   <select id="checkRoleNames" resultType="string">
-    <if test="roleNames != null and roleNames.size != 0">
-      select v.val FROM
-      <foreach collection="roleNames" item="roleName" separator="union" open="(" close=")">
-        select #{roleName} as val
-      </foreach>
-      v
-      where v.val not in (select role_name from role)
-    </if>
+    <choose>
+      <when test="roleNames != null and roleNames.size != 0">
+        select v.val FROM
+        <foreach collection="roleNames" item="roleName" separator="union" open="(" close=")">
+          select #{roleName} as val
+        </foreach>
+        v
+        where v.val not in (select role_name from role)
+      </when>
+      <otherwise>
+        select role_name from role where 1!=1
+      </otherwise>
+    </choose>
   </select>
 </mapper>

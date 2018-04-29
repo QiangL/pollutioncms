@@ -34,7 +34,11 @@ public class UserMapperTest extends BaseTest {
         user.setUserAddr("");
         user.setUserTel("133");
         Assert.assertEquals(1, userMapper.saveUser(user));
-        RoleUser roleUser = new RoleUser();
+        user.setUserName("mapperTest2");
+        Assert.assertEquals(1, userMapper.saveUser(user));
+        user.setUserName("mapperTest3");
+        Assert.assertEquals(1, userMapper.saveUser(user));
+        /*RoleUser roleUser = new RoleUser();
         roleUser.setRoleId(1);
         roleUser.setUserId(userMapper.selectOneByExample(
                 Example.builder(User.class)
@@ -48,7 +52,7 @@ public class UserMapperTest extends BaseTest {
                         .where(Sqls.custom()
                                 .andEqualTo("userName", "mapperTest"))
                         .build());
-        userMapper.deleteUser(user);
+        userMapper.deleteUser(user);*/
     }
 
 }

@@ -13,9 +13,9 @@ public interface ModuleService {
 
     List<ModuleDTO> listModule();
 
-    List<ModuleDTO> listModuleOps(String parentUuid);
+    List<ModuleDTO> listModuleOps(Integer parentId);
 
-    int getModuleOpsCount(String parentUuid);
+    int getModuleOpsCount(Integer parentId);
 
     boolean saveModule(ModuleDTO moduleDTO);
 

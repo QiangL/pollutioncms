@@ -101,8 +101,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(UserDTO userDTO) {
-        userDTO.setStatus(UserStatusEnum.DELETED);
-        if (userMapper.updateByPrimaryKeySelective(userDTO.toDO()) != 1) {
+        if (userMapper.deleteUser(userDTO.toDO()) < 1) {
             // == 2说明 user表和role_user表都删除了
             logger.error("dao operate effect num error,dto:{}", userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);

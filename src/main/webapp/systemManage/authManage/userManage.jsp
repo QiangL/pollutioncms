@@ -195,7 +195,7 @@
         let data = liger.get("maingrid").getSelectedRow();
         let listbox = liger.get("roleModify");
         listbox.setValue(data.roleNames);
-        let dialog = openDialog("修改用户角色", $("#roleModify-container"));
+        dialog = openDialog("修改用户角色", $("#roleModify-container"));
 
     }
 
@@ -225,6 +225,7 @@
                     if (res.success) {
                         $.ligerDialog.success('修改成功');
                         liger.get("maingrid").loadData();
+                        dialog.hide();
                     } else {
                         $.ligerDialog.error('修改失败,原因:' + res.errorCodes);
                     }

@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author liqiag
  * @discription ModuleDTO
@@ -16,31 +18,30 @@ import org.springframework.beans.BeanUtils;
  **/
 public class ModuleDTO {
 
-    @Length(min=36,max=36,groups = ModuleDTOValidator.NeedId.class)
-    private String id;
-
-    private String pid;
-
+    @NotNull(groups = ModuleDTOValidator.NeedId.class)
+    private Integer id;
+    @NotNull
+    private Integer pid;
+    @NotNull
     private String name;
 
     @NotBlank(groups = ModuleDTOValidator.ModuleOps.class )
     private String permission;
-    @NotBlank(groups = ModuleDTOValidator.ModuleOps.class )
     private String comment;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
@@ -71,30 +72,30 @@ public class ModuleDTO {
     public Module toModuleDO() {
         Module module = new Module();
         BeanUtils.copyProperties(this, module);
-        module.setUuid(this.getId());
-        module.setParentUuid(this.getPid());
+        module.setId(this.getId());
+        module.setParentId(this.getPid());
         return module;
     }
     public ModuleOperate toModuleOpsDO() {
         ModuleOperate moduleOperate = new ModuleOperate();
         BeanUtils.copyProperties(this, moduleOperate);
-        moduleOperate.setUuid(this.getId());
-        moduleOperate.setParentUuid(this.getPid());
+        moduleOperate.setId(this.getId());
+        moduleOperate.setParentId(this.getPid());
         return moduleOperate;
     }
 
     public static ModuleDTO toDTO(ModuleOperate mdo){
         ModuleDTO moduleDTO = new ModuleDTO();
         BeanUtils.copyProperties(mdo, moduleDTO);
-        moduleDTO.setId(mdo.getUuid());
-        moduleDTO.setPid(mdo.getParentUuid());
+        moduleDTO.setId(mdo.getId());
+        moduleDTO.setPid(mdo.getParentId());
         moduleDTO.setName(mdo.getName());
         return moduleDTO;
     }
     public static ModuleDTO toDTO(Module mdo){
         ModuleDTO moduleDTO = new ModuleDTO();
-        moduleDTO.setId(mdo.getUuid());
-        moduleDTO.setPid(mdo.getParentUuid());
+        moduleDTO.setId(mdo.getId());
+        moduleDTO.setPid(mdo.getParentId());
         moduleDTO.setName(mdo.getName());
         return moduleDTO;
     }

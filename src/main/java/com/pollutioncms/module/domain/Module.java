@@ -6,42 +6,42 @@ import javax.persistence.*;
 @Table(name = "module")
 public class Module implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "select uuid()")
-    private String uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
+    private Integer id;
 
-    @Column(name = "parent_uuid")
-    private String parentUuid;
+    @Column(name = "parent_id")
+    private Integer parentId;
 
     private String name;
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * @return uuid
+     * @return id
      */
-    public String getUuid() {
-        return uuid;
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * @param uuid
+     * @param id
      */
-    public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
-     * @return parent_uuid
+     * @return parent_id
      */
-    public String getParentUuid() {
-        return parentUuid;
+    public Integer getParentId() {
+        return parentId;
     }
 
     /**
-     * @param parentUuid
+     * @param parentId
      */
-    public void setParentUuid(String parentUuid) {
-        this.parentUuid = parentUuid == null ? null : parentUuid.trim();
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     /**
@@ -70,8 +70,8 @@ public class Module implements Serializable {
             return false;
         }
         Module other = (Module) that;
-        return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getParentUuid() == null ? other.getParentUuid() == null : this.getParentUuid().equals(other.getParentUuid()))
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
     }
 
@@ -79,8 +79,8 @@ public class Module implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
-        result = prime * result + ((getParentUuid() == null) ? 0 : getParentUuid().hashCode());
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         return result;
     }
@@ -91,8 +91,8 @@ public class Module implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", uuid=").append(uuid);
-        sb.append(", parentUuid=").append(parentUuid);
+        sb.append(", id=").append(id);
+        sb.append(", parentId=").append(parentId);
         sb.append(", name=").append(name);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

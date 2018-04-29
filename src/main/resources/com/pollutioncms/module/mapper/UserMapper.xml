@@ -24,8 +24,8 @@
     <select id="listPermissions" parameterType="String" resultType="String">
     select DISTINCT permission
     from module_operate
-    WHERE module_operate.uuid in
-      (select role_auth.module_op_uuid
+    WHERE module_operate.id in
+      (select role_auth.module_op_id
         FROM role_auth
         WHERE role_auth.role_id IN
           (select role_id
@@ -80,5 +80,8 @@
         VALUES
         (#{user.userName},#{user.pwd},sysdate(),#{user.showName},#{user.userSex},#{user.userTel},#{user.userAddr},#{user.userEmail},
         sysdate(),#{user.salt},1)
+        <selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
     </insert>
 </mapper>

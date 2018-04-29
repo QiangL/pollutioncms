@@ -12,23 +12,23 @@ import java.util.List;
  **/
 public class LigerTreeVO {
 
-    private String id;
-    private String pid;
+    private Integer id;
+    private Integer pid;
     private String text;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 

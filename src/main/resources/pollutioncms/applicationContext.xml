@@ -20,8 +20,11 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="com.pollutioncms.service"/>
+	<context:component-scan base-package="com.pollutioncms.service.api"/>
+    <context:component-scan base-package="com.pollutioncms.service.utils"/>
     <context:component-scan base-package="com.pollutioncms.module"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- db config -->
     <import resource="classpath:pollutioncms/spring-database.xml"/>
@@ -34,4 +37,6 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+    <!-- //TODO 搞明白这个 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

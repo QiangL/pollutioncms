@@ -57,7 +57,7 @@ CREATE TABLE `module_operate` (
   UNIQUE KEY `uuid_UNIQUE` (`uuid`),
   KEY `uuid_fk_idx` (`parent_uuid`),
   KEY `uuid_permission` (`uuid`,`permission`),
-  CONSTRAINT `second_module_uuid_fk` FOREIGN KEY (`parent_uuid`) REFERENCES module (`uuid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `second_module_uuid_fk` FOREIGN KEY (`parent_uuid`) REFERENCES module (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

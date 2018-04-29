@@ -41,9 +41,9 @@ public class ModuleController {
 
     @GetMapping("/listOps.mvc")
     @RequiresPermissions("module:listOps")
-    public LigerGridVo<?> listOps(@RequestParam("parentUuid") String parentUuid) {
-        List<ModuleDTO> moduleDTOS = moduleService.listModuleOps(parentUuid);
-        return LigerGridVo.Resp(moduleDTOS, moduleService.getModuleOpsCount(parentUuid));
+    public LigerGridVo<?> listOps(@RequestParam("parentId") Integer parentId) {
+        List<ModuleDTO> moduleDTOS = moduleService.listModuleOps(parentId);
+        return LigerGridVo.Resp(moduleDTOS, moduleService.getModuleOpsCount(parentId));
     }
 
     @PostMapping("/addModule.mvc")

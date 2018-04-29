@@ -107,8 +107,9 @@
     $(document).ready(function () {
         loadTree('/framework/module/listModules.mvc','#maintree',function(event){
             let data=event.data;
-            let uuid=data.id;
-            loadSheet('#maingrid',moduleColumns,toolbarItem,'/framework/module/listOps.mvc',{parentUuid:uuid},'GET');
+            let id=data.id;
+            $("#form").find("#pid").val(id);
+            loadSheet('#maingrid',moduleColumns,toolbarItem,'/framework/module/listOps.mvc',{parentId:id},'GET');
         });
         $("#pageloading").hide();
     });

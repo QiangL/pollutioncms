@@ -22,7 +22,7 @@ public class ModuleOpsMapperTest extends BaseTest {
     public void test() {
         Module module = new Module();
         module.setName("tset");
-        module.setParentUuid("1");
+        module.setParentId(1);
         moduleMapper.insert(module);
     }
 }

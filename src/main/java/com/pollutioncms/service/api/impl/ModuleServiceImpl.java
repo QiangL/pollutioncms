@@ -45,15 +45,15 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
-    public List<ModuleDTO> listModuleOps(String parentUuid) {
+    public List<ModuleDTO> listModuleOps(Integer parentId) {
         return moduleopsToDTOList(moduleOperateMapper.selectByExample(Example.builder(ModuleOperate.class)
-                                    .where(Sqls.custom().andEqualTo("parentUuid",parentUuid)).build()));
+                                    .where(Sqls.custom().andEqualTo("parentId",parentId)).build()));
     }
 
     @Override
-    public int getModuleOpsCount(String parentUuid) {
+    public int getModuleOpsCount(Integer parentId) {
         return moduleOperateMapper.selectCountByExample(Example.builder(ModuleOperate.class)
-                                    .where(Sqls.custom().andEqualTo("parentUuid",parentUuid)).build());
+                                    .where(Sqls.custom().andEqualTo("parentId",parentId)).build());
     }
 
     @Override
@@ -68,12 +68,10 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public boolean updateModule(ModuleDTO moduleDTO) {
-        if(StringUtils.isEmpty(moduleDTO.getId())|| moduleDTO.getId().length() != 36){
-            // 36 ==uuid的长度
+        if(moduleDTO.getId() == null){
             throw new ParamErrorException("uuid incorrect");
         }
-        if(StringUtils.isEmpty(moduleDTO.getPid())|| moduleDTO.getPid().length() != 36){
-            // 36 ==uuid的长度
+        if(moduleDTO.getPid() == null){
             throw new ParamErrorException("parent uuid incorrect");
         }
         if(moduleOperateMapper.updateByPrimaryKeySelective(moduleDTO.toModuleOpsDO()) != 1){
@@ -85,12 +83,10 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public boolean deleteModule(ModuleDTO moduleDTO) {
-        if(StringUtils.isEmpty(moduleDTO.getId())|| moduleDTO.getId().length() != 36){
-            // 36 ==uuid的长度
+        if(moduleDTO.getId() == null){
             throw new ParamErrorException("uuid incorrect");
         }
-        if(StringUtils.isEmpty(moduleDTO.getPid())|| moduleDTO.getPid().length() != 36){
-            // 36 ==uuid的长度
+        if(moduleDTO.getPid() == null){
             throw new ParamErrorException("parent uuid incorrect");
         }
         if(moduleOperateMapper.delete(moduleDTO.toModuleOpsDO()) != 1){

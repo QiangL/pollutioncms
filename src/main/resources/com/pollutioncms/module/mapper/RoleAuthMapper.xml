@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pollutioncms.module.mapper.RoleAuthMapper">
-    <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.RoleAuth">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="id" jdbcType="CHAR" property="id" />
-        <result column="role_id" jdbcType="INTEGER" property="roleId" />
-        <result column="module_op_uuid" jdbcType="CHAR" property="moduleOpUuid" />
-        <result column="can_inherit" jdbcType="BIT" property="canInherit" />
-    </resultMap>
+  <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.RoleAuth">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="module_op_id" jdbcType="INTEGER" property="moduleOpId" />
+    <result column="can_inherit" jdbcType="BIT" property="canInherit" />
+  </resultMap>
 </mapper>

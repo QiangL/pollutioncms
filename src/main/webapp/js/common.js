@@ -42,6 +42,7 @@ function loadTree(url,divId,successFunc){
         url:url,
         checkbox: false,
         idFieldName: 'id',
+        parentIDFieldName :'pid',
         isExpand: true,
         slide: false,
         single:true,

@@ -7,13 +7,13 @@ import javax.persistence.*;
 public class RoleAuth implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
-    private String id;
+    private Integer id;
 
     @Column(name = "role_id")
     private Integer roleId;
 
-    @Column(name = "module_op_uuid")
-    private String moduleOpUuid;
+    @Column(name = "module_op_id")
+    private Integer moduleOpId;
 
     /**
      * 能否传递，给别人授权
@@ -26,15 +26,15 @@ public class RoleAuth implements Serializable {
     /**
      * @return id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id
      */
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -52,17 +52,17 @@ public class RoleAuth implements Serializable {
     }
 
     /**
-     * @return module_op_uuid
+     * @return module_op_id
      */
-    public String getModuleOpUuid() {
-        return moduleOpUuid;
+    public Integer getModuleOpId() {
+        return moduleOpId;
     }
 
     /**
-     * @param moduleOpUuid
+     * @param moduleOpId
      */
-    public void setModuleOpUuid(String moduleOpUuid) {
-        this.moduleOpUuid = moduleOpUuid == null ? null : moduleOpUuid.trim();
+    public void setModuleOpId(Integer moduleOpId) {
+        this.moduleOpId = moduleOpId;
     }
 
     /**
@@ -97,7 +97,7 @@ public class RoleAuth implements Serializable {
         RoleAuth other = (RoleAuth) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getModuleOpUuid() == null ? other.getModuleOpUuid() == null : this.getModuleOpUuid().equals(other.getModuleOpUuid()))
+            && (this.getModuleOpId() == null ? other.getModuleOpId() == null : this.getModuleOpId().equals(other.getModuleOpId()))
             && (this.getCanInherit() == null ? other.getCanInherit() == null : this.getCanInherit().equals(other.getCanInherit()));
     }
 
@@ -107,7 +107,7 @@ public class RoleAuth implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
-        result = prime * result + ((getModuleOpUuid() == null) ? 0 : getModuleOpUuid().hashCode());
+        result = prime * result + ((getModuleOpId() == null) ? 0 : getModuleOpId().hashCode());
         result = prime * result + ((getCanInherit() == null) ? 0 : getCanInherit().hashCode());
         return result;
     }
@@ -120,7 +120,7 @@ public class RoleAuth implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", roleId=").append(roleId);
-        sb.append(", moduleOpUuid=").append(moduleOpUuid);
+        sb.append(", moduleOpId=").append(moduleOpId);
         sb.append(", canInherit=").append(canInherit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

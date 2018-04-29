@@ -24,7 +24,6 @@
         <property name="basePackage" value="com.pollutioncms.module.mapper" />
         <property name="properties">
             <value>
-                ORDER=BEFORE
                 mappers=tk.mybatis.mapper.common.Mapper
             </value>
         </property>

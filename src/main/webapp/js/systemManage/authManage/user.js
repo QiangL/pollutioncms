@@ -7,4 +7,6 @@ function updataForm(form, data) {
     form.find("#userEmail").val(data.userEmail);
     form.find("#userAddr").val(data.userAddr);
     form.find("#status").val(data.status);
+    form.find("#pwd").val('');
+    form.find("#pwd2").val('');
 }
