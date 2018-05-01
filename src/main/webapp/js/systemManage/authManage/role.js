@@ -4,4 +4,6 @@ function updataForm(form, data) {
     form.find("#roleCnName").val(data.roleCnName);
     form.find("#comment").val(data.comment);
     form.find("input[value=" + data.canInherit + "]").click();
+
+    form.find("#roleName").attr('readOnly', true);
 }

@@ -9,4 +9,5 @@ function updataForm(form, data) {
     form.find("#status").val(data.status);
     form.find("#pwd").val('');
     form.find("#pwd2").val('');
+    form.find("#userName").attr('readOnly', true);
 }

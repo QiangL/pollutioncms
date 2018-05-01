@@ -33,7 +33,8 @@ CREATE TABLE `module` (
   `comment` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `uuid_fk_idx` (`parent_id`)
+  KEY `uuid_fk_idx` (`parent_id`),
+  KEY `permission_idx` (`permission`)
 ) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,8 +90,8 @@ CREATE TABLE `role_auth` (
   `module_id` int(11) NOT NULL,
   `can_inherit` tinyint(1) DEFAULT '0' COMMENT '能否传递，给别人授权',
   PRIMARY KEY (`id`),
-  KEY `role_fk_idx` (`role_id`),
   KEY `module_op_uuid_fk_idx` (`module_id`),
+  KEY `role_module_idx` (`role_id`,`module_id`),
   CONSTRAINT `module_id_fk` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`),
   CONSTRAINT `role_fk` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
@@ -182,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-01 23:37:46
+-- Dump completed on 2018-05-01 23:46:18
