@@ -81,6 +81,7 @@
     let moduleColumns = [
         {display: '操作名', name: 'name'},
         {display: '操作编码', name: 'permission'},
+        {display:'地址',name:'url'},
         {display: '备注', name: 'comment'},
         {
             display: '编辑', render: function (rowData) {

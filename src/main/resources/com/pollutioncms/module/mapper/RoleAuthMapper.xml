@@ -10,4 +10,18 @@
     <result column="module_op_id" jdbcType="INTEGER" property="moduleOpId" />
     <result column="can_inherit" jdbcType="BIT" property="canInherit" />
   </resultMap>
+
+  <update id="updateAuths">
+    delete from role_auth
+    where role_id =(select id from role where role_name = #{roleName});
+
+    <if test="ids != null and ids.size != 0">
+      insert into role_auth (role_id,module_id)
+      values
+      <foreach collection="ids" open="" close="" separator="," item="id">
+        ((select id from role where role_name = #{roleName}),#{id})
+      </foreach>
+    </if>
+
+  </update>
 </mapper>

@@ -95,6 +95,10 @@ public class RoleController {
         return Response.succResp();
     }
 
+    /**
+     * 没有权限的接口
+     * @return
+     */
     @GetMapping("/queryRoleNames.mvc")
     public JSONArray queryRoleNames(){
         Set<String> roleNameSet = roleService.queryRoleNames();

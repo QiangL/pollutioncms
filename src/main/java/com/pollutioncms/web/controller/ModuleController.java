@@ -5,6 +5,7 @@ import com.pollutioncms.service.dto.ModuleDTO;
 import com.pollutioncms.service.dto.validator.ModuleDTOValidator;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
+import com.pollutioncms.web.utils.LigerTreeVOUtil;
 import com.pollutioncms.web.vo.LigerGridVo;
 import com.pollutioncms.web.vo.LigerTreeVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.groups.Default;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,13 +36,13 @@ public class ModuleController {
     @RequiresPermissions("module:listModule")
     public List<LigerTreeVO> listModule() {
         List<ModuleDTO> moduleDTOS = moduleService.listModule();
-        return fill(moduleDTOS);
+        return LigerTreeVOUtil.fill(moduleDTOS);
     }
 
     @GetMapping("/listOps.mvc")
     @RequiresPermissions("module:listOps")
     public LigerGridVo<?> listOps(@RequestParam("parentId") Integer parentId) {
-        List<ModuleDTO> moduleDTOS = moduleService.listModuleOps(parentId);
+        List<ModuleDTO> moduleDTOS = moduleService.listAuths(parentId);
         return LigerGridVo.Resp(moduleDTOS, moduleService.getModuleOpsCount(parentId));
     }
 
@@ -79,19 +79,4 @@ public class ModuleController {
         return Response.succResp();
     }
 
-    private LigerTreeVO fill(ModuleDTO dto) {
-        LigerTreeVO data = new LigerTreeVO();
-        data.setId(dto.getId());
-        data.setPid(dto.getPid());
-        data.setText(dto.getName());
-        return data;
-    }
-
-    private List<LigerTreeVO> fill(List<ModuleDTO> dtos) {
-        List<LigerTreeVO> datas = new ArrayList<>();
-        for (ModuleDTO dto : dtos) {
-            datas.add(fill(dto));
-        }
-        return datas;
-    }
 }

@@ -1,12 +1,14 @@
 package com.pollutioncns.test.module;
 
 import com.pollutioncms.module.domain.Module;
-import com.pollutioncms.module.domain.ModuleOperate;
 import com.pollutioncms.module.mapper.ModuleMapper;
-import com.pollutioncms.module.mapper.ModuleOperateMapper;
 import com.pollutioncns.test.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.util.Sqls;
+
+import java.util.List;
 
 /**
  * @author liqiag
@@ -20,9 +22,8 @@ public class ModuleOpsMapperTest extends BaseTest {
 
     @Test
     public void test() {
-        Module module = new Module();
-        module.setName("tset");
-        module.setParentId(1);
-        moduleMapper.insert(module);
+        List<Module> list = moduleMapper.selectAll();
+        System.out.println(list);
     }
+
 }

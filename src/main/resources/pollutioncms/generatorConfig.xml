@@ -50,7 +50,7 @@
         <table tableName="module">
             <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
-        <table tableName="module_operate">
+        <!--<table tableName="module_operate">
             <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="role_auth">
@@ -67,6 +67,6 @@
         </table>
         <table tableName="user">
             <generatedKey column="id" sqlStatement="MySql"/>
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>

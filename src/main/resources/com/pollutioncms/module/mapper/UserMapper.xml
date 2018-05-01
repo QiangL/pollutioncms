@@ -23,9 +23,9 @@
   </sql>
     <select id="listPermissions" parameterType="String" resultType="String">
     select DISTINCT permission
-    from module_operate
-    WHERE module_operate.id in
-      (select role_auth.module_op_id
+    from module
+    WHERE module.id in
+      (select role_auth.module_id
         FROM role_auth
         WHERE role_auth.role_id IN
           (select role_id

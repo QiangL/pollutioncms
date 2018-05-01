@@ -3,8 +3,6 @@ package com.pollutioncms.web.vo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.List;
-
 /**
  * @author liqiag
  * @discription LigerTreeVO
@@ -15,6 +13,7 @@ public class LigerTreeVO {
     private Integer id;
     private Integer pid;
     private String text;
+    private Boolean leaf;
 
     public Integer getId() {
         return id;
@@ -38,6 +37,14 @@ public class LigerTreeVO {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Boolean getLeaf() {
+        return leaf;
+    }
+
+    public void setLeaf(Boolean leaf) {
+        this.leaf = leaf;
     }
 
     @Override
