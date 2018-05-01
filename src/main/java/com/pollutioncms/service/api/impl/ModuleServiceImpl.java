@@ -53,8 +53,9 @@ public class ModuleServiceImpl implements ModuleService {
     public List<ModuleDTO> listModules(String userName) {
         Set<String> roleNames = roleUserMapper.queryRole(userName);
         List<Module> moduleList = moduleMapper.listModuleAuths(roleNames);
+        //TODO 这段sql化
         for (int i = 0; i < moduleList.size(); i++) {
-            if (moduleList.get(i).getLeaf()) {
+            if (moduleList.get(i).getLeaf() && moduleList.get(i).getApi()) {
                 moduleList.remove(i);
                 i--;
             }

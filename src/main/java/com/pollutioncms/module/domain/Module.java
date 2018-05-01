@@ -20,6 +20,13 @@ public class Module implements Serializable {
 
     private Boolean leaf;
 
+    /**
+     * 是页面还是一个http接口
+        true ==接口
+        false==页面
+     */
+    private Boolean api;
+
     private String comment;
 
     private static final long serialVersionUID = 1L;
@@ -109,6 +116,32 @@ public class Module implements Serializable {
     }
 
     /**
+     * 获取是页面还是一个http接口
+true ==接口
+false==页面
+     *
+     * @return api - 是页面还是一个http接口
+true ==接口
+false==页面
+     */
+    public Boolean getApi() {
+        return api;
+    }
+
+    /**
+     * 设置是页面还是一个http接口
+true ==接口
+false==页面
+     *
+     * @param api 是页面还是一个http接口
+true ==接口
+false==页面
+     */
+    public void setApi(Boolean api) {
+        this.api = api;
+    }
+
+    /**
      * @return comment
      */
     public String getComment() {
@@ -140,6 +173,7 @@ public class Module implements Serializable {
             && (this.getPermission() == null ? other.getPermission() == null : this.getPermission().equals(other.getPermission()))
             && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
             && (this.getLeaf() == null ? other.getLeaf() == null : this.getLeaf().equals(other.getLeaf()))
+            && (this.getApi() == null ? other.getApi() == null : this.getApi().equals(other.getApi()))
             && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()));
     }
 
@@ -153,6 +187,7 @@ public class Module implements Serializable {
         result = prime * result + ((getPermission() == null) ? 0 : getPermission().hashCode());
         result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         result = prime * result + ((getLeaf() == null) ? 0 : getLeaf().hashCode());
+        result = prime * result + ((getApi() == null) ? 0 : getApi().hashCode());
         result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
         return result;
     }
@@ -169,6 +204,7 @@ public class Module implements Serializable {
         sb.append(", permission=").append(permission);
         sb.append(", url=").append(url);
         sb.append(", leaf=").append(leaf);
+        sb.append(", api=").append(api);
         sb.append(", comment=").append(comment);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

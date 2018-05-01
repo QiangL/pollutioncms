@@ -30,6 +30,12 @@ public class ModuleDTO {
     private String url;
 
     private Boolean leaf;
+    /**
+     * 是页面还是一个http接口
+     true ==接口
+     false==页面
+     */
+    private Boolean api;
 
     public Integer getId() {
         return id;
@@ -85,6 +91,14 @@ public class ModuleDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Boolean getApi() {
+        return api;
+    }
+
+    public void setApi(Boolean api) {
+        this.api = api;
     }
 
     public Module toModuleDO() {
