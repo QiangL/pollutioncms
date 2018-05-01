@@ -3,6 +3,7 @@ package com.pollutioncms.service.api;
 import com.pollutioncms.service.dto.ModuleDTO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author liqiag
@@ -16,6 +17,8 @@ public interface ModuleService {
      * @return
      */
     List<ModuleDTO> listModule();
+
+    List<ModuleDTO> listModules(String userName);
 
     List<ModuleDTO> listAllAuths();
 
@@ -41,7 +44,7 @@ public interface ModuleService {
 
     boolean deleteModule(ModuleDTO moduleDTO);
 
-    boolean updateRoleAuths(String roleName, List<Integer> ids);
+    boolean updateRoleAuths(String roleName, Set<Integer> ids);
 
-    List<Integer> checkAuthIds(List<Integer> ids);
+    List<Integer> checkAuthIds(Set<Integer> ids);
 }

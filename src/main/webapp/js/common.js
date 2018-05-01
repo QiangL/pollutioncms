@@ -6,7 +6,7 @@ function loadSheet(divId, columns, toolbarItems, url,urlParam, method) {
         url: url,
         urlParms:urlParam,
         method: method,
-        pageSize: 30,
+        pageSize: 15,
         rownumbers: true,
         toolbarShowInLeft: false,
         pageParmName: 'pageNum',

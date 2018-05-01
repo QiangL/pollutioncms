@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:util="http://www.springframework.org/schema/util"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-     http://www.springframework.org/schema/tx
-     http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+
+
      http://www.springframework.org/schema/context
-     http://www.springframework.org/schema/context/spring-context-4.2.xsd
-     http://www.springframework.org/schema/aop
-     http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
-     http://www.springframework.org/schema/mvc
-     http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
-     http://www.springframework.org/schema/util
-     http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+     http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
     <context:component-scan base-package="com.pollutioncms.web.auth"/>
 
@@ -27,8 +19,25 @@
         <property name="hashIterations" value="${shiro.hashNum}"/>
         <property name="hashAlgorithmName" value="${shiro.Algorith}"/>
     </bean>
-
-
+    <!-- 为了sessionDao功能声明下列bean -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    </bean>
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <property name="name" value="JSESSION"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="-1"/>
+    </bean>
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+    <!-- end -->
 
     <!-- 配置权限管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -36,8 +45,8 @@
         <property name="realm" ref="userRealm"/>
         <!-- 使用下面配置的缓存管理器 -->
         <property name="cacheManager" ref="cacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
     </bean>
-
 
     <!-- 基于Form表单的身份验证过滤器
          使用后不再需要logincontroller,按shiroFilter的配置走
@@ -73,21 +82,21 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon表示此地址不需要任何权限即可访问 -->
-                /static/**  =anon
-                /lib/**     =anon
-                /css/**     =anon
-                /images/**  =anon
-                /login.jsp  =anon
+                /static/** =anon
+                /lib/** =anon
+                /css/** =anon
+                /images/** =anon
+                /login.jsp =anon
                 /unAuth.jsp =anon
-                /error.jsp  =anon
+                /error.jsp =anon
                 <!-- 登入过滤器 -->
-                /login      =loginFilter
+                /login =loginFilter
                 <!-- 登出过滤器 -->
-                /logout     =logoutFilter
-                /**         =userSessionFilter
+                /logout =logoutFilter
+                /** =userSessionFilter
             </value>
         </property>
     </bean>
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 </beans>

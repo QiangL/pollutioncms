@@ -21,7 +21,7 @@
     <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
 </head>
 
-<body style="overflow-x:hidden; padding:2px;" class="container">
+<body style="overflow-x:hidden; padding:2px;width:90%;" class="container">
 <div class="l-loading" style="display:block" id="pageloading"></div>
 <div class="l-clear"></div>
 
@@ -100,7 +100,7 @@
 </form>
 <div id="roleModify-container">
     <div class="row">
-        <div class="col-md-4"></div>
+        <div class="col-md-4">选择赋予的角色：</div>
         <div id="roleModify" class="col-md-8">
 
         </div>
@@ -132,11 +132,11 @@
         }</shiro:hasPermission>
     ];
     let userColumns = [
-        {display: '用户名', name: 'userName'},
-        {display: '用户显示名称', name: 'showName'},
-        {display: '用户角色', name: 'roleNames'},
+        {display: '用户名', name: 'userName',width:85},
+        {display: '用户显示名称', name: 'showName',width:85},
+        {display: '用户角色', name: 'roleNames',width:85},
         {
-            display: '用户状态', width:70,render: function (rowData) {
+            display: '用户状态', width:60,render: function (rowData) {
                 if (rowData.status === 'NORMAL') {
                     return '正常'
                 }
@@ -157,15 +157,15 @@
                 }
             }
         },
-        {display: '用户电话', name: 'userTel'},
-        {display: '用户邮箱', name: 'userEmail'},
-        {display: '用户地址', name: 'userAddr'},
+        {display: '用户电话', name: 'userTel',width:95},
+        {display: '用户邮箱', name: 'userEmail',width:150},
+        {display: '用户地址', name: 'userAddr',width:150},
         {
-            display: '最后修改时间', name: 'lastOptTime', render: function (rowData) {
+            display: '最后修改时间', name: 'lastOptTime',width:150, render: function (rowData) {
                 return new Date(rowData.lastOptTime).toLocaleString();
             }
         }, {
-            display: '编辑', render: function (rowData) {
+            display: '编辑',width:150, render: function (rowData) {
                 let motifyRoles = '<shiro:hasPermission name="user:motifyRoles"><a onclick="motifyUser()">修改角色</a></shiro:hasPermission>';
                 let update = '<shiro:hasPermission name="user:update"><a onclick="updateUser()">修改</a></shiro:hasPermission>';
                 let delet = '<shiro:hasPermission name="user:delete"><a onclick="deleteUser()">删除</a></shiro:hasPermission>';

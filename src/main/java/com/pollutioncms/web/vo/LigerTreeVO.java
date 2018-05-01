@@ -14,6 +14,7 @@ public class LigerTreeVO {
     private Integer pid;
     private String text;
     private Boolean leaf;
+    private String url;
 
     public Integer getId() {
         return id;
@@ -45,6 +46,14 @@ public class LigerTreeVO {
 
     public void setLeaf(Boolean leaf) {
         this.leaf = leaf;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

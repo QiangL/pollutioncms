@@ -19,6 +19,7 @@ public class LigerTreeVOUtil {
         data.setPid(dto.getPid());
         data.setText(dto.getName());
         data.setLeaf(dto.getLeaf());
+        data.setUrl(dto.getUrl());
         return data;
     }
 

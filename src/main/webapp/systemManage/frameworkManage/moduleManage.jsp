@@ -21,13 +21,19 @@
     <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
 </head>
 
-<body style="overflow-x:hidden; padding:2px;" class="container">
+<body style="overflow-x:hidden; padding:2px;width:90%" class="container">
 <div class="l-loading" style="display:block" id="pageloading"></div>
 <div class="l-clear"></div>
 
 <div class="row">
-    <div id="maintree" class="col-md-3"></div>
-    <div id="maingrid" class="col-md-9"></div>
+    <div class="col-md-3">
+        模块结构：
+        <div id="maintree"></div>
+    </div>
+    <div class="col-md-9">
+        模块下属权限：
+        <div id="maingrid"></div>
+    </div>
 </div>
 
 <form id="form" style="width: 600px;display:none;">
@@ -44,6 +50,12 @@
             <label for="permission" class="col-md-5 control-label">模块编码：</label>
             <div class="col-md-7">
                 <input id="permission" name="permission" type="text" required="true" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="url" class="col-md-5 control-label">模块地址：</label>
+            <div class="col-md-7">
+                <input id="url" name="url" type="text" class="form-control"/>
             </div>
         </div>
         <div class="form-group">
@@ -81,7 +93,7 @@
     let moduleColumns = [
         {display: '操作名', name: 'name'},
         {display: '操作编码', name: 'permission'},
-        {display:'地址',name:'url'},
+        {display: 'url地址', name: 'url'},
         {display: '备注', name: 'comment'},
         {
             display: '编辑', render: function (rowData) {
@@ -106,11 +118,11 @@
 
 
     $(document).ready(function () {
-        loadTree('/framework/module/listModules.mvc','#maintree',function(event){
-            let data=event.data;
-            let id=data.id;
+        loadTree('/framework/module/listModules.mvc', '#maintree', function (event) {
+            let data = event.data;
+            let id = data.id;
             $("#form").find("#pid").val(id);
-            loadSheet('#maingrid',moduleColumns,toolbarItem,'/framework/module/listOps.mvc',{parentId:id},'GET');
+            loadSheet('#maingrid', moduleColumns, toolbarItem, '/framework/module/listOps.mvc', {parentId: id}, 'GET');
         });
         $("#pageloading").hide();
     });

@@ -5,7 +5,9 @@ import com.pollutioncms.common.enums.ExceptionEnum;
 import com.pollutioncms.common.exception.DaoException;
 import com.pollutioncms.common.exception.ParamErrorException;
 import com.pollutioncms.module.domain.Role;
+import com.pollutioncms.module.domain.RoleAuth;
 import com.pollutioncms.module.domain.RoleUser;
+import com.pollutioncms.module.mapper.RoleAuthMapper;
 import com.pollutioncms.module.mapper.RoleMapper;
 import com.pollutioncms.module.mapper.RoleUserMapper;
 import com.pollutioncms.module.mapper.UserMapper;
@@ -41,6 +43,9 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleUserMapper roleUserMapper;
 
+    @Autowired
+    private RoleAuthMapper roleAuthMapper;
+
     @Override
     public List<RoleDTO> listRoles(Integer pageNum, Integer count) {
         PageHelper.startPage(pageNum, count);
@@ -68,7 +73,10 @@ public class RoleServiceImpl implements RoleService {
             logger.warn("want delete role has user,dto:{}", roleDTO);
             throw new ParamErrorException("can't delete role,it has users");
         }
-
+        roleAuthMapper.deleteByExample(Example.builder(RoleAuth.class)
+                            .where(Sqls.custom()
+                                    .andEqualTo("roleId",roleDTO.getId()))
+                            .build());
         if (rolemapper.delete(roleDTO.toDO()) != 1){
             logger.error("dao operate effect num error,dto:{}",roleDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);

@@ -26,15 +26,19 @@
 <div class="l-clear"></div>
 
 <div class="row">
-    <div class="btn-group">
-        <input type="button" id="btn-newTree" value="新建" class="btn btn-success"/>
+    <div  class="col-md-3">
+        角色列表：
+        <div id="allRoles"></div>
         <input type="button" id="btn-submitTree" value="提交" class="btn btn-warning"/>
     </div>
-</div>
-<div class="row">
-    <div id="allRoles" class="col-md-4"></div>
-    <div id="allAuths" class="col-md-4"></div>
-    <div id="newAuths" class="col-md-4"></div>
+    <div class="col-md-4">
+        所有模块权限：
+        <div id="allAuths"></div>
+    </div>
+    <div class="col-md-4">
+        <div id="newAuths"></div>
+    </div>
+
 </div>
 
 <script src="lib/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>

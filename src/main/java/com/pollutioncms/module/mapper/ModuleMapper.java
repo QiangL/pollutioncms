@@ -5,10 +5,11 @@ import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ModuleMapper extends Mapper<Module> {
 
-    List<Module> listModuleAuths(@Param("roleName") String roleName);
+    List<Module> listModuleAuths(@Param("roleNames") Set<String> roleNames);
 
-    List<Integer> checkAuthIds(@Param("ids") List<Integer> ids);
+    List<Integer> checkAuthIds(@Param("ids") Set<Integer> ids);
 }

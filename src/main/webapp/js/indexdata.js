@@ -133,17 +133,18 @@
         },
         {
             isexpand: "false", text: "系统管理", children: [
-                {url: "demos/portal/portal.htm", text: "默认"},
-                {url: "demos/portal/panel.htm", text: "panel"},
-                {url: "demos/portal/panel-event.htm", text: "panel事件支持"},
-                {url: "demos/portal/portal-columns.htm", text: "columns"},
-                {url: "demos/portal/portal-cookie.htm", text: "记忆"},
-                {url: "demos/portal/portal-drag.htm", text: "可拖动"},
-                {url: "demos/portal/portal-get.htm", text: "方法"},
-                {url: "demos/portal/portal-url.htm", text: "载入页面"},
-                {url: "demos/portal/portal-rows-url.htm", text: "通过url载入模型"},
-                {url: "demos/portal/portal-inject.htm", text: "html启动模式"},
-                {url: "demos/portal/portal-method.htm", text: "方法2"}
+                {
+                    text: "框架管理", children: [
+                        {url: '/systemManage/frameworkManage/moduleManage.jsp', text: '模块管理'},
+                        {url: '/systemManage/frameworkManage/navManage.jsp', text: '导航管理'}
+                    ]
+                },
+                {
+                    text: "权限管理", children: [
+                        {url: '/systemManage/authManage/roleManage.jsp', text: '角色管理'},
+                        {url: '/systemManage/authManage/userManage.jsp', text: '用户管理'}
+                    ]
+                }
             ]
         }
     ];

@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pollutioncms.module.mapper.ModuleMapper">
-  <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.Module">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="permission" jdbcType="VARCHAR" property="permission" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="leaf" jdbcType="TINYINT" property="leaf" />
-    <result column="comment" jdbcType="VARCHAR" property="comment" />
-  </resultMap>
-  <sql id="allParam">
+    <resultMap id="BaseResultMap" type="com.pollutioncms.module.domain.Module">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="leaf" jdbcType="TINYINT" property="leaf"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+    </resultMap>
+    <sql id="allParam">
     id,parent_id,name,permission,url,leaf,comment
   </sql>
 
-  <select id="listModuleAuths" resultMap="BaseResultMap">
-    select <include refid="allParam"/>
-    from module
-    where leaf =FALSE
-    UNION
-    select <include refid="allParam"/> from module
-    where leaf=true and id IN
-    (select module_id from role_auth
-    where role_id =(select id from role WHERE  role_name =#{roleName}))
-
-  </select>
-
-  <select id="checkAuthIds" resultType="int">
-    <choose>
-      <when test="ids != null and ids.size != 0">
-        select v.val FROM
-        <foreach collection="ids" item="id" separator="union" open="(" close=")">
-          select #{id} as val
+    <select id="listModuleAuths" resultMap="BaseResultMap">
+        select
+        <include refid="allParam"/>
+        from module
+        where leaf =FALSE
+        UNION
+        select
+        <include refid="allParam"/>
+        from module
+        where leaf=true and id IN
+        (select module_id from role_auth
+        where role_id in
+        (select id from role
+        WHERE role_name IN
+        <foreach collection="roleNames" item="roleName" open="(" close=")" separator=",">
+            #{roleName}
         </foreach>
-        v where v.val not IN (select id from MODULE where leaf =true)
-      </when>
-      <otherwise>
-        select id from module where 1!=1
-      </otherwise>
-    </choose>
-  </select>
+        ))
+
+    </select>
+
+    <select id="checkAuthIds" resultType="int">
+        <choose>
+            <when test="ids != null and ids.size != 0">
+                select v.val FROM
+                <foreach collection="ids" item="id" separator="union" open="(" close=")">
+                    select #{id} as val
+                </foreach>
+                v where v.val not IN (select id from MODULE where leaf =true)
+            </when>
+            <otherwise>
+                select id from module where 1!=1
+            </otherwise>
+        </choose>
+    </select>
 </mapper>

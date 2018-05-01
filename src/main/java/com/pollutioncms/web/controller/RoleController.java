@@ -2,6 +2,7 @@ package com.pollutioncms.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pollutioncms.common.exception.BaseException;
 import com.pollutioncms.service.api.RoleService;
 import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.service.dto.UserDTO;
@@ -78,8 +79,13 @@ public class RoleController {
             return BindErrorHandler.handler(result.getAllErrors());
         }
         logger.info("delete role,dto:{}", roleDTO);
-        roleService.deleteRole(roleDTO);
-        return Response.succResp();
+        try{
+            roleService.deleteRole(roleDTO);
+            return Response.succResp();
+        }catch (BaseException e){
+            return Response.failResp(e.getErrorMsg());
+        }
+
     }
 
     @PostMapping("/updateRole.mvc")

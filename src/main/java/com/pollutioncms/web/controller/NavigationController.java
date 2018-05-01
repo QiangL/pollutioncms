@@ -11,9 +11,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author liqiag
@@ -33,6 +31,16 @@ public class NavigationController {
 
     }
 
+    @GetMapping("/listModulesByUserName.mvc")
+    public List<LigerTreeVO> listModulesByUserName(@RequestParam("userName") String userName) {
+        if (userName == null) {
+            return new ArrayList<>();
+        }
+        return LigerTreeVOUtil.fill(moduleService.listModules(userName));
+    }
+
+
+
     @GetMapping("/listRoleAuths.mvc")
     @RequiresPermissions("navigation:listRoleAuths")
     public List<LigerTreeVO> queryRoleAuths(@RequestParam("roleName") String roleName) {
@@ -50,7 +58,7 @@ public class NavigationController {
         if (roleName == null || ids == null) {
             return Response.failResp(RespError.PARAM_WRONG);
         }
-        List<Integer> intIds = new ArrayList<>();
+        Set<Integer> intIds = new HashSet<>();
         for (int i = 0; i < ids.size(); i++) {
             JSONObject obj = (JSONObject) ids.get(i);
             if (obj.getBoolean("leaf")) {
