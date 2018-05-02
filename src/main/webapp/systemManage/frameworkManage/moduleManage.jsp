@@ -59,6 +59,26 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="leaf" class="col-md-5 control-label">是否是叶子节点:</label>
+            <div class="col-md-7" id="leaf">
+                <div class="col-md-2"></div>
+                <label for="leaf" class="radio-inline col-md-4"><input name="leaf" type="radio"
+                                                                             value="false">不是</label>
+                <label for="leaf" class="radio-inline  col-md-4"><input name="leaf" type="radio"
+                                                                              value="true">是</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="api" class="col-md-5 control-label">模块是否有页面</label>
+            <div class="col-md-7" id="api">
+                <div class="col-md-2"></div>
+                <label for="api" class="radio-inline col-md-4"><input name="api" type="radio"
+                                                                       value="false">是</label>
+                <label for="api" class="radio-inline  col-md-4"><input name="api" type="radio"
+                                                                        value="true">不是</label>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="comment" class="col-md-5 control-label">备注：</label>
             <div class="col-md-7">
                 <input id="comment" name="comment" type="text" class="form-control"/>
