@@ -103,14 +103,17 @@ public class UserController {
                 (userRequestVO.getPwd() != null && !userRequestVO.getPwd().equals(userRequestVO.getPwd2()))) {
             return Response.failResp(RespError.PASSWORD_ERROR);
         }
+        if("".equals(userRequestVO.getPwd())){
+            userRequestVO.setPwd(null);
+        }
 
         logger.info("update user,vo:{}", userRequestVO);
         userService.updateUserSelective(userRequestVO.toDTO());
         return Response.succResp();
     }
 
-    @PostMapping("/motifyRoles.mvc")
-    @RequiresPermissions("user:motifyRoles")
+    @PostMapping("/modifyRoles.mvc")
+    @RequiresPermissions("user:modifyRoles")
     public Response<?> addRoles(@RequestParam("roleNames") Set<String> roleNames, @RequestParam("userName") String userName) {
         Set<String> notExitRoleNames = roleService.notExitRoleNames(roleNames);
         if (notExitRoleNames.size() != 0) {

@@ -40,7 +40,9 @@ public class Outfall_viewDAO extends BaseDAO implements IOutfall_viewDAO{
 			
 			/*
 			 * 得到排水口的所需的信息：名称，编号，位置，是否联网，数据上报，排水口状态，排水欧MN号
-			 */ 
+			 */
+			//TODO 增加了setOV_no
+			view.setOV_no(no);
 			view.setOut_name(out.getOutName());
 			view.setOut_water_no(out.getOutWateNo());
 			view.setOut_location(out.getOutLocation());
@@ -65,6 +67,5 @@ public class Outfall_viewDAO extends BaseDAO implements IOutfall_viewDAO{
 		//System.out.println("Outfall_viewDAO outfall_views size="+outfall_views.size());
 		return outfall_views;
 	}
-	
 
 }

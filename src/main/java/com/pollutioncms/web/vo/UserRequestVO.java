@@ -50,6 +50,8 @@ public class UserRequestVO {
 
     private UserStatusEnum status;
 
+    private String roleName;
+
     public Integer getId() {
         return id;
     }
@@ -140,6 +142,14 @@ public class UserRequestVO {
 
     public void setStatus(UserStatusEnum status) {
         this.status = status;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override

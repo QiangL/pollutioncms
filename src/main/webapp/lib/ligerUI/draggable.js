@@ -154,11 +154,11 @@
                         var newnode = $.extend(true, {}, node);
                         removeAttr(newnode);
                         if (g.nodeDropInParent) {
-                            //g.remove(node);
+                            g.remove(node);
                             rightTree.append(g.nodeDropIn, [newnode]);
                         }
                         else {
-                            //g.remove(node);
+                            g.remove(node);
                             rightTree.append(rightTree.getParent(g.nodeDropIn), [newnode], g.nodeDropIn, g.nodeDropDir == "bottom")
                         }
                     }

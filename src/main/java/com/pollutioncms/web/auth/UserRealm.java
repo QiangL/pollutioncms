@@ -55,6 +55,10 @@ public class UserRealm extends AuthorizingRealm {
             AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         LoginUserDTO user = userService.getLoginUser((String) token.getPrincipal());
+        if(user == null){
+            logger.error("unkonw account,userName:{}",token.getPrincipal());
+            throw new UnknownAccountException("unkonw account,userName:" + token.getPrincipal());
+        }
         if (user.getStatus() == UserStatusEnum.LOCKED) {
             logger.error("locked account login in,username:{}", token.getPrincipal());
             throw new LockedAccountException("已锁定账户，请联系管理员");

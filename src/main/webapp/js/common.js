@@ -43,7 +43,7 @@ function loadTree(url,divId,successFunc){
         checkbox: false,
         idFieldName: 'id',
         parentIDFieldName :'pid',
-        isExpand: true,
+        isExpand: false,
         slide: false,
         single:true,
         ajaxType:'GET',

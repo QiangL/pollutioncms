@@ -61,7 +61,7 @@
         <div style="height: 365px; position: absolute; top: 280px; left: 477px; width: 457px;
             clear: both; margin-top: 0px; margin-left: 0px;">
 
-			<form action="/login" method="post">
+			<form action="/login.mvc" method="post">
             <table cellspacing="5" cellpadding="5" border="1" bordercolor="#00FF00">
                 <tr>
                     <td align="right">

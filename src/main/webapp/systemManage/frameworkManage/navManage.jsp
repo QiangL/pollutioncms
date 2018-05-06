@@ -29,7 +29,9 @@
     <div  class="col-md-3">
         角色列表：
         <div id="allRoles"></div>
+        <shiro:hasPermission name="navigation:update">
         <input type="button" id="btn-submitTree" value="提交" class="btn btn-warning"/>
+        </shiro:hasPermission>
     </div>
     <div class="col-md-4">
         所有模块权限：
@@ -73,6 +75,7 @@
             data: data,
             idFieldName: 'id',
             parentIDFieldName: 'pid',
+            isExpand: false,
             onContextmenu: function (node, e) {
                 actionNode = node.data;
                 menu.show({top: e.pageY, left: e.pageX});
@@ -81,7 +84,17 @@
         });
         treeDraggable(liger.get('allAuths'), newTree);
     }
-
+    function filterIds(target,source){
+        for(let i in source){
+            if('delete' !== source[i].__status){
+                if(source[i].children){
+                    filterIds(target,source[i].children);
+                }else{
+                    target.push(source[i]);
+                }
+            }
+        }
+    }
     $(document).ready(function () {
         $("#btn-newTree").on('click', function () {
             newTree();
@@ -99,6 +112,9 @@
             split: ",",
             ajaxType: 'GET',
             onSelected: function () {
+                loadTree('/framework/navigation/listAllAuths.mvc', "#allAuths", function () {
+                    //nothings
+                });
                 $.get('/framework/navigation/listRoleAuths.mvc', {'roleName': $("#roleName").val()}, function (data) {
                     newTree(data);
                 }, 'json');
@@ -113,9 +129,11 @@
             }
             let newAuthsTree = liger.get('newAuths');
             let newNav = newAuthsTree.getData();
+            let data=new Array();
+            filterIds(data,newNav);
             $.ajax('/framework/navigation/updateNavigation.mvc', {
                 method: 'POST',
-                data: JSON.stringify({'roleName': roleName, 'ids': newNav}),
+                data: JSON.stringify({'roleName': roleName, 'ids': data}),
                 dataType: 'json',
                 contentType: "application/json",
                 success: function (res) {

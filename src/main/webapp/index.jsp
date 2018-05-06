@@ -371,9 +371,7 @@
 <div id="topmenu" class="l-topmenu">
     <div class="l-topmenu-logo">污染物在线监控首页</div>
     <div class="l-topmenu-welcome">
-        <span class="l-link2">用户&nbsp;${user.showName}&nbsp;你好</span>
-        <span class="space">|</span>
-        <a href="index.aspx" class="l-link2">首页</a>
+        <span class="l-link2"><a href="/selfUser/updateSelf.mvc" target="_blank">用户&nbsp;${user.showName}&nbsp;你好</a></span>
         <span class="space">|</span>
         <a href="/logout" class="l-link2" target="_blank">注销</a>
     </div>

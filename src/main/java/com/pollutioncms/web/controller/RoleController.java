@@ -6,15 +6,19 @@ import com.pollutioncms.common.exception.BaseException;
 import com.pollutioncms.service.api.RoleService;
 import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.service.dto.UserDTO;
+import com.pollutioncms.service.dto.validator.RoleDTOValidator;
 import com.pollutioncms.web.contants.Constants;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
-import com.pollutioncms.service.dto.validator.RoleDTOValidator;
 import com.pollutioncms.web.vo.LigerGridVo;
+import com.pollutioncms.web.vo.RoleVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.easybooks.bookstore.dao.impl.Ent_viewDAO;
+import org.easybooks.bookstore.dao.impl.Outfall_viewDAO;
+import org.easybooks.bookstore.vo.Outfall_view;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +27,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.groups.Default;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static com.pollutioncms.web.contants.Constants.NUM_EACH_PAGE;
@@ -43,17 +48,23 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private Outfall_viewDAO outfall_viewDAO;
+
+    @Autowired
+    private Ent_viewDAO ent_viewDAO;
+
     @GetMapping("/listRoles.mvc")
     @RequiresPermissions("role:list")
-    public LigerGridVo<RoleDTO> listRoles(@RequestParam(value = "pageNum", required = false) Integer pageNum,
-                                          @RequestParam(value = "count", required = false) Integer count) {
+    public LigerGridVo<RoleVO> listRoles(@RequestParam(value = "pageNum", required = false) Integer pageNum,
+                                         @RequestParam(value = "count", required = false) Integer count) {
         if (pageNum == null) {
             pageNum = 0;
         }
         if (count == null) {
             count = NUM_EACH_PAGE;
         }
-        return LigerGridVo.Resp(roleService.listRoles(pageNum, count), roleService.getCount());
+        return LigerGridVo.Resp(toVOs(roleService.listRoles(pageNum, count)), roleService.getCount());
     }
 
     @PostMapping("/addRole.mvc")
@@ -64,6 +75,9 @@ public class RoleController {
             return BindErrorHandler.handler(result.getAllErrors());
         }
         logger.info("add role,dto:{}", roleDTO);
+        if (Constants.NO_RELATE_EN_NO.equals(roleDTO.getEntNo())) {
+            roleDTO.setEntNo(null);
+        }
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         roleService.saveRole(((UserDTO) session.getAttribute(Constants.USER)).getUserName(), roleDTO);
@@ -79,10 +93,10 @@ public class RoleController {
             return BindErrorHandler.handler(result.getAllErrors());
         }
         logger.info("delete role,dto:{}", roleDTO);
-        try{
+        try {
             roleService.deleteRole(roleDTO);
             return Response.succResp();
-        }catch (BaseException e){
+        } catch (BaseException e) {
             return Response.failResp(e.getErrorMsg());
         }
 
@@ -97,24 +111,56 @@ public class RoleController {
             return BindErrorHandler.handler(result.getAllErrors());
         }
         logger.info("update role,dto:{}", roleDTO);
+        if (Constants.NO_RELATE_EN_NO.equals(roleDTO.getEntNo())) {
+            roleDTO.setEntNo(null);
+        }
         roleService.updateRoleSelective(roleDTO);
         return Response.succResp();
     }
 
     /**
      * 没有权限的接口
+     *
      * @return
      */
     @GetMapping("/queryRoleNames.mvc")
-    public JSONArray queryRoleNames(){
+    public JSONArray queryRoleNames() {
         Set<String> roleNameSet = roleService.queryRoleNames();
         JSONArray array = new JSONArray();
-        roleNameSet.forEach(name->{
+        roleNameSet.forEach(name -> {
             JSONObject object = new JSONObject();
             object.put("id", name);
             object.put("text", name);
             array.add(object);
         });
         return array;
+    }
+
+    @GetMapping("/listEnter.mvc")
+    public JSONArray listEnter() {
+        List<Outfall_view> list = outfall_viewDAO.getAllOutfall_views();
+        JSONArray jsonArray = new JSONArray();
+        JSONObject json;
+        for (Outfall_view o : list) {
+            json = new JSONObject();
+            json.put("id", o.getOV_no());
+            json.put("name", o.getEnt_name());
+            jsonArray.add(json);
+        }
+        json = new JSONObject();
+        json.put("id", Constants.NO_RELATE_EN_NO);
+        json.put("name", "不关联任何企业");
+        jsonArray.add(json);
+        return jsonArray;
+    }
+
+    private List<RoleVO> toVOs(List<RoleDTO> dtos) {
+        List<RoleVO> vos = new ArrayList<>();
+        for (RoleDTO dto : dtos) {
+            RoleVO vo = RoleVO.toVO(dto);
+            vo.setEntNo(String.valueOf(dto.getEntNo()));
+            vos.add(vo);
+        }
+        return vos;
     }
 }

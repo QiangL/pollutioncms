@@ -35,6 +35,8 @@ public class RoleDTO {
 
     private Integer parentId;
 
+    private Integer entNo;
+
     public static RoleDTO toRoleDTO(Role role) throws BeansException {
         RoleDTO roleDTO = new RoleDTO();
         BeanUtils.copyProperties(role, roleDTO);
@@ -86,6 +88,14 @@ public class RoleDTO {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public Integer getEntNo() {
+        return entNo;
+    }
+
+    public void setEntNo(Integer entNo) {
+        this.entNo = entNo;
     }
 
     @Override

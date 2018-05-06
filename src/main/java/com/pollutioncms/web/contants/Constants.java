@@ -13,4 +13,6 @@ public interface Constants {
     String RESULT = "result";
 
     String USER = "user";
+
+    Integer NO_RELATE_EN_NO=-1;
 }

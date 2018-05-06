@@ -43,6 +43,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="entNo" class="col-md-5 control-label">关联企业：</label>
+            <div class="col-md-7 ">
+                <div id="entNoComboBox"></div>
+            </div>
+            <div><input id="entNo" name="entNo" type="hidden"></div>
+        </div>
+
+        <div class="form-group">
             <label for="comment" class="col-md-5 control-label">备注：</label>
             <div class="col-md-7 ">
                 <input id="comment" name="comment" type="text" class="form-control"/>
@@ -71,6 +79,7 @@
 <script src="lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerToolBar.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
 <script src="js/systemManage/authManage/authCommon.js" type="text/javascript"></script>
 <script src="js/systemManage/authManage/role.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
@@ -87,27 +96,45 @@
         {display: '角色名', name: 'roleName'},
         {display: '角色中文名', name: 'roleCnName'},
         {display: '角色说明', name: 'comment'},
+        {display: '关联企业', name: 'entNo'},
         {
             display: '编辑', render: function (rowData) {
-                let update='<shiro:hasPermission name="role:update"><a onclick="updateRole()">修改</a></shiro:hasPermission>';
-                let delet='<shiro:hasPermission name="role:delete"><a onclick="deleteRole()">删除</a></shiro:hasPermission>';
-                return update+' '+delet;
+                let update = '<shiro:hasPermission name="role:update"><a onclick="updateRole()">修改</a></shiro:hasPermission>';
+                let delet = '<shiro:hasPermission name="role:delete"><a onclick="deleteRole()">删除</a></shiro:hasPermission>';
+                return update + ' ' + delet;
             }
         }
     ];
 
     function addRole() {
+        let form = $("#form");
+        form.find("#roleName").removeAttr('readOnly');
         add('/authManage/role/addRole.mvc', liger.get("maingrid"));
     }
-    function updateRole(){
+
+    function updateRole() {
         update('/authManage/role/updateRole.mvc', liger.get("maingrid"));
     }
-    function deleteRole(){
+
+    function deleteRole() {
         delet('/authManage/role/deleteRole.mvc', liger.get("maingrid"));
     }
+
     $(document).ready(function () {
-        loadSheet('#maingrid', roleColumns, toolbarItem, '/authManage/role/listRoles.mvc', '','GET');
+        loadSheet('#maingrid', roleColumns, toolbarItem, '/authManage/role/listRoles.mvc', '', 'GET');
         $("#pageloading").hide();
+        $("#entNoComboBox").ligerComboBox({
+            url: '/authManage/role/listEnter.mvc',
+            valueFieldID: 'entNoComboBox',
+            split: ",",
+            valueField: 'id',
+            textField: 'name',
+            ajaxType: 'GET',
+            width:300,
+            onSelected:function(value,text){
+                $("#entNo").val(value);
+            }
+        });
     });
 </script>
 </body>

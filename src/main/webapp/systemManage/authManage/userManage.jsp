@@ -54,6 +54,15 @@
                 <input id="showName" name="showName" type="text" required="true" class="form-control"/>
             </div>
         </div>
+        <shiro:hasPermission name="user:modifyRoles">
+            <div class="form-group">
+                <label for="roleName" class="col-md-5 control-label">角色：</label>
+                <div class="col-md-7 ">
+                    <div id="roleNameComboBox"></div>
+                </div>
+                <div><input id="roleName" name="roleName" type="hidden"></div>
+            </div>
+        </shiro:hasPermission>
         <div class="form-group">
             <label for="status" class="col-md-5 control-label">用户状态：</label>
             <div class="col-md-7">
@@ -98,18 +107,6 @@
         </div>
     </div>
 </form>
-<div id="roleModify-container">
-    <div class="row">
-        <div class="col-md-4">选择赋予的角色：</div>
-        <div id="roleModify" class="col-md-8">
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-5"></div>
-        <input type="button" id="btn-modifyRoleNames" value="提交" class="btn btn-warning"/>
-    </div>
-</div>
 <script src="lib/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script src="lib/jquery/jquery.serializejson.min.js" type="text/javascript"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -119,6 +116,7 @@
 <script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerListBox.js" type="text/javascript"></script>
 <script src="lib/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
 <script src="js/systemManage/authManage/authCommon.js" type="text/javascript"></script>
 <script src="js/systemManage/authManage/user.js" type="text/javascript"></script>
@@ -132,11 +130,11 @@
         }</shiro:hasPermission>
     ];
     let userColumns = [
-        {display: '用户名', name: 'userName',width:85},
-        {display: '用户显示名称', name: 'showName',width:85},
-        {display: '用户角色', name: 'roleNames',width:85},
+        {display: '用户名', name: 'userName', width: 85},
+        {display: '用户显示名称', name: 'showName', width: 85},
+        {display: '用户角色', name: 'roleNames', width: 85},
         {
-            display: '用户状态', width:60,render: function (rowData) {
+            display: '用户状态', width: 60, render: function (rowData) {
                 if (rowData.status === 'NORMAL') {
                     return '正常'
                 }
@@ -149,7 +147,7 @@
             }
         },
         {
-            display: '用户性别', width:50,name: 'userSex', render: function (rowData) {
+            display: '用户性别', width: 50, name: 'userSex', render: function (rowData) {
                 if (rowData.userSex === 'FEMALE') {
                     return "女";
                 } else {
@@ -157,27 +155,28 @@
                 }
             }
         },
-        {display: '用户电话', name: 'userTel',width:95},
-        {display: '用户邮箱', name: 'userEmail',width:150},
-        {display: '用户地址', name: 'userAddr',width:150},
+        {display: '用户电话', name: 'userTel', width: 95},
+        {display: '用户邮箱', name: 'userEmail', width: 150},
+        {display: '用户地址', name: 'userAddr', width: 150},
         {
-            display: '最后修改时间', name: 'lastOptTime',width:150, render: function (rowData) {
+            display: '最后修改时间', name: 'lastOptTime', width: 150, render: function (rowData) {
                 return new Date(rowData.lastOptTime).toLocaleString();
             }
         }, {
-            display: '编辑',width:150, render: function (rowData) {
-                let motifyRoles = '<shiro:hasPermission name="user:motifyRoles"><a onclick="motifyUser()">修改角色</a></shiro:hasPermission>';
+            display: '编辑', width: 150, render: function (rowData) {
                 let update = '<shiro:hasPermission name="user:update"><a onclick="updateUser()">修改</a></shiro:hasPermission>';
                 let delet = '<shiro:hasPermission name="user:delete"><a onclick="deleteUser()">删除</a></shiro:hasPermission>';
-                return motifyRoles + ' ' + update + ' ' + delet;
+                return update + ' ' + delet;
             }
         }
     ];
 
     function addUser() {
-        let form=$("#form");
-        form.find("#pwd").attr("required",true);
-        form.find("#pwd2").attr("required",true);
+        generateRoleList();
+        let form = $("#form");
+        form.find("#userName").removeAttr('readOnly');
+        form.find("#pwd").attr("required", true);
+        form.find("#pwd2").attr("required", true);
         add('/authManage/user/addUser.mvc', liger.get("maingrid"));
     }
 
@@ -186,39 +185,46 @@
     }
 
     function updateUser() {
-        let form=$("#form");
-        form.find("#pwd").attr("required",false);
-        form.find("#pwd2").attr("required",false);update('/authManage/user/updateUser.mvc', liger.get("maingrid"));
+        generateRoleList();
+        let form = $("#form");
+        form.find("#pwd").attr("required", false);
+        form.find("#pwd2").attr("required", false);
+        update('/authManage/user/updateUser.mvc', liger.get("maingrid"));
     }
 
-    function motifyUser() {
+    function modifyRoles() {
         let data = liger.get("maingrid").getSelectedRow();
         let listbox = liger.get("roleModify");
         listbox.setValue(data.roleNames);
         dialog = openDialog("修改用户角色", $("#roleModify-container"));
-
     }
-
-    $(document).ready(function () {
-        loadSheet('#maingrid', userColumns, toolbarItem, '/authManage/user/listUsers.mvc', '','GET');
-        $("#pageloading").hide();
-        $("#roleModify").ligerListBox({
-            height:250,
-            width:250,
-            isShowCheckBox: true,
-            isMultiSelect: true,
+    function generateRoleList(){
+        <shiro:hasPermission name="user:modifyRoles">
+        $("#roleNameComboBox").ligerComboBox({
             url: '/authManage/role/queryRoleNames.mvc',
-            valueFieldID: 'motifyRoleNames',
+            valueFieldID: 'roleName',
             split: ",",
-            ajaxType: 'GET'
+            valueField: 'id',
+            textField: 'text',
+            ajaxType: 'GET',
+            width:300,
+            onSelected: function (value, text) {
+                $("#roleName").val(value);
+            }
         });
-        $("#roleModify-container").attr('style', 'display:none');
+        </shiro:hasPermission>
+    }
+    $(document).ready(function () {
+        loadSheet('#maingrid', userColumns, toolbarItem, '/authManage/user/listUsers.mvc', '', 'GET');
+        $("#pageloading").hide();
+
+        /*$("#roleModify-container").attr('style', 'display:none');
         $("#btn-modifyRoleNames").on("click", function () {
             let grid = liger.get('maingrid');
             let userName=grid.getSelectedRow().userName;
-            $.ajax('/authManage/user/motifyRoles.mvc',{
+            $.ajax('/authManage/user/modifyRoles.mvc',{
                 method:'POST',
-                data:{'roleNames':$("#motifyRoleNames").val(),'userName':userName},
+                data:{'roleNames':$("#modifyRoleNames").val(),'userName':userName},
                 dataType:'json',
                 contentType:"application/x-www-form-urlencoded",
                 success:function (res) {
@@ -231,7 +237,7 @@
                     }
                 }
             });
-        });
+        });*/
     });
 </script>
 </body>

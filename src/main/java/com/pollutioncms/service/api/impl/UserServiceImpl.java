@@ -2,10 +2,10 @@ package com.pollutioncms.service.api.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.pollutioncms.common.enums.ExceptionEnum;
-import com.pollutioncms.common.enums.UserStatusEnum;
 import com.pollutioncms.common.exception.DaoException;
 import com.pollutioncms.common.exception.ParamErrorException;
 import com.pollutioncms.module.domain.User;
+import com.pollutioncms.module.mapper.RoleUserMapper;
 import com.pollutioncms.module.mapper.UserMapper;
 import com.pollutioncms.service.api.UserService;
 import com.pollutioncms.service.dto.AuthUserDTO;
@@ -23,7 +23,9 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author liqiag
@@ -38,6 +40,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleUserMapper roleUserMapper;
     @Autowired
     private PasswordHelper passwordHelper;
 
@@ -54,7 +58,7 @@ public class UserServiceImpl implements UserService {
         User user = getUserByName(userName);
         if (user == null) {
             logger.error("query username not exit,username:{}", userName);
-            throw new ParamErrorException("user not exit");
+            return null;
         }
         return LoginUserDTO.toLoginUserDTO(user);
     }
@@ -95,10 +99,16 @@ public class UserServiceImpl implements UserService {
         // 加密
         User user = userDTO.toDO();
         passwordHelper.encryption(user);
+
         if (userMapper.saveUser(user) != 1) {
             logger.error("dao operate effect num error,dto:{}", userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
-        } else return true;
+        } else{
+            Set<String> roleNames = new HashSet<>();
+            roleNames.add(userDTO.getRoleName());
+            roleUserMapper.motifyRoles(userDTO.getUserName(), roleNames);
+            return true;
+        }
 
     }
 
@@ -119,10 +129,16 @@ public class UserServiceImpl implements UserService {
         if (!StringUtils.isEmpty(userDTO.getPwd())) {
             passwordHelper.encryption(user);
         }
+
         if (userMapper.updateByPrimaryKeySelective(user) != 1) {
             logger.error("dao operate effect num error,dto:{}", userDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
-        } else return true;
+        } else{
+            Set<String> roleNames = new HashSet<>();
+            roleNames.add(userDTO.getRoleName());
+            roleUserMapper.motifyRoles(userDTO.getUserName(), roleNames);
+            return true;
+        }
     }
 
     private List<UserDTO> toDTOList(List<User> list) {

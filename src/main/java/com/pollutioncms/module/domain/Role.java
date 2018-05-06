@@ -18,6 +18,9 @@ public class Role implements Serializable {
     @Column(name = "role_name")
     private String roleName;
 
+    @Column(name = "ent_no")
+    private Integer entNo;
+
     /**
      * 备注
      */
@@ -75,6 +78,20 @@ public class Role implements Serializable {
     }
 
     /**
+     * @return ent_no
+     */
+    public Integer getEntNo() {
+        return entNo;
+    }
+
+    /**
+     * @param entNo
+     */
+    public void setEntNo(Integer entNo) {
+        this.entNo = entNo;
+    }
+
+    /**
      * 获取备注
      *
      * @return role_cn_name - 备注
@@ -121,6 +138,7 @@ public class Role implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
+            && (this.getEntNo() == null ? other.getEntNo() == null : this.getEntNo().equals(other.getEntNo()))
             && (this.getRoleCnName() == null ? other.getRoleCnName() == null : this.getRoleCnName().equals(other.getRoleCnName()))
             && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()));
     }
@@ -132,6 +150,7 @@ public class Role implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
+        result = prime * result + ((getEntNo() == null) ? 0 : getEntNo().hashCode());
         result = prime * result + ((getRoleCnName() == null) ? 0 : getRoleCnName().hashCode());
         result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
         return result;
@@ -146,6 +165,7 @@ public class Role implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", parentId=").append(parentId);
         sb.append(", roleName=").append(roleName);
+        sb.append(", entNo=").append(entNo);
         sb.append(", roleCnName=").append(roleCnName);
         sb.append(", comment=").append(comment);
         sb.append(", serialVersionUID=").append(serialVersionUID);

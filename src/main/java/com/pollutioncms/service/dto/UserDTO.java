@@ -63,6 +63,8 @@ public class UserDTO {
      */
     private UserStatusEnum status;
 
+    private String roleName;
+
     public static UserDTO toUserDTO(User user) throws BeansException {
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
@@ -165,6 +167,14 @@ public class UserDTO {
 
     public void setStatus(UserStatusEnum status) {
         this.status = status;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override

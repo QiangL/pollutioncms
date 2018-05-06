@@ -1,6 +1,5 @@
 package com.pollutioncms.web.utils;
 
-import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.web.module.Response;
 import org.springframework.validation.ObjectError;
 

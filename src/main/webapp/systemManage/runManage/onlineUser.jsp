@@ -38,7 +38,8 @@
     let columns = [
         {
             display: '操作', render: function (rowData) {
-                return '<a class="stopUser" data-sessionId='+rowData.sessionId+'>下线</a>';
+                let ret= '<shiro:hasPermission name="onlineUser:stop"><a class="stopUser" data-sessionId='+rowData.sessionId+'>下线</a></shiro:hasPermission>';
+                return ret;
             }
         },
         {display: '用户名', name: 'userName'},

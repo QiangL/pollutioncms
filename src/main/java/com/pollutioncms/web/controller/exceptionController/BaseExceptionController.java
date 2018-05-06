@@ -22,6 +22,7 @@ public class BaseExceptionController {
 
     private static final Logger logger= LoggerFactory.getLogger(BaseExceptionController.class);
 
+    //TODO 异常捕获顺序
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         logger.error("exception happened",e);

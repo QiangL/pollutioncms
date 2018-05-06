@@ -43,7 +43,7 @@ public interface UserService {
     /** 获取User数目 **/
     int getCount();
 
-    boolean saveUser(UserDTO userDTOv);
+    boolean saveUser(UserDTO userDTO);
 
     /** 逻辑删除，只是将数据库标识位置为删除 **/
     boolean deleteUser(UserDTO userDTO);

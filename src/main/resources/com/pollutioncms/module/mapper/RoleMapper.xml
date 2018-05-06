@@ -8,18 +8,19 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="ent_no" jdbcType="INTEGER" property="entNo" />
     <result column="role_cn_name" jdbcType="VARCHAR" property="roleCnName" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
   </resultMap>
 
   <sql id="allParam">
-    id,parent_id,role_name,role_cn_name,comment
+    id,parent_id,role_name,ent_no,role_cn_name,comment
   </sql>
 
   <insert id="saveRole">
     insert into role
-    (parent_id,role_name,role_cn_name,comment) values
-    ((select id from user where user_name = #{parentUserName}),#{role.roleName},#{role.roleCnName},#{role.comment})
+    (parent_id,role_name,ent_no,role_cn_name,comment) values
+    ((select id from user where user_name = #{parentUserName}),#{role.roleName},#{role.entNo},#{role.roleCnName},#{role.comment})
     <selectKey keyProperty="id" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
