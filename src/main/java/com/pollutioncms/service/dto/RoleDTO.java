@@ -1,6 +1,5 @@
 package com.pollutioncms.service.dto;
 
-import com.pollutioncms.common.enums.AuthEnum;
 import com.pollutioncms.module.domain.Role;
 import com.pollutioncms.service.dto.validator.RoleDTOValidator;
 import org.apache.commons.lang3.builder.ToStringBuilder;

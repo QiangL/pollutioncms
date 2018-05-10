@@ -47,10 +47,10 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--<table tableName="module">
+        <table tableName="module">
             <generatedKey column="id" sqlStatement="Mysql"/>
-        </table>-->
-        <!--<table tableName="module_operate">
+        </table>
+        <table tableName="module_operate">
             <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="role_auth">
@@ -58,15 +58,15 @@
         </table>
         <table tableName="navigation">
             <generatedKey column="id" sqlStatement="MySql"/>
-        </table>-->
+        </table>
         <table tableName="role">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-        <!--<table tableName="role_user">
+        <table tableName="role_user">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
         <table tableName="user">
             <generatedKey column="id" sqlStatement="MySql"/>
-        </table>-->
+        </table>
     </context>
 </generatorConfiguration>
