@@ -8,6 +8,7 @@ import com.pollutioncms.service.dto.RoleDTO;
 import com.pollutioncms.service.dto.UserDTO;
 import com.pollutioncms.service.dto.validator.RoleDTOValidator;
 import com.pollutioncms.web.contants.Constants;
+import com.pollutioncms.web.enums.RespError;
 import com.pollutioncms.web.module.Response;
 import com.pollutioncms.web.utils.BindErrorHandler;
 import com.pollutioncms.web.vo.LigerGridVo;
@@ -77,6 +78,9 @@ public class RoleController {
         logger.info("add role,dto:{}", roleDTO);
         if (Constants.NO_RELATE_EN_NO.equals(roleDTO.getEntNo())) {
             roleDTO.setEntNo(null);
+        }
+        if(roleService.checkRoleName(roleDTO.getRoleName())){
+            return Response.failResp(RespError.ROLE_NAME_DUPLICATE);
         }
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();

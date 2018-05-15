@@ -72,6 +72,9 @@ public class UserController {
                 (userRequestVO.getPwd() != null && !userRequestVO.getPwd().equals(userRequestVO.getPwd2()))) {
             return Response.failResp(RespError.PASSWORD_ERROR);
         }
+        if(userService.checkUserName(userRequestVO.getUserName())){
+            return Response.failResp(RespError.USER_NAME_DUPLICATE);
+        }
         logger.info("add user,vo:{}", userRequestVO);
         userService.saveUser(userRequestVO.toDTO());
         return Response.succResp();

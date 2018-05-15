@@ -30,4 +30,6 @@ public interface RoleService {
 
     /** 返回表中没有的roleName的集合 **/
     Set<String> notExitRoleNames(Set<String> roleNames);
+
+    boolean checkRoleName(String roleName);
 }

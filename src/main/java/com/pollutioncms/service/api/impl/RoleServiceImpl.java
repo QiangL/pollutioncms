@@ -114,6 +114,12 @@ public class RoleServiceImpl implements RoleService {
         return rolemapper.checkRoleNames(roleNames);
     }
 
+    @Override
+    public boolean checkRoleName(String roleName) {
+        return rolemapper.selectCountByExample(Example.builder(Role.class)
+                .where(Sqls.custom().andEqualTo("roleName", roleName)).build()) > 0;
+    }
+
     private List<RoleDTO> toDTOList(List<Role> list) {
         List<RoleDTO> roleDTOS = new ArrayList<>();
         try {

@@ -37,7 +37,7 @@ public class LoginController {
         }else if(ae instanceof LockedAccountException){
             error="已锁定账户，无法登录";
         }else{
-            error="可能已经登陆";
+            error="可能未输入密码或已经登陆";
         }
         map.put("error",error);
         return "unAuth";

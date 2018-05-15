@@ -141,6 +141,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean checkUserName(String userName) {
+        return userMapper.selectCountByExample(Example.builder(User.class)
+                .where(Sqls.custom().andEqualTo("userName", userName)).build()) > 0;
+    }
+
     private List<UserDTO> toDTOList(List<User> list) {
         List<UserDTO> userDTOS = new ArrayList<>();
         try {
