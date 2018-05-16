@@ -40,13 +40,6 @@
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <!-- 对shiro 注解的支持-->
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-
-
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"/>

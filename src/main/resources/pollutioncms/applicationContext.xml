@@ -38,4 +38,10 @@
     </bean>
     <!-- //TODO 搞明白这个 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 对shiro 注解的支持-->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>
