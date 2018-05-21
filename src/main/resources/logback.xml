@@ -61,6 +61,17 @@
     <logger name="com.pollutioncms" level="${log.level}" additivty="true">
         <appender-ref ref="INFO"/>
     </logger>
+    <logger name="org.easybooks" level="${log.level}" additivty="true">
+        <appender-ref ref="INFO"/>
+    </logger>
+
+    <logger name="org.easybooks" level="ERROR" additivty="true">
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+    <logger name="com.pollutioncms" level="ERROR" additivty="true">
+        <appender-ref ref="ERROR"/>
+    </logger>
 
     <root>
         <level value="DEBUG" />

@@ -1,9 +1,9 @@
-package com.pollutioncns.test.module;
+package com.pollutioncms.test.module;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.module.mapper.UserMapper;
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

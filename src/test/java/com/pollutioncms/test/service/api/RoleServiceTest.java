@@ -1,6 +1,6 @@
-package com.pollutioncns.test.service.api;
+package com.pollutioncms.test.service.api;
 
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 
 /**
  * @author liqiag

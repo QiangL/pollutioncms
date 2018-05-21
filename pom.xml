@@ -38,6 +38,8 @@
 
         <junit.version>4.12</junit.version>
         <powermockit.version>1.6.5</powermockit.version>
+
+        <log.level>DEBUG</log.level>
     </properties>
 
     <dependencies>

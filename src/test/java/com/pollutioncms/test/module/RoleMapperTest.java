@@ -1,8 +1,8 @@
-package com.pollutioncns.test.module;
+package com.pollutioncms.test.module;
 
 import com.pollutioncms.module.domain.Role;
 import com.pollutioncms.module.mapper.RoleMapper;
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

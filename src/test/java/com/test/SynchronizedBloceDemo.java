@@ -1,35 +1,17 @@
 package com.test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-class SynchronizedBloceDemo {
+import java.util.TreeMap;
 
+public class SynchronizedBloceDemo {
+
+    private static final Logger logger= LoggerFactory.getLogger(SynchronizedBloceDemo.class);
     public static void main(String[] args) throws Exception {
-        int[] a = new int[]{1, 2, 3, 4, 5};
-        List<Integer> aa = new ArrayList<>();
-        aa.addAll(Arrays.asList(1, 2, 3, 4, 5));
-        Collections.rotate(aa, 1);
-        System.out.println(aa);
 
+        logger.info("asdfasdf ");
     }
-}
-
-interface BaseTest<T> {
-
-}
-
-class SubClass implements BaseTest {
-
-}
-
-interface BaseTest2<T> {
-
-}
-
-class SubClass2 extends SubClass implements BaseTest {
 
 }
 

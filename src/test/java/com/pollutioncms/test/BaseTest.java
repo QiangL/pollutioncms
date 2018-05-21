@@ -1,4 +1,4 @@
-package com.pollutioncns.test;
+package com.pollutioncms.test;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date 2018-04-13
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:pollutioncms/applicationContext.xml",
+@ContextConfiguration({"classpath:pollutioncms/applicationContext.xml","classpath:monitoredcontrol/applicationContext.xml",
                 "classpath:pollutioncms/spring-mvc.xml"})
 public class BaseTest {
 }

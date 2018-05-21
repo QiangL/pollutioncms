@@ -1,12 +1,10 @@
-package com.pollutioncns.test.module;
+package com.pollutioncms.test.module;
 
 import com.pollutioncms.module.domain.Module;
 import com.pollutioncms.module.mapper.ModuleMapper;
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.util.Sqls;
 
 import java.util.List;
 

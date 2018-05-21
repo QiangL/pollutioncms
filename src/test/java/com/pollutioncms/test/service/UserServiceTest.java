@@ -1,8 +1,8 @@
-package com.pollutioncns.test.service;
+package com.pollutioncms.test.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pollutioncms.service.api.UserService;
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

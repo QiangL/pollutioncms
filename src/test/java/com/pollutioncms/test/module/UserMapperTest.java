@@ -1,16 +1,13 @@
-package com.pollutioncns.test.module;
+package com.pollutioncms.test.module;
 
-import com.pollutioncms.module.domain.RoleUser;
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.module.mapper.RoleUserMapper;
 import com.pollutioncms.module.mapper.UserMapper;
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.util.Sqls;
 
 /**
  * @author liqiag

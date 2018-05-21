@@ -1,8 +1,8 @@
-package com.pollutioncns.test.service;
+package com.pollutioncms.test.service;
 
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.service.utils.PasswordHelper;
-import com.pollutioncns.test.BaseTest;
+import com.pollutioncms.test.BaseTest;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
