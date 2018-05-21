@@ -1,16 +1,37 @@
 package com.test;
 
-import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-public class SynchronizedBloceDemo {
+class SynchronizedBloceDemo {
 
-    public static void main(String[] args) {
-        ReferenceQueue<String> a = new ReferenceQueue<>();
-        WeakReference<String> test = new WeakReference<>("test", a);
-        a.poll();
+    public static void main(String[] args) throws Exception {
+        int[] a = new int[]{1, 2, 3, 4, 5};
+        List<Integer> aa = new ArrayList<>();
+        aa.addAll(Arrays.asList(1, 2, 3, 4, 5));
+        Collections.rotate(aa, 1);
+        System.out.println(aa);
+
     }
+}
+
+interface BaseTest<T> {
 
 }
+
+class SubClass implements BaseTest {
+
+}
+
+interface BaseTest2<T> {
+
+}
+
+class SubClass2 extends SubClass implements BaseTest {
+
+}
+
 
 
