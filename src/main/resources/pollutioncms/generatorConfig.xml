@@ -25,7 +25,10 @@
         <jdbcConnection driverClass="${jdbc.driverClassName}"
             connectionURL="${jdbc.url}"
             userId="${jdbc.username}"
-            password="${jdbc.password}"/>
+            password="${jdbc.password}">
+            <!-- http://www.mybatis.org/generator/usage/mysql.html -->
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
