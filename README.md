@@ -8,3 +8,5 @@
 前端，emmmmmm用了LigerUI。
 
 所以突出点估计就是Mybatis的自动化和结合使用Shiro了吧
+
+> 该工程的com.pollutioncms包下的内容才使用了SSM和Shiro，另一个包下使用的是Struts、Spring和Hibernate，也就是说该工程还涉及到SSM和SSH的整合使用。
