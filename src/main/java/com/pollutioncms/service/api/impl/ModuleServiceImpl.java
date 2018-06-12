@@ -10,6 +10,11 @@ import com.pollutioncms.module.mapper.RoleAuthMapper;
 import com.pollutioncms.module.mapper.RoleUserMapper;
 import com.pollutioncms.service.api.ModuleService;
 import com.pollutioncms.service.dto.ModuleDTO;
+import com.pollutioncms.web.auth.UserRealm;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -34,6 +39,10 @@ import java.util.Set;
 public class ModuleServiceImpl implements ModuleService {
 
     private static final Logger logger = LoggerFactory.getLogger(ModuleServiceImpl.class);
+
+    @Autowired
+    private MemoryConstrainedCacheManager cacheManager;
+
     @Autowired
     private ModuleMapper moduleMapper;
 
@@ -98,6 +107,7 @@ public class ModuleServiceImpl implements ModuleService {
             logger.error("dao operate effect num error,dto:{}", moduleDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }
+        removeCache();
         return true;
     }
 
@@ -113,6 +123,7 @@ public class ModuleServiceImpl implements ModuleService {
             logger.error("dao operate effect num error,dto:{}", moduleDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }
+        removeCache();
         return true;
     }
 
@@ -128,12 +139,14 @@ public class ModuleServiceImpl implements ModuleService {
             logger.error("dao operate effect num error,dto:{}", moduleDTO);
             throw new DaoException(ExceptionEnum.DATA_EFFECT_NUM_ERROR);
         }
+        removeCache();
         return true;
     }
 
     @Override
     public boolean updateRoleAuths(String roleName, Set<Integer> ids) {
         roleAuthMapper.updateAuths(roleName, ids);
+        removeCache();
         return true;
     }
 
@@ -152,5 +165,11 @@ public class ModuleServiceImpl implements ModuleService {
             logger.error("copy user properties error");
         }
         return userDTOS;
+    }
+
+    private void removeCache(){
+        Cache<Object,Object> cache=cacheManager.getCache(UserRealm.class.getCanonicalName()+ ".authorizationCache");
+        Subject subject = SecurityUtils.getSubject();
+        cache.remove(subject.getPrincipals());
     }
 }

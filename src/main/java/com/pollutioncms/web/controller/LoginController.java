@@ -30,6 +30,9 @@ public class LoginController {
         AuthenticationException ae = (AuthenticationException) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         logger.error("login error",ae);
         String error=null;
+        if(ae ==null){
+            return "redirect:/";
+        }
         if(ae instanceof UnknownAccountException){
             error="未知账户";
         }else if(ae instanceof IncorrectCredentialsException){

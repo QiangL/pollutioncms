@@ -1,5 +1,6 @@
 package com.pollutioncms.test.module;
 
+import com.github.pagehelper.PageHelper;
 import com.pollutioncms.module.domain.User;
 import com.pollutioncms.module.mapper.RoleUserMapper;
 import com.pollutioncms.module.mapper.UserMapper;
@@ -8,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author liqiag
@@ -50,6 +53,11 @@ public class UserMapperTest extends BaseTest {
                                 .andEqualTo("userName", "mapperTest"))
                         .build());
         userMapper.deleteUser(user);*/
+    }
+    @Test
+    public void test2(){
+        PageHelper.startPage(1,1);
+        List<User> users = userMapper.selectAll();
     }
 
 }

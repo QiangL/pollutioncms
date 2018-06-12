@@ -33,6 +33,7 @@
           WHERE user.user_name = #{userName}
             and user.id=role_user.user_id)
       )
+      and module.permission IS NOT NULL
   </select>
     <select id="listRoles" parameterType="String" resultType="String">
     select DISTINCT role_name from role
